@@ -37,8 +37,14 @@ theme:
       accent: indigo
       toggle:
         icon: material/weather-night
-        name: Alternar tema
-      toggle_dark: true  # Usa automáticamente el modo del sistema
+        name: Modo oscuro
+
+    - scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Modo claro
 
 markdown_extensions:
   - admonition
