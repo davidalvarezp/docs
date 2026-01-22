@@ -10,20 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Clona el repo
       - uses: actions/checkout@v3
 
-      # 2️⃣ Configura Python
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      # 3️⃣ Instala MkDocs Material
       - run: pip install mkdocs-material
 
-      # 4️⃣ Build y deploy
-      - name: Build and deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         env:
-          # Este token permite push a gh-pages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mkdocs gh-deploy --force --clean
