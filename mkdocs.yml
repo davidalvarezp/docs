@@ -1,5 +1,6 @@
 site_name: SysAdmin & CyberSec Docs
 site_description: Documentación de administración de sistemas, ciberseguridad y desarrollo.
+site_url: https://docs.davidalvarezp.com
 site_author: davidalvarezp
 
 repo_name: davidalvarezp/docs
