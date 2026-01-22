@@ -36,15 +36,16 @@ theme:
       primary: blue
       accent: indigo
       toggle:
-        icon: material/weather-night
-        name: Modo oscuro
-
+        icon: material/weather-sunny
+        name: Modo claro
+        
     - scheme: slate
       primary: blue
       accent: indigo
       toggle:
-        icon: material/weather-sunny
-        name: Modo claro
+        icon: material/weather-night
+        name: Modo oscuro
+
 
 markdown_extensions:
   - admonition
