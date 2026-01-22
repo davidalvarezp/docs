@@ -10,13 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # importantísimo
 
-      - uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      - run: pip install mkdocs-material
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
 
       - name: Deploy to GitHub Pages
         env:
