@@ -10,18 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      # 1️⃣ Clona el repo
+      - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      # 2️⃣ Configura Python
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      - name: Install MkDocs
-        run: pip install mkdocs-material
+      # 3️⃣ Instala MkDocs Material
+      - run: pip install mkdocs-material
 
-      - name: Build and deploy
+      # 4️⃣ Build y deploy
+      - name: Build and deploy to GitHub Pages
         env:
+          # Este token permite push a gh-pages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mkdocs gh-deploy --force --clean
