@@ -10,31 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout del repo sin credenciales persistentes
-      - name: Checkout repo
+      # Checkout sin credenciales persistentes
+      - name: Checkout
         uses: actions/checkout@v3
         with:
-          persist-credentials: false  # importante
+          persist-credentials: false
 
-      # 2️⃣ Instala Python
+      # Instala Python
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.x
 
-      # 3️⃣ Instala MkDocs Material
+      # Instala dependencias
       - name: Install dependencies
         run: pip install mkdocs-material
 
-      # 4️⃣ Construye el sitio estático
-      - name: Build MkDocs site
+      # Build del sitio
+      - name: Build site
         run: mkdocs build
 
-      # 5️⃣ Despliega a gh-pages usando token explícito
+      # Deploy a gh-pages
       - name: Deploy to GitHub Pages
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           REPO: ${{ github.repository }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd site
           git init
@@ -43,5 +43,5 @@ jobs:
           git add -A
           git commit -m "Deploy MkDocs site"
           git branch -M gh-pages
-          git remote add origin https://x-access-token:$TOKEN@github.com/$REPO.git
+          git remote add origin https://$GH_TOKEN@github.com/$REPO.git
           git push origin gh-pages --force
