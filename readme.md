@@ -1,5 +1,10 @@
 # SysAdmin & CyberSec Docs
 
+![MkDocs](https://img.shields.io/badge/MkDocs-Material-blue)
+![License](https://img.shields.io/github/license/davidalvarezp/docs)
+![Last Commit](https://img.shields.io/github/last-commit/davidalvarezp/docs)
+
+
 Documentación técnica sobre **Administración de Sistemas**, **Ciberseguridad** y **DevOps**, enfocada en buenas prácticas, hardening, alta disponibilidad y entornos Linux.
 
 🌐 **Web:** https://docs.davidalvarezp.com
