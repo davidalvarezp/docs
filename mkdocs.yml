@@ -32,14 +32,14 @@ theme:
     - header.autohide
 
   palette:
-    - scheme: default
+    - scheme: slate
       primary: blue
       accent: indigo
       toggle:
         icon: material/weather-sunny
         name: Modo claro
         
-    - scheme: slate
+    - scheme: default
       primary: blue
       accent: indigo
       toggle:
