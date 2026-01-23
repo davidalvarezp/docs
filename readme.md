@@ -1,4 +1,4 @@
-# 📚 SysAdmin & CyberSec Docs
+# SysAdmin & CyberSec Docs
 
 Documentación técnica sobre **Administración de Sistemas**, **Ciberseguridad** y **DevOps**, enfocada en buenas prácticas, hardening, alta disponibilidad y entornos Linux.
 
