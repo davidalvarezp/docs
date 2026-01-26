@@ -14,14 +14,12 @@ Documentación técnica sobre **Administración de Sistemas**, **Ciberseguridad*
 ## 🧠 Contenido
 
 - 🔐 **Ciberseguridad**
-  - Bastionado de sistemas y redes
   - Hacking ético
+  - Bastionado de sistemas y redes
+
 - 🖥️ **SysAdmin**
   - Administración de sistemas
   - Seguridad y alta disponibilidad
-- 🚀 **DevOps**
-  - Contenedores Linux (LXC)
-  - Automatización e infraestructura
 
 ---
 
