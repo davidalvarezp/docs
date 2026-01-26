@@ -13,9 +13,11 @@ nav:
       - Seguridad y alta disponibilidad: sysadmin/sad/index.md
       - Administración de Sistemas: sysadmin/aso/index.md
   - CyberSec:
+      - Inicio: cybersec/readme.md
       - Bastionado de redes y sistemas: cybersec/brs/index.md
       - Hacking Ético: cybersec/he/index.md
   - DevOps:
+      - Inicio: devops/readme.md
       - Linux Containers (LXC): devops/lxc/index.md
 
 theme:
