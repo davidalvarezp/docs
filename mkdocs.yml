@@ -9,6 +9,7 @@ repo_url: https://github.com/davidalvarezp/docs
 nav:
   - Inicio: index.md
   - SysAdmin:
+      - Inicio: sysadmin/readme.md
       - Seguridad y alta disponibilidad: sysadmin/sad/index.md
       - Administración de Sistemas: sysadmin/aso/index.md
   - CyberSec:
