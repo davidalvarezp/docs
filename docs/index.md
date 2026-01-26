@@ -1,4 +1,4 @@
-# Documentación técnica
+# Docs
 
 Bienvenidx 👋  
 Este sitio reúne documentación, guías y notas técnicas centradas en **administración de sistemas** y **ciberseguridad**.
