@@ -6,7 +6,7 @@ El contenido está orientado a entornos reales, tanto desde una perspectiva **de
 
 ---
 
-## 🔐 Áreas cubiertas
+## Áreas cubiertas
 
 ### Seguridad defensiva
 - Hardening de sistemas y servicios
@@ -36,7 +36,7 @@ El contenido está orientado a entornos reales, tanto desde una perspectiva **de
 
 ---
 
-## 🧭 Enfoque
+## Enfoque
 
 El contenido de esta sección está orientado a:
 
@@ -49,7 +49,7 @@ Se prioriza el entendimiento técnico y el contexto, no el uso de herramientas d
 
 ---
 
-## ⚠️ Uso responsable
+## Uso responsable
 
 El contenido relacionado con técnicas ofensivas se proporciona con fines **educativos y defensivos**.
 
@@ -60,7 +60,7 @@ Su uso debe realizarse:
 
 ---
 
-## 📚 Uso de la sección
+## Uso de la sección
 
 - Los temas están organizados por áreas y técnicas
 - Cada documento aborda un problema o concepto concreto
@@ -68,7 +68,7 @@ Su uso debe realizarse:
 
 ---
 
-## 🔗 Relación con administración de sistemas
+## Relación con administración de sistemas
 
 Una base sólida de **administración de sistemas** es fundamental para una buena seguridad.
 
