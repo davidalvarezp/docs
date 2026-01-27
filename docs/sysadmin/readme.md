@@ -6,7 +6,7 @@ El enfoque es práctico y orientado a la resolución de problemas, la estabilida
 
 ---
 
-## 🖥 Áreas cubiertas
+## Áreas cubiertas
 
 ### Sistemas operativos
 - Linux (distribuciones server y desktop)
@@ -40,7 +40,7 @@ El enfoque es práctico y orientado a la resolución de problemas, la estabilida
 
 ---
 
-## 🧭 Enfoque
+## Enfoque
 
 El contenido de esta sección está orientado a:
 
@@ -53,7 +53,7 @@ No se trata de configuraciones “de laboratorio”, sino de escenarios habitual
 
 ---
 
-## 📚 Uso de la sección
+## Uso de la sección
 
 - Cada tema está organizado por tecnologías o problemas concretos
 - Las guías son independientes y reutilizables
@@ -61,7 +61,7 @@ No se trata de configuraciones “de laboratorio”, sino de escenarios habitual
 
 ---
 
-## 🔐 Relación con la seguridad
+## Relación con la seguridad
 
 La administración de sistemas se aborda siempre teniendo en cuenta:
 
