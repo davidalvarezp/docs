@@ -1,4 +1,4 @@
-# 🛡️ Escenario práctico de DDoS y balanceo de carga (Debian 12)
+# 🛡️ Escenario práctico de DDoS y balanceo de carga
 
 Este repositorio contiene un **escenario práctico completo de ciberseguridad**, diseñado para ser ejecutado **en vivo** durante una charla o clase,  orientado a **SMR**, adaptable a otros niveles.
 
@@ -125,10 +125,10 @@ La defensa se construye **por capas**:
 
 ```
 .
-├── README.md            # Visión general del escenario
-├── servidor_web_ddos.md         # Servidor web vulnerable (demo DDoS)
-├── servidores_web_int.md     # Configuración de web1 y web2
-└── servidor_lb.md          # Balanceador de carga (Nginx)
+├── README.md                          # Visión general del escenario
+├── 1_servidor-web-ddos.md             # Servidor web vulnerable (demo DDoS)
+├── 2_servidor-balanceador-carga.md    # Balanceador de carga (Nginx)
+└── 3_servidores-web-int.md            # Configuración de web1 y web2
 
 ```
 
@@ -151,10 +151,3 @@ Este escenario está diseñado **EXCLUSIVAMENTE** para:
 
 > “Un ataque sencillo puede causar un gran impacto.
 > La defensa no está en una sola herramienta, sino en el diseño.”
-
----
-
-## 📌 Licencia
-
-Material educativo.
-Úsalo, modifícalo y compártelo para fines formativos.
