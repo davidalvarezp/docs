@@ -6,7 +6,7 @@ El contenido está orientado a entornos reales de operación: servidores, redes,
 
 ---
 
-## 🖥 Administración de sistemas
+## Administración de sistemas
 
 Documentación práctica sobre la gestión y operación de infraestructuras:
 
@@ -19,7 +19,7 @@ Documentación práctica sobre la gestión y operación de infraestructuras:
 
 ---
 
-## 🔐 Ciberseguridad
+## Ciberseguridad
 
 Apuntes y guías enfocadas a la protección y análisis de sistemas:
 
@@ -33,7 +33,7 @@ Apuntes y guías enfocadas a la protección y análisis de sistemas:
 
 ---
 
-## 🧭 Objetivo del sitio
+## Objetivo del sitio
 
 El objetivo de esta documentación es servir como:
 
@@ -46,7 +46,7 @@ No está pensada como un curso estructurado, sino como documentación.
 
 ---
 
-## 📚 Uso de la documentación
+## Uso de la documentación
 
 - Navega por el menú lateral para explorar los temas
 - Utiliza el buscador para localizar conceptos rápidamente
@@ -54,7 +54,7 @@ No está pensada como un curso estructurado, sino como documentación.
 
 ---
 
-## ✍️ Autor
+## Autor
 
 Creado y mantenido por **[davidalvarezp](https://davidalvarezp.com)**.
 
