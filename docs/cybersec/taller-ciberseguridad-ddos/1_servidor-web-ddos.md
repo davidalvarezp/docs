@@ -251,4 +251,4 @@ Una vez comprobado que **este servidor cae**, se usará como:
 * backend de un **balanceador de carga**
 * parte de una infraestructura más robusta
 
-👉 Continúa con: [2_servidor-balanceador-carga.md](2_servidor-balanceador-carga)
+👉 Continúa con: [2_servidor-balanceador-carga.md](../2_servidor-balanceador-carga)
