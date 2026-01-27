@@ -1,4 +1,4 @@
-# servidor_web_ddos.md 
+# 1_servidor-web-ddos.md
 ## Servidor web vulnerable para demo de DDoS (Debian 12)
 
 Este documento describe la **creación y configuración de un servidor web deliberadamente vulnerable**, diseñado para **caer bajo carga** y servir como demostración práctica de un ataque de tipo **Denegación de Servicio (DoS/DDoS)**.
@@ -251,4 +251,4 @@ Una vez comprobado que **este servidor cae**, se usará como:
 * backend de un **balanceador de carga**
 * parte de una infraestructura más robusta
 
-👉 Continúa con: `servidores_web_int.md`
+👉 Continúa con: `2_servidor-balanceador-carga.md`
