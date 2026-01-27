@@ -263,6 +263,6 @@ Con esto queda completo el laboratorio.
 
 Vuelve a:
 
-* `README.md` para visión general
+* [README.md](../readme) para visión general
 
 * 
