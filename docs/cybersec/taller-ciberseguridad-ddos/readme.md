@@ -8,7 +8,9 @@ El objetivo es **mostrar de forma visual y comprensible** cómo:
 - la **seguridad ofensiva** ayuda a diseñar **mejores defensas**
 
 Todo el escenario está basado en **servidores Debian 12** y ejecutado sobre **VirtualBox**.
+
 Importar escenario completo: [drive.google.com](https://drive.google.com/file/d/1youuMw9QuI2W8kBspaG40wpCOiNSKGpf/view?usp=sharing)
+
 - usuario: administrador / root
 - passwd: renaido
 
