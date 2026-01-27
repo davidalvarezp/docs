@@ -262,4 +262,4 @@ Ahora el ataque con `curl` será **mucho menos efectivo**.
 
 Configurar correctamente los **dos servidores web backend** para trabajar detrás del balanceador.
 
-👉 Continúa con: `3_servidores-web-int.md`
+👉 Continúa con: [3_servidores-web-int.md](3_servidores-web-int)
