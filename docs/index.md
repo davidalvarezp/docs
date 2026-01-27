@@ -1,6 +1,5 @@
-# Docs
-
-Bienvenidx 👋  
+# SysAdmin & CyberSec Docs
+ 
 Este sitio reúne documentación, guías y notas técnicas centradas en **administración de sistemas** y **ciberseguridad**.
 
 El contenido está orientado a entornos reales de operación: servidores, redes, hardening, seguridad defensiva y ofensiva, y resolución de problemas en sistemas en producción.
