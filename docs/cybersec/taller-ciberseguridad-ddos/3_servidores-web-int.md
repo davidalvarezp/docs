@@ -264,5 +264,3 @@ Con esto queda completo el laboratorio.
 Vuelve a:
 
 * [README.md](../readme) para visión general
-
-* 
