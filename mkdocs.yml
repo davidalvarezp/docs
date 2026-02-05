@@ -26,7 +26,8 @@ nav:
       - Introducción: sysadmin/bb-dd/index.md
       - Gestión de BBDD: sysadmin/bb-dd/gestion/index.md
       - Administración de BBDD: sysadmin/bb-dd/administracion/index.md
-    - Hardware: sysadmin/index.md
+    - Hardware: 
+      - Introducción: sysadmin/hardware/index.md
     - Programación:
       - Introducción: sysadmin/programacion/index.md
       - Python: sysadmin/programacion/python/index.md
@@ -38,7 +39,35 @@ nav:
       - Lenguajes de Marcas: sysadmin/web/lenguajes-marcas/index.md
       - Aplicaciones Web: sysadmin/web/aplicaciones-web/index.md
 
-  - CyberSec: cybersec/index.md
+  - CyberSec:
+    - Introducción: cybersec/index.md
+    - Hacking Ético:
+      - Introducción: cybersec/hacking-etico/index.md
+      - Reconocimiento: cybersec/hacking-etico/recon/index.md
+      - Escaneo: cybersec/hacking-etico/scan/index.md
+      - Explotación: cybersec/hacking-etico/exploit/index.md
+      - Post-Explotación: cybersec/hacking-etico/post-exploit/index.md
+      - Mantener Acceso: cybersec/hacking-etico/persist/index.md
+      - Borrado de Huellas: cybersec/hacking-etico/cover/index.md
+      - Reporte: cybersec/hacking-etico/report/index.md
+    - Bastionado:
+      - Introducción: cybersec/bastionado/index.md
+      - Bastionado de Redes: cybersec/bastionado/redes/index.md
+      - Bastionado de Sistemas: cybersec/bastionado/sistemas/index.md
+    - Análisis Forense:
+      - Introducción: cybersec/forense/index.md
+      - Forense en PC: cybersec/forense/pc/index.md
+      - Forense en Cloud: cybersec/forense/cloud/index.md
+      - Forense en Móviles: cybersec/forense/phone/index.md
+    - Incidentes de Ciberseguridad:
+      - Introducción: cybersec/incidentes/index.md
+      - Prevención: cybersec/incidentes/prevencion/index.md
+      - Taxonomía de Incidentes: cybersec/incidentes/taxonomia/index.md
+    - Puesta en Producción:
+      - Introducción: cybersec/produccion/index.md
+    - Normativa de Ciberseguridad:
+      - Marco Normativo: cybersec/normativa/index.md
+
 
 theme:
   name: material
