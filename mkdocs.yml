@@ -38,7 +38,7 @@ nav:
       - Lenguajes de Marcas: sysadmin/web/lenguajes-marcas/index.md
       - Aplicaciones Web: sysadmin/web/aplicaciones-web/index.md
 
-  - ciberseguridad: cybersec/index.md
+  - CyberSec: cybersec/index.md
 
 theme:
   name: material
