@@ -66,7 +66,7 @@ nav:
     - Puesta en Producción:
       - Introducción: cybersec/produccion/index.md
     - Normativa de Ciberseguridad:
-      - Marco Normativo: cybersec/normativa/index.md
+      - Introducción: cybersec/normativa/index.md
 
 
 theme:
