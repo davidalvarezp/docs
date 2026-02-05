@@ -5,9 +5,40 @@ site_author: davidalvarezp
 
 repo_name: davidalvarezp/docs
 repo_url: https://github.com/davidalvarezp/docs
+edit_uri: edit/main/docs/
+
 
 nav:
   - Inicio: index.md
+
+  - SysAdmin:
+    - Introducción: sysadmin/index.md
+    - Sistemas Operativos:
+      - Introducción: sysadmin/sistemas-operativos/index.md
+      - Implantación de SO: sysadmin/sistemas-operativos/implantacion/index.md
+      - Administracion de SO: sysadmin/sistemas-operativos/administracion/index.md
+    - Redes:
+      - Introducción: sysadmin/redes/index.md
+      - Planificación: sysadmin/redes/planificacion/index.md
+      - Administracion: sysadmin/redes/administracion/index.md
+      - Servicios: sysadmin/redes/servicios/index.md
+    - Bases de Datos:
+      - Introducción: sysadmin/bb-dd/index.md
+      - Gestión de BBDD: sysadmin/bb-dd/gestion/index.md
+      - Administración de BBDD: sysadmin/bb-dd/administracion/index.md
+    - Hardware: sysadmin/index.md
+    - Programación:
+      - Introducción: sysadmin/programacion/index.md
+      - Python: sysadmin/programacion/python/index.md
+    - Seguridad:
+      - Introducción: sysadmin/seguridad/index.md
+      - Alta Disponibilidad: sysadmin/seguridad/disponibilidad/index.md
+    - Web:
+      - Introducción: sysadmin/web/index.md
+      - Lenguajes de Marcas: sysadmin/web/lenguajes-marcas/index.md
+      - Aplicaciones Web: sysadmin/web/aplicaciones-web/index.md
+
+  - ciberseguridad: cybersec/index.md
 
 theme:
   name: material
