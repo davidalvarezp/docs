@@ -72,8 +72,6 @@ nav:
 theme:
   name: material
   generator: false
-  copyright: >
-    © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
 
   language: es
   features:
@@ -118,6 +116,8 @@ plugins:
   - search
   - tags
 
+copyright: >
+  © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
 extra:
   social:
     - icon: fontawesome/brands/github
