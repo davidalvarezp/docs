@@ -72,6 +72,9 @@ nav:
 theme:
   name: material
   generator: false
+  copyright:
+    text: "© 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
+
   language: es
   features:
     - navigation.instant
@@ -114,10 +117,6 @@ markdown_extensions:
 plugins:
   - search
   - tags
-
-
-copyright: >
-  © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
 
 extra:
   social:
