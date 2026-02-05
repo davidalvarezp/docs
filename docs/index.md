@@ -1,61 +1,59 @@
 # SysAdmin & CyberSec Docs
- 
-Este sitio reúne documentación, guías y notas técnicas centradas en **administración de sistemas** y **ciberseguridad**.
 
-El contenido está orientado a entornos reales de operación: servidores, redes, hardening, seguridad defensiva y ofensiva, y resolución de problemas en sistemas en producción.
+Bienvenido a **SysAdmin & CyberSec Docs**, un sitio de **artículos técnicos y documentación profesional** sobre administración de sistemas y ciberseguridad.
+
+El contenido está diseñado para **personas que quieren aprender y aplicar conocimientos prácticos** en entornos reales de operación, con ejemplos, guías y buenas prácticas.
 
 ---
 
-## Administración de sistemas
+## Áreas de contenido
 
-Documentación práctica sobre la gestión y operación de infraestructuras:
+### Administración de Sistemas
+Artículos y guías prácticas sobre:
 
 - Sistemas Linux y Unix-like
-- Gestión de servidores y servicios
-- Networking y resolución de incidencias
-- Automatización y scripting
+- Windows Server y Active Directory
+- Gestión de servidores, servicios y aplicaciones
+- Configuración y troubleshooting de redes
+- Automatización de tareas y scripting
 - Monitorización, logging y mantenimiento
-- Buenas prácticas operativas
+- Buenas prácticas operativas en entornos profesionales
 
----
+[Ver área de SysAdmin](/sysadmin/index.md)
 
-## Ciberseguridad
+### Ciberseguridad
+Artículos y guías prácticas sobre:
 
-Apuntes y guías enfocadas a la protección y análisis de sistemas:
-
-- Hacking ético
+- Hacking ético y pruebas de penetración
 - Hardening de sistemas y servicios
-- Seguridad en red
+- Seguridad en redes y segmentación
 - Gestión de usuarios, permisos y credenciales
-- Análisis de vulnerabilidades
-- Seguridad defensiva y ofensiva
-- Respuesta ante incidentes
+- Análisis de vulnerabilidades y respuesta ante incidentes
+
+[Ver área de CyberSec](/cybersec/index.md)
 
 ---
 
 ## Objetivo del sitio
 
-El objetivo de esta documentación es servir como:
+Este sitio ofrece:
 
-- Referencia técnica personal
-- Repositorio de conocimiento reutilizable
-- Apoyo para tareas de administración y seguridad
-- Material de consulta clara y directa
-
-No está pensada como un curso estructurado, sino como documentación.
+- Contenidos técnicos **claros y aplicables** a entornos reales
+- Información organizada por áreas y competencias
+- Artículos que combinan teoría y práctica
+- Referencia para quienes desean formarse profesionalmente en IT
 
 ---
 
-## Uso de la documentación
+## Cómo utilizar la documentación
 
-- Navega por el menú lateral para explorar los temas
-- Utiliza el buscador para localizar conceptos rápidamente
-- Cada sección es independiente y pensada para consulta puntual
+- Explora los temas a través del **menú lateral**
+- Cada artículo está diseñado para ser independiente y práctico
+- El buscador permite localizar rápidamente conceptos o técnicas específicas
+- Ideal para consulta técnica y aprendizaje progresivo
 
 ---
 
 ## Autor
 
-Creado y mantenido por **[davidalvarezp](https://davidalvarezp.com)**.
-
----
+By **[davidalvarezp](https://davidalvarezp.com)**
