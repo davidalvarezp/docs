@@ -8,8 +8,6 @@ repo_url: https://github.com/davidalvarezp/docs
 
 nav:
   - Inicio: index.md
-  - SysAdmin:
-  - CyberSec:
 
 theme:
   name: material
