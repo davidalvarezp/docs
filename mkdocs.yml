@@ -44,7 +44,7 @@ nav:
     - Hacking Ético:
       - Introducción: cybersec/hacking-etico/index.md
       - Reconocimiento: cybersec/hacking-etico/recon/index.md
-      - Escaneo: cybersec/hacking-etico/scan/index.md
+      - Enumeración: cybersec/hacking-etico/enum/index.md
       - Explotación: cybersec/hacking-etico/exploit/index.md
       - Post-Explotación: cybersec/hacking-etico/post-exploit/index.md
       - Mantener Acceso: cybersec/hacking-etico/persist/index.md
