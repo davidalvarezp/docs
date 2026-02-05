@@ -118,6 +118,7 @@ plugins:
 
 copyright: >
   © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
+  
 extra:
   social:
     - icon: fontawesome/brands/github
