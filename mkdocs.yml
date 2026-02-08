@@ -56,7 +56,16 @@ nav:
       - Bastionado de Sistemas: cybersec/bastionado/sistemas/index.md
     - Análisis Forense:
       - Introducción: cybersec/forense/index.md
-      - Forense en PC: cybersec/forense/pc/index.md
+      - Forense en PC:
+        - Introducción: cybersec/forense/pc/index.md
+        - Clonado de discos: 
+          - Introducción: cybersec/forense/pc/clonado-disco/index.md
+          - Adquisicón básica: cybersec/forense/pc/clonado-disco/adquisicion-basica/index.md
+          - Adquisición avanzada: cybersec/forense/pc/clonado-disco/adquisicion-avanzada/index.md
+        - Volcado de RAM:
+          - Introducción: cybersec/forense/pc/volcado-ram/index.md
+          - Volcado en Windows: cybersec/forense/pc/volcado-ram/windows/index.md
+        - Herramientas de Triaje: cybersec/forense/pc/herramientas-triaje/index.md
       - Forense en Cloud: cybersec/forense/cloud/index.md
       - Forense en Móviles: cybersec/forense/phone/index.md
     - Incidentes de Ciberseguridad:
