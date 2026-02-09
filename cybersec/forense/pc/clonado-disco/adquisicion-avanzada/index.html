@@ -1,0 +1,4863 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación de administración de sistemas y ciberseguridad.">
+      
+      
+        <meta name="author" content="davidalvarezp">
+      
+      
+        <link rel="canonical" href="https://docs.davidalvarezp.com/cybersec/forense/pc/clonado-disco/adquisicion-avanzada/">
+      
+      
+        <link rel="prev" href="../adquisicion-basica/">
+      
+      
+        <link rel="next" href="../../volcado-ram/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Adquisición avanzada - SysAdmin & CyberSec Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#laboratorio-practico-adquisicion-avanzada-de-discos-windows-y-gnulinux" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../../../.." title="SysAdmin &amp; CyberSec Docs" class="md-header__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SysAdmin & CyberSec Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Adquisición avanzada
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../sysadmin/" class="md-tabs__link">
+          
+  
+  
+  SysAdmin
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+  CyberSec
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="SysAdmin &amp; CyberSec Docs" class="md-nav__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SysAdmin & CyberSec Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SysAdmin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SysAdmin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistemas Operativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistemas Operativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/sistemas-operativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/sistemas-operativos/implantacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implantación de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/sistemas-operativos/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/planificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planificación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/servicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bases de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bases de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/bb-dd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/bb-dd/gestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/bb-dd/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Programación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/programacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/programacion/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/seguridad/disponibilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alta Disponibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/web/lenguajes-marcas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes de Marcas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/web/aplicaciones-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aplicaciones Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CyberSec
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CyberSec
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hacking Ético
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hacking Ético
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/recon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reconocimiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/enum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/post-exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/persist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mantener Acceso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Borrado de Huellas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bastionado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../bastionado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../bastionado/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Redes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../bastionado/sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Forense
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Análisis Forense
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en PC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Forense en PC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_2" id="__nav_3_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clonado de discos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clonado de discos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../adquisicion-basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisicón básica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisición avanzada
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisición avanzada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enunciado-del-laboratorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enunciado del Laboratorio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enunciado del Laboratorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo General
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexto-del-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto del Caso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos Previos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-1-adquisicion-en-modo-live-desde-gnulinux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 1: Adquisición en Modo Live desde GNU/Linux
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 1: Adquisición en Modo Live desde GNU/Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-preparacion-del-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Preparación del Entorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-arranque-en-modo-live-y-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Arranque en Modo Live y Configuración
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-adquisicion-en-formato-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Adquisición en Formato RAW
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-clonado-disco-a-disco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Clonado Disco a Disco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-ejercicios-de-acceso-problemas-encontrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Ejercicios de Acceso - Problemas Encontrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-2-adquisicion-desde-windows-con-ftk-imager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2: Adquisición desde Windows con FTK Imager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 2: Adquisición desde Windows con FTK Imager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-preparacion-del-entorno-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Preparación del Entorno Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-instalacion-de-ftk-imager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Instalación de FTK Imager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-conectar-disco-sospechoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Conectar Disco Sospechoso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-adquisicion-con-ftk-imager-en-formato-encase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Adquisición con FTK Imager en Formato EnCase
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-3-acceso-desde-windows-a-evidencias-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 3: Acceso desde Windows a Evidencias Linux
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 3: Acceso desde Windows a Evidencias Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-conectar-disco-de-evidencias-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Conectar Disco de Evidencias Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-acceso-a-imagenes-raw-linux-con-ftk-imager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Acceso a Imágenes RAW Linux con FTK Imager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-acceso-a-imagenes-encase-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Acceso a Imágenes EnCase Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-4-acceso-complejo-imagenes-encase-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 4: Acceso Complejo - Imágenes EnCase Windows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 4: Acceso Complejo - Imágenes EnCase Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-acceso-con-arsenal-recon-image-mounter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Acceso con Arsenal Recon Image Mounter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-investigacion-clave-de-recuperacion-bitlocker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Investigación: Clave de Recuperación BitLocker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-5-acceso-desde-ubuntu-desktop-a-imagenes-encase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 5: Acceso desde Ubuntu Desktop a Imágenes EnCase
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 5: Acceso desde Ubuntu Desktop a Imágenes EnCase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-preparar-entorno-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Preparar Entorno Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-acceso-a-imagen-encase-linux-desde-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Acceso a Imagen EnCase Linux desde Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-limpieza-y-desmontaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Limpieza y Desmontaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-de-problemas-y-preguntas-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución de Problemas y Preguntas Frecuentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solución de Problemas y Preguntas Frecuentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-1-ewf-tools-no-reconoce-imagen-e01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 1: ewf-tools no reconoce imagen E01
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-2-bitlocker-en-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 2: BitLocker en Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-3-ftk-imager-no-detecta-disco-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 3: FTK Imager no detecta disco físico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-4-arsenal-image-mounter-no-monta-e01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 4: Arsenal Image Mounter no monta E01
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluacion-del-laboratorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluación del Laboratorio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluación del Laboratorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rúbrica de Evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#puntos-extra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Puntos Extra:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-y-aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión y Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_3" id="__nav_3_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado de RAM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volcado de RAM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../volcado-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../volcado-ram/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../herramientas-triaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de Triaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Móviles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidentes de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidentes de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../incidentes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../incidentes/prevencion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prevención
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../incidentes/taxonomia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taxonomía de Incidentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Puesta en Producción
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Puesta en Producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../produccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normativa de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Normativa de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../normativa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enunciado-del-laboratorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enunciado del Laboratorio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enunciado del Laboratorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo General
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexto-del-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto del Caso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos Previos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-1-adquisicion-en-modo-live-desde-gnulinux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 1: Adquisición en Modo Live desde GNU/Linux
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 1: Adquisición en Modo Live desde GNU/Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-preparacion-del-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Preparación del Entorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-arranque-en-modo-live-y-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Arranque en Modo Live y Configuración
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-adquisicion-en-formato-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Adquisición en Formato RAW
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-clonado-disco-a-disco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Clonado Disco a Disco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-ejercicios-de-acceso-problemas-encontrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Ejercicios de Acceso - Problemas Encontrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-2-adquisicion-desde-windows-con-ftk-imager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2: Adquisición desde Windows con FTK Imager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 2: Adquisición desde Windows con FTK Imager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-preparacion-del-entorno-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Preparación del Entorno Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-instalacion-de-ftk-imager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Instalación de FTK Imager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-conectar-disco-sospechoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Conectar Disco Sospechoso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-adquisicion-con-ftk-imager-en-formato-encase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Adquisición con FTK Imager en Formato EnCase
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-3-acceso-desde-windows-a-evidencias-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 3: Acceso desde Windows a Evidencias Linux
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 3: Acceso desde Windows a Evidencias Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-conectar-disco-de-evidencias-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Conectar Disco de Evidencias Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-acceso-a-imagenes-raw-linux-con-ftk-imager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Acceso a Imágenes RAW Linux con FTK Imager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-acceso-a-imagenes-encase-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Acceso a Imágenes EnCase Linux
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-4-acceso-complejo-imagenes-encase-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 4: Acceso Complejo - Imágenes EnCase Windows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 4: Acceso Complejo - Imágenes EnCase Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-acceso-con-arsenal-recon-image-mounter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Acceso con Arsenal Recon Image Mounter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-investigacion-clave-de-recuperacion-bitlocker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Investigación: Clave de Recuperación BitLocker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-5-acceso-desde-ubuntu-desktop-a-imagenes-encase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 5: Acceso desde Ubuntu Desktop a Imágenes EnCase
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parte 5: Acceso desde Ubuntu Desktop a Imágenes EnCase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-preparar-entorno-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Preparar Entorno Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-acceso-a-imagen-encase-linux-desde-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Acceso a Imagen EnCase Linux desde Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-limpieza-y-desmontaje" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Limpieza y Desmontaje
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-de-problemas-y-preguntas-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución de Problemas y Preguntas Frecuentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solución de Problemas y Preguntas Frecuentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-1-ewf-tools-no-reconoce-imagen-e01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 1: ewf-tools no reconoce imagen E01
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-2-bitlocker-en-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 2: BitLocker en Ubuntu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-3-ftk-imager-no-detecta-disco-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 3: FTK Imager no detecta disco físico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-4-arsenal-image-mounter-no-monta-e01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 4: Arsenal Image Mounter no monta E01
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluacion-del-laboratorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluación del Laboratorio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluación del Laboratorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rubrica-de-evaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rúbrica de Evaluación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#puntos-extra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Puntos Extra:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-y-aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión y Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/davidalvarezp/docs/edit/main/docs/cybersec/forense/pc/clonado-disco/adquisicion-avanzada/index.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="laboratorio-practico-adquisicion-avanzada-de-discos-windows-y-gnulinux">Laboratorio Práctico: Adquisición Avanzada de Discos - Windows y GNU/Linux</h1>
+<h2 id="enunciado-del-laboratorio"><strong>Enunciado del Laboratorio</strong></h2>
+<h3 id="objetivo-general"><strong>Objetivo General</strong></h3>
+<p>Realizar adquisiciones forenses avanzadas de discos en diferentes escenarios, combinando técnicas de adquisición en modo Live, desde Windows, y acceso cruzado a evidencias entre sistemas operativos.</p>
+<h3 id="contexto-del-caso"><strong>Contexto del Caso</strong></h3>
+<p>Acaban de entregarte un disco de una máquina sospeitosa Windows 11. El disco está en el cartafol del módulo.</p>
+<p><strong>Importante:</strong> Recuerda custodiar la prueba haciendo las mínimas modificaciones posibles.</p>
+<h3 id="requisitos-previos"><strong>Requisitos Previos</strong></h3>
+<ul>
+<li>Disco de máquina sospechosa Windows 11</li>
+<li>Máquina virtual Windows 11 para laboratorio</li>
+<li>Distribución Live de GNU/Linux</li>
+<li>Herramientas: FTK Imager, Arsenal Recon Image Mounter</li>
+<li>Máquina Ubuntu Desktop del laboratorio anterior</li>
+</ul>
+<hr />
+<h2 id="parte-1-adquisicion-en-modo-live-desde-gnulinux"><strong>Parte 1: Adquisición en Modo Live desde GNU/Linux</strong></h2>
+<h3 id="11-preparacion-del-entorno"><strong>1.1. Preparación del Entorno</strong></h3>
+<p><strong>A. Añadir dos discos de 100GB a la máquina Windows sospechosa:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># En VirtualBox (host)</span>
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;~/VirtualBox VMs/Máquina sospeitosa Windows 11/&quot;</span>
+
+<span class="c1"># Crear discos de evidencia</span>
+vboxmanage<span class="w"> </span>createmedium<span class="w"> </span>disk<span class="w"> </span>--filename<span class="w"> </span>disco_evidencia1.vdi<span class="w"> </span>--size<span class="w"> </span><span class="m">102400</span><span class="w"> </span>--format<span class="w"> </span>VDI
+vboxmanage<span class="w"> </span>createmedium<span class="w"> </span>disk<span class="w"> </span>--filename<span class="w"> </span>disco_evidencia2.vdi<span class="w"> </span>--size<span class="w"> </span><span class="m">102400</span><span class="w"> </span>--format<span class="w"> </span>VDI
+
+<span class="c1"># Conectar discos a la máquina Windows sospechosa</span>
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Máquina sospeitosa Windows 11&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span>disco_evidencia1.vdi
+
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Máquina sospeitosa Windows 11&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span>disco_evidencia2.vdi
+
+<span class="c1"># Verificar configuración</span>
+vboxmanage<span class="w"> </span>showvminfo<span class="w"> </span><span class="s2">&quot;Máquina sospeitosa Windows 11&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A10<span class="w"> </span><span class="s2">&quot;Storage&quot;</span>
+</code></pre></div>
+<p><strong>B. Preparar imagen LIVE de GNU/Linux:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Opciones recomendadas:</span>
+<span class="c1"># 1. Kali Linux Live: https://www.kali.org/get-kali/#kali-live</span>
+<span class="c1"># 2. Caine Linux: https://www.caine-live.net/</span>
+<span class="c1"># 3. Ubuntu Live: https://ubuntu.com/download/desktop</span>
+
+<span class="c1"># Descargar Kali Linux Live (ejemplo)</span>
+wget<span class="w"> </span>https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-live-amd64.iso
+
+<span class="c1"># Configurar arranque desde Live ISO en VirtualBox</span>
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Máquina sospeitosa Windows 11&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;IDE Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>dvddrive<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span>kali-linux-2023.4-live-amd64.iso
+
+<span class="c1"># Establecer arranque desde DVD</span>
+vboxmanage<span class="w"> </span>modifyvm<span class="w"> </span><span class="s2">&quot;Máquina sospeitosa Windows 11&quot;</span><span class="w"> </span>--boot1<span class="w"> </span>dvd<span class="w"> </span>--boot2<span class="w"> </span>disk<span class="w"> </span>--boot3<span class="w"> </span>none<span class="w"> </span>--boot4<span class="w"> </span>none
+</code></pre></div>
+<h3 id="12-arranque-en-modo-live-y-configuracion"><strong>1.2. Arranque en Modo Live y Configuración</strong></h3>
+<p><strong>A. Iniciar máquina desde Live ISO:</strong></p>
+<ol>
+<li>Iniciar "Máquina sospeitosa Windows 11"</li>
+<li>Seleccionar "Live boot" o "Try without installing"</li>
+<li>Idioma: Español/Inglés</li>
+<li>Teclado: Español</li>
+</ol>
+<p><strong>B. Preparar entorno en Live:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Abrir terminal (Ctrl+Alt+T)</span>
+
+<span class="c1"># 1. Identificar discos</span>
+sudo<span class="w"> </span>fdisk<span class="w"> </span>-l
+
+<span class="c1"># Resultado esperado:</span>
+<span class="c1"># /dev/sda: Disco original Windows 11 (sospechoso) - ~128GB</span>
+<span class="c1"># /dev/sdb: Disco evidencia 1 - 100GB</span>
+<span class="c1"># /dev/sdc: Disco evidencia 2 - 100GB</span>
+
+<span class="c1"># 2. Preparar disco de evidencia 1 para almacenar imagen</span>
+sudo<span class="w"> </span>parted<span class="w"> </span>/dev/sdb<span class="w"> </span>mklabel<span class="w"> </span>gpt
+sudo<span class="w"> </span>parted<span class="w"> </span>/dev/sdb<span class="w"> </span>mkpart<span class="w"> </span>primary<span class="w"> </span>ext4<span class="w"> </span><span class="m">0</span>%<span class="w"> </span><span class="m">100</span>%
+sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/sdb1
+
+<span class="c1"># 3. Crear punto de montaje y montar</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/evidencias
+sudo<span class="w"> </span>mount<span class="w"> </span>/dev/sdb1<span class="w"> </span>/mnt/evidencias
+
+<span class="c1"># 4. Verificar espacio</span>
+df<span class="w"> </span>-h<span class="w"> </span>/mnt/evidencias
+</code></pre></div>
+<h3 id="13-adquisicion-en-formato-raw"><strong>1.3. Adquisición en Formato RAW</strong></h3>
+<p><strong>A. Instalar herramientas forenses (en Kali ya están preinstaladas):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># En otras distribuciones puede ser necesario:</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>dc3dd<span class="w"> </span>hashdeep<span class="w"> </span>sleuthkit<span class="w"> </span>-y
+
+<span class="c1"># Verificar herramientas</span>
+dc3dd<span class="w"> </span>--version
+</code></pre></div>
+<p><strong>B. Realizar adquisición RAW del disco sospechoso:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Identificar disco Windows sospechoso (normalmente /dev/sda)</span>
+sudo<span class="w"> </span>fdisk<span class="w"> </span>-l<span class="w"> </span>/dev/sda
+
+<span class="c1"># Realizar adquisición con dc3dd</span>
+sudo<span class="w"> </span>dc3dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/sda<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">of</span><span class="o">=</span>/mnt/evidencias/CASOB-Evidencia01-MaquinaSospechosa-W11.raw<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">log</span><span class="o">=</span>/mnt/evidencias/CASOB-Evidencia01.log<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">verb</span><span class="o">=</span>on<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">hash</span><span class="o">=</span>sha256<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">hash</span><span class="o">=</span>sha512<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">hof</span><span class="o">=</span>/mnt/evidencias/CASOB-Evidencia01.hashes
+
+<span class="c1"># Parámetros explicados:</span>
+<span class="c1"># if=/dev/sda: Disco Windows sospechoso</span>
+<span class="c1"># of=...: Imagen RAW de salida</span>
+<span class="c1"># log=...: Registro detallado del proceso</span>
+<span class="c1"># verb=on: Mostrar progreso</span>
+<span class="c1"># hash=sha256/sha512: Calcular hashes durante copia</span>
+<span class="c1"># hof=...: Archivo con hashes calculados</span>
+</code></pre></div>
+<p><strong>C. Verificación del proceso:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Verificar archivos creados</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>/mnt/evidencias/CASOB-Evidencia01*
+
+<span class="c1"># 2. Verificar hashes</span>
+cat<span class="w"> </span>/mnt/evidencias/CASOB-Evidencia01.hashes
+
+<span class="c1"># 3. Comparar hash del dispositivo original</span>
+sudo<span class="w"> </span>dc3dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/sda<span class="w"> </span><span class="nv">hash</span><span class="o">=</span>sha256<span class="w"> </span><span class="nv">verb</span><span class="o">=</span>on<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;input results for&quot;</span>
+
+<span class="c1"># 4. Documentar proceso</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>/mnt/evidencias/CASOB-Evidencia01-metadata.txt<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">ADQUISICIÓN FORENSE - CASO B</span>
+<span class="s">============================</span>
+<span class="s">Fecha: $(date)</span>
+<span class="s">Sistema: Windows 11 sospechoso</span>
+<span class="s">Herramienta: dc3dd</span>
+<span class="s">Operador: $(whoami)</span>
+<span class="s">Dispositivo origen: /dev/sda</span>
+<span class="s">Imagen destino: CASOB-Evidencia01-MaquinaSospechosa-W11.raw</span>
+
+<span class="s">HASHES:</span>
+<span class="s">$(cat /mnt/evidencias/CASOB-Evidencia01.hashes)</span>
+
+<span class="s">TAMAÑO IMAGEN: $(du -h /mnt/evidencias/CASOB-Evidencia01-MaquinaSospechosa-W11.raw | cut -f1)</span>
+<span class="s">TIEMPO ADQUISICIÓN: Registrado en log</span>
+<span class="s">INTEGRIDAD: VERIFICADA</span>
+
+<span class="s">FIRMA: _________________________</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<h3 id="14-clonado-disco-a-disco"><strong>1.4. Clonado Disco a Disco</strong></h3>
+<p><strong>A. Preparar segundo disco de evidencia:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Limpiar disco evidencia 2</span>
+sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/dev/sdc<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">100</span>
+
+<span class="c1"># 2. Verificar que está vacío</span>
+sudo<span class="w"> </span>hexdump<span class="w"> </span>-C<span class="w"> </span>/dev/sdc<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+
+<span class="c1"># 3. Realizar clonado disco a disco</span>
+sudo<span class="w"> </span>dc3dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/sda<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/dev/sdc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">log</span><span class="o">=</span>/mnt/evidencias/CASOB-DiscoaDisco.log<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">verb</span><span class="o">=</span>on<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">hash</span><span class="o">=</span>sha256<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">hashlog</span><span class="o">=</span>/mnt/evidencias/CASOB-DiscoaDisco.hashes
+
+<span class="c1"># 4. Verificar progreso (mostrará porcentaje completo)</span>
+</code></pre></div>
+<p><strong>B. Verificación del clonado:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Calcular hashes del disco clonado</span>
+sudo<span class="w"> </span>dc3dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/sdc<span class="w"> </span><span class="nv">hash</span><span class="o">=</span>sha256<span class="w"> </span><span class="nv">verb</span><span class="o">=</span>on<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;input results for&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/mnt/evidencias/CASOB-Clon-verificacion.txt
+
+<span class="c1"># 2. Comparar con hashes originales</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== COMPARACIÓN HASHES ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Disco original (/dev/sda):&quot;</span>
+sudo<span class="w"> </span>sha256sum<span class="w"> </span>/dev/sda
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Disco clonado (/dev/sdc):&quot;</span>
+sudo<span class="w"> </span>sha256sum<span class="w"> </span>/dev/sdc
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="c1"># 3. Verificar si coinciden</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>sudo<span class="w"> </span>sha256sum<span class="w"> </span>/dev/sda<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f1<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>sudo<span class="w"> </span>sha256sum<span class="w"> </span>/dev/sdc<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f1<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✓ CLONADO EXITOSO: Hashes coinciden&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✗ ERROR: Hashes NO coinciden&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># 4. Documentar resultados</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>/mnt/evidencias/CASOB-Clonado-Conclusion.txt<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">CONCLUSIÓN CLONADO DISCO A DISCO</span>
+<span class="s">=================================</span>
+<span class="s">Fecha verificación: $(date)</span>
+
+<span class="s">HASH SHA-256 ORIGINAL (/dev/sda):</span>
+<span class="s">$(sudo sha256sum /dev/sda)</span>
+
+<span class="s">HASH SHA-256 CLON (/dev/sdc):</span>
+<span class="s">$(sudo sha256sum /dev/sdc)</span>
+
+<span class="s">RESULTADO: $([ &quot;$(sudo sha256sum /dev/sda | cut -d&#39; &#39; -f1)&quot; = &quot;$(sudo sha256sum /dev/sdc | cut -d&#39; &#39; -f1)&quot; ] &amp;&amp; echo &quot;COINCIDEN - Clonado exitoso&quot; || echo &quot;NO COINCIDEN - Error en clonado&quot;)</span>
+
+<span class="s">ANÁLISIS:</span>
+<span class="s">- Un clonado exitoso debe producir hashes idénticos</span>
+<span class="s">- Cualquier diferencia indica error en el proceso</span>
+<span class="s">- Hashes idénticos garantizan copia bit-a-bit exacta</span>
+
+<span class="s">FIRMA VERIFICADOR: _________________________</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<h3 id="15-ejercicios-de-acceso-problemas-encontrados"><strong>1.5. Ejercicios de Acceso - Problemas Encontrados</strong></h3>
+<p><strong>A. Intentar montar la imagen RAW:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Intentar montar imagen RAW directamente</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> </span>ro<span class="w"> </span>/mnt/evidencias/CASOB-Evidencia01-MaquinaSospechosa-W11.raw<span class="w"> </span>/mnt/temp
+
+<span class="c1"># 2. Error esperado: &quot;wrong fs type, bad option, bad superblock&quot;</span>
+
+<span class="c1"># 3. Intentar con loop device</span>
+sudo<span class="w"> </span>losetup<span class="w"> </span>-f<span class="w"> </span>-P<span class="w"> </span>-r<span class="w"> </span>/mnt/evidencias/CASOB-Evidencia01-MaquinaSospechosa-W11.raw
+sudo<span class="w"> </span>losetup<span class="w"> </span>-a
+
+<span class="c1"># 4. Identificar particiones dentro del loop</span>
+sudo<span class="w"> </span>fdisk<span class="w"> </span>-l<span class="w"> </span>/dev/loop0
+
+<span class="c1"># 5. Intentar montar partición Windows (normalmente NTFS)</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>ntfs-3g<span class="w"> </span>-o<span class="w"> </span>ro<span class="w"> </span>/dev/loop0p2<span class="w"> </span>/mnt/temp<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="c1"># Documentar error encontrado</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>/mnt/evidencias/CASOB-Problema-Montaje.txt<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">PROBLEMA ENCONTRADO AL MONTAR IMAGEN WINDOWS 11</span>
+<span class="s">===============================================</span>
+<span class="s">Fecha: $(date)</span>
+
+<span class="s">Comando ejecutado:</span>
+<span class="s">sudo mount -t ntfs-3g -o ro /dev/loop0p2 /mnt/temp</span>
+
+<span class="s">Error obtenido:</span>
+<span class="s">$(sudo mount -t ntfs-3g -o ro /dev/loop0p2 /mnt/temp 2&gt;&amp;1)</span>
+
+<span class="s">Posibles causas:</span>
+<span class="s">1. Sistema de archivos NTFS corrupto</span>
+<span class="s">2. BitLocker habilitado (cifrado de disco)</span>
+<span class="s">3. Problemas con driver ntfs-3g</span>
+<span class="s">4. Imagen dañada durante adquisición</span>
+
+<span class="s">Verificación adicional:</span>
+<span class="s">- Hash de imagen verificado: OK</span>
+<span class="s">- Tamaño de imagen correcto: OK</span>
+<span class="s">- Particiones detectadas: OK</span>
+
+<span class="s">Conclusión preliminar:</span>
+<span class="s">Es probable que el disco Windows 11 esté cifrado con BitLocker.</span>
+<span class="s">Se requiere clave de recuperación o contraseña para montar.</span>
+
+<span class="s">Acciones recomendadas:</span>
+<span class="s">1. Buscar clave de recuperación de BitLocker</span>
+<span class="s">2. Utilizar herramientas específicas para discos cifrados</span>
+<span class="s">3. Intentar montar desde Windows con credenciales adecuadas</span>
+
+<span class="s">FIRMA ANALISTA: _________________________</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p><strong>B. Verificar cifrado BitLocker:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instalar herramientas para detectar BitLocker</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>dislocker<span class="w"> </span>-y
+
+<span class="c1"># Intentar detectar BitLocker</span>
+sudo<span class="w"> </span>dislocker<span class="w"> </span>-V<span class="w"> </span>/dev/loop0p2
+
+<span class="c1"># Verificar si hay metadatos de BitLocker</span>
+sudo<span class="w"> </span>strings<span class="w"> </span>/dev/loop0p2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;bitlocker\|fve&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+</code></pre></div>
+<hr />
+<h2 id="parte-2-adquisicion-desde-windows-con-ftk-imager"><strong>Parte 2: Adquisición desde Windows con FTK Imager</strong></h2>
+<h3 id="21-preparacion-del-entorno-windows"><strong>2.1. Preparación del Entorno Windows</strong></h3>
+<p><strong>A. Crear clon Windows 11 para laboratorio:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># En PowerShell con permisos de administrador</span>
+
+<span class="c"># 1. Importar módulo Hyper-V (si se usa)</span>
+<span class="nb">Import-Module</span> <span class="n">Hyper-V</span>
+
+<span class="c"># 2. Crear máquina virtual (ejemplo Hyper-V)</span>
+<span class="nb">New-VM</span> <span class="n">-Name</span> <span class="s2">&quot;Windows 11 - LabForense&quot;</span> <span class="n">-MemoryStartupBytes</span> <span class="n">4GB</span> <span class="n">-Generation</span> <span class="n">2</span> <span class="n">-SwitchName</span> <span class="s2">&quot;Default Switch&quot;</span>
+
+<span class="c"># 3. Crear disco del sistema</span>
+<span class="nb">New-VHD</span> <span class="n">-Path</span> <span class="s2">&quot;C:\VMs\Windows11-LabForense\disk.vhdx&quot;</span> <span class="n">-SizeBytes</span> <span class="n">64GB</span> <span class="n">-Dynamic</span>
+
+<span class="c"># 4. Conectar disco a VM</span>
+<span class="nb">Add-VMHardDiskDrive</span> <span class="n">-VMName</span> <span class="s2">&quot;Windows 11 - LabForense&quot;</span> <span class="n">-Path</span> <span class="s2">&quot;C:\VMs\Windows11-LabForense\disk.vhdx&quot;</span>
+
+<span class="c"># 5. Instalar Windows 11 desde ISO</span>
+<span class="nb">Set-VMDvdDrive</span> <span class="n">-VMName</span> <span class="s2">&quot;Windows 11 - LabForense&quot;</span> <span class="n">-Path</span> <span class="s2">&quot;C:\ISOs\Windows11.iso&quot;</span>
+
+<span class="c"># 6. Iniciar e instalar</span>
+<span class="nb">Start-VM</span> <span class="n">-Name</span> <span class="s2">&quot;Windows 11 - LabForense&quot;</span>
+</code></pre></div>
+<p><strong>Para VirtualBox:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clonar máquina Windows 11 existente</span>
+vboxmanage<span class="w"> </span>clonevm<span class="w"> </span><span class="s2">&quot;Windows 11 Original&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;Windows 11 - LabForense&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--register<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mode<span class="w"> </span>all
+
+<span class="c1"># Configurar para laboratorio</span>
+vboxmanage<span class="w"> </span>modifyvm<span class="w"> </span><span class="s2">&quot;Windows 11 - LabForense&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--memory<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cpus<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--vram<span class="w"> </span><span class="m">128</span>
+</code></pre></div></p>
+<p><strong>B. Añadir disco de 100GB para evidencias:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># En VirtualBox host</span>
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;~/VirtualBox VMs/Windows 11 - LabForense/&quot;</span>
+
+<span class="c1"># Crear disco de evidencias</span>
+vboxmanage<span class="w"> </span>createmedium<span class="w"> </span>disk<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filename<span class="w"> </span>disco_evidencias_windows.vdi<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--size<span class="w"> </span><span class="m">102400</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--format<span class="w"> </span>VDI
+
+<span class="c1"># Conectar a la máquina</span>
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Windows 11 - LabForense&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span>disco_evidencias_windows.vdi
+</code></pre></div>
+<p><strong>C. Configurar dentro de Windows:</strong></p>
+<ol>
+<li>Iniciar "Windows 11 - LabForense"</li>
+<li>Abrir "Administración de discos" (Win + X → Administración de discos)</li>
+<li>Inicializar nuevo disco (GPT)</li>
+<li>Crear partición NTFS de 100GB</li>
+<li>Asignar letra de unidad (ej: E:)</li>
+</ol>
+<h3 id="22-instalacion-de-ftk-imager"><strong>2.2. Instalación de FTK Imager</strong></h3>
+<p><strong>A. Descarga e instalación:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Desde PowerShell en la máquina Windows Lab</span>
+
+<span class="c"># 1. Crear directorio para herramientas</span>
+<span class="n">mkdir</span> <span class="n">C</span><span class="p">:\</span><span class="n">Tools</span><span class="p">\</span><span class="n">Forensic</span>
+<span class="nb">cd </span><span class="n">C</span><span class="p">:\</span><span class="n">Tools</span><span class="p">\</span><span class="n">Forensic</span>
+
+<span class="c"># 2. Descargar FTK Imager (versión portable recomendada)</span>
+<span class="c"># Opción 1: Desde página oficial (requiere registro)</span>
+<span class="c"># Opción 2: Usar versión de evaluación</span>
+
+<span class="c"># 3. Ejemplo con wget (si está disponible)</span>
+<span class="nb">wget </span><span class="n">https</span><span class="p">://</span><span class="n">downloads</span><span class="p">.</span><span class="n">accessdata</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">FTKImager</span><span class="p">/</span><span class="n">FTKImager_4</span><span class="p">.</span><span class="n">7</span><span class="p">.</span><span class="n">1</span><span class="p">.</span><span class="n">exe</span> <span class="n">-OutFile</span> <span class="n">FTKImager</span><span class="p">.</span><span class="n">exe</span>
+
+<span class="c"># 4. Instalar</span>
+<span class="p">.\</span><span class="n">FTKImager</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">SILENT</span> <span class="p">/</span><span class="n">NORESTART</span>
+
+<span class="c"># 5. Alternativa: Usar versión portable</span>
+<span class="nb">wget </span><span class="n">https</span><span class="p">://</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">FTKImagerPortable</span><span class="p">.</span><span class="n">zip</span> <span class="n">-OutFile</span> <span class="n">FTKImagerPortable</span><span class="p">.</span><span class="n">zip</span>
+<span class="nb">Expand-Archive</span> <span class="n">FTKImagerPortable</span><span class="p">.</span><span class="n">zip</span> <span class="n">-DestinationPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">Tools</span><span class="p">\</span><span class="n">Forensic</span><span class="p">\</span><span class="n">FTKImager</span>
+</code></pre></div>
+<p><strong>B. Verificar instalación:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Comprobar que FTK Imager funciona</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files\AccessData\FTK Imager&quot;</span>
+<span class="p">.\</span><span class="n">FTKImager</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-help</span>
+
+<span class="c"># O abrir interfaz gráfica</span>
+<span class="nb">Start-Process</span> <span class="s2">&quot;C:\Program Files\AccessData\FTK Imager\FTKImager.exe&quot;</span>
+</code></pre></div>
+<h3 id="23-conectar-disco-sospechoso"><strong>2.3. Conectar Disco Sospechoso</strong></h3>
+<p><strong>A. En VirtualBox host:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Desconectar disco de máquina sospechosa (si está conectado)</span>
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Máquina sospeitosa Windows 11&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span>none
+
+<span class="c1"># 2. Conectar a máquina Lab Forense</span>
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Windows 11 - LabForense&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span><span class="s2">&quot;~/VirtualBox VMs/Máquina sospeitosa Windows 11/Windows11Sospechoso.vdi&quot;</span>
+
+<span class="c1"># 3. Verificar</span>
+vboxmanage<span class="w"> </span>showvminfo<span class="w"> </span><span class="s2">&quot;Windows 11 - LabForense&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A5<span class="w"> </span><span class="s2">&quot;Storage&quot;</span>
+</code></pre></div>
+<p><strong>B. Dentro de Windows Lab Forense:</strong></p>
+<ol>
+<li>No hacer clic en notificaciones de nuevo hardware</li>
+<li>Abrir "Administración de discos"</li>
+<li><strong>No inicializar</strong> el nuevo disco</li>
+<li>Anotar número de disco (ej: Disco 2)</li>
+</ol>
+<h3 id="24-adquisicion-con-ftk-imager-en-formato-encase"><strong>2.4. Adquisición con FTK Imager en Formato EnCase</strong></h3>
+<p><strong>A. Proceso paso a paso en FTK Imager:</strong></p>
+<ol>
+<li>
+<p><strong>Abrir FTK Imager</strong> como Administrador</p>
+</li>
+<li>
+<p><strong>Seleccionar origen:</strong></p>
+</li>
+<li>File → Create Disk Image</li>
+<li>Seleccionar "Physical Drive"</li>
+<li>Elegir disco sospechoso (normalmente PhysicalDrive1)</li>
+<li>
+<p>Click en "Finish"</p>
+</li>
+<li>
+<p><strong>Configurar destino:</strong></p>
+</li>
+<li>Destination: "Image destination folder"</li>
+<li>Ruta: <code>E:\CASOB\</code> (disco de evidencias)</li>
+<li>
+<p>Image Filename: <code>CASOB-Evidencia02-MaquinaSospechosa-W11</code></p>
+</li>
+<li>
+<p><strong>Configurar formato EnCase:</strong></p>
+</li>
+<li>Image Type: "EnCase Evidence File (L01)"</li>
+<li>Compression: "Fast" (9 - mejor relación tiempo/compresión)</li>
+<li>
+<p>Segment Size: 650MB (compatible con FAT32 si es necesario)</p>
+</li>
+<li>
+<p><strong>Información del caso:</strong></p>
+</li>
+<li>Case Number: CASOB</li>
+<li>Evidence Number: 02</li>
+<li>Unique Description: "Máquina sospechosa Windows 11 - Adquisición FTK Imager"</li>
+<li>Examiner: Tu nombre</li>
+<li>
+<p>Notes: "Adquisición completa formato EnCase"</p>
+</li>
+<li>
+<p><strong>Verificación:</strong></p>
+</li>
+<li>Marcar "Verify images after they are created"</li>
+<li>
+<p>Marcar "Create directory listings of all files in the image"</p>
+</li>
+<li>
+<p><strong>Iniciar adquisición:</strong></p>
+</li>
+<li>Click en "Start"</li>
+<li>Observar progreso</li>
+<li>Tiempo estimado: 30-60 minutos para 128GB</li>
+</ol>
+<p><strong>B. Comandos alternativos (línea de comandos):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># FTK Imager también tiene interfaz de línea de comandos</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files\AccessData\FTK Imager&quot;</span>
+
+<span class="c"># Ejemplo de adquisición por CLI</span>
+<span class="p">.\</span><span class="n">FTKImager</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-diskimage</span> <span class="p">-</span><span class="n">-source</span> <span class="p">\\.\</span><span class="n">PhysicalDrive1</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-dest</span> <span class="n">E</span><span class="p">:\</span><span class="n">CASOB</span><span class="p">\</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-filename</span> <span class="n">CASOB-Evidencia02-MaquinaSospechosa-W11</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-encase</span> <span class="p">-</span><span class="n">-compress</span> <span class="n">9</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-frag</span> <span class="n">650</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-case</span> <span class="n">CASOB</span> <span class="p">-</span><span class="n">-evid</span> <span class="n">02</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-desc</span> <span class="s2">&quot;Máquina Windows 11 sospechosa&quot;</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-examiner</span> <span class="s2">&quot;$env:USERNAME&quot;</span> <span class="p">`</span>
+    <span class="p">-</span><span class="n">-verify</span>
+</code></pre></div>
+<p><strong>C. Verificación post-adquisición:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Verificar archivos creados</span>
+<span class="nb">dir </span><span class="n">E</span><span class="p">:\</span><span class="n">CASOB</span><span class="p">\</span><span class="n">CASOB-Evidencia02</span><span class="p">*</span>
+
+<span class="c"># Debería mostrar:</span>
+<span class="c"># CASOB-Evidencia02-MaquinaSospechosa-W11.E01</span>
+<span class="c"># CASOB-Evidencia02-MaquinaSospechosa-W11.E02</span>
+<span class="c"># ...</span>
+<span class="c"># CASOB-Evidencia02-MaquinaSospechosa-W11.txt (metadata)</span>
+
+<span class="c"># 2. Verificar metadata</span>
+<span class="nb">type </span><span class="n">E</span><span class="p">:\</span><span class="n">CASOB</span><span class="p">\</span><span class="n">CASOB-Evidencia02-MaquinaSospechosa-W11</span><span class="p">.</span><span class="n">txt</span>
+
+<span class="c"># 3. Verificar hashes en el archivo de log</span>
+<span class="n">findstr</span> <span class="s2">&quot;MD5\|SHA1&quot;</span> <span class="n">E</span><span class="p">:\</span><span class="n">CASOB</span><span class="p">\</span><span class="n">CASOB-Evidencia02-MaquinaSospechosa-W11</span><span class="p">.</span><span class="n">txt</span>
+
+<span class="c"># 4. Crear documento de verificación</span>
+<span class="sh">@&quot;</span>
+<span class="sh">ADQUISICIÓN FTK IMAGER - CASO B</span>
+<span class="sh">===============================</span>
+<span class="sh">Fecha: </span><span class="p">$(</span><span class="nb">Get-Date</span><span class="p">)</span>
+<span class="sh">Herramienta: FTK Imager 4.7.1</span>
+<span class="sh">Operador: $env:USERNAME</span>
+<span class="sh">Disco origen: \\.\PhysicalDrive1</span>
+<span class="sh">Formato: EnCase L01</span>
+<span class="sh">Compresión: 9 (Fast)</span>
+<span class="sh">Segmentación: 650MB</span>
+
+<span class="sh">ARCHIVOS GENERADOS:</span>
+<span class="p">$(</span><span class="nb">dir </span><span class="n">E</span><span class="p">:\</span><span class="n">CASOB</span><span class="p">\</span><span class="n">CASOB-Evidencia02</span><span class="p">*</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">&quot;  </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2"> - </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Length</span><span class="p">/</span><span class="n">1MB</span><span class="p">)</span><span class="s2"> MB&quot;</span> <span class="p">})</span>
+
+<span class="sh">VERIFICACIÓN: </span><span class="p">$(</span><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&quot;E:\CASOB\CASOB-Evidencia02-MaquinaSospechosa-W11.txt&quot;</span><span class="p">)</span> <span class="p">{</span><span class="s2">&quot;COMPLETADA&quot;</span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="s2">&quot;PENDIENTE&quot;</span><span class="p">})</span>
+
+<span class="sh">HASHES:</span>
+<span class="p">$(</span><span class="n">findstr</span> <span class="s2">&quot;MD5 hash\|SHA1 hash&quot;</span> <span class="n">E</span><span class="p">:\</span><span class="n">CASOB</span><span class="p">\</span><span class="n">CASOB-Evidencia02-MaquinaSospechosa-W11</span><span class="p">.</span><span class="n">txt</span><span class="p">)</span>
+
+<span class="sh">FIRMA: _________________________</span>
+<span class="sh">&quot;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;E:\CASOB\CASOB-Verificacion-FTK.txt&quot;</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
+</code></pre></div>
+<hr />
+<h2 id="parte-3-acceso-desde-windows-a-evidencias-linux"><strong>Parte 3: Acceso desde Windows a Evidencias Linux</strong></h2>
+<h3 id="31-conectar-disco-de-evidencias-linux"><strong>3.1. Conectar Disco de Evidencias Linux</strong></h3>
+<p><strong>A. En VirtualBox host:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Identificar disco de evidencias de Ubuntu</span>
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;~/VirtualBox VMs/UbuDesk-Laboratorio Forense/&quot;</span>
+ls<span class="w"> </span>-la<span class="w"> </span>*.vdi
+
+<span class="c1"># 2. Conectar a máquina Windows Lab</span>
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;Windows 11 - LabForense&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span>disco_evidencias.vdi
+
+<span class="c1"># 3. Alternativa: Conectar solo la imagen específica</span>
+vboxmanage<span class="w"> </span>createmedium<span class="w"> </span>disk<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filename<span class="w"> </span><span class="s2">&quot;evidencia_linux.vdi&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--format<span class="w"> </span>VDI<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--variant<span class="w"> </span>Fixed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--property<span class="w"> </span><span class="nv">location</span><span class="o">=</span><span class="s2">&quot;/media/disco-evidencias/CasoA/CasoA-Evidencia01-Maquina-Sospeitosa-Linux.dd&quot;</span>
+</code></pre></div>
+<p><strong>B. Preparar disco en Windows:</strong></p>
+<ol>
+<li>Iniciar "Windows 11 - LabForense"</li>
+<li>Abrir "Administración de discos"</li>
+<li>El disco Linux aparecerá como "No inicializado"</li>
+<li><strong>No inicializar</strong> - vamos a acceder mediante FTK Imager</li>
+</ol>
+<h3 id="32-acceso-a-imagenes-raw-linux-con-ftk-imager"><strong>3.2. Acceso a Imágenes RAW Linux con FTK Imager</strong></h3>
+<p><strong>A. Abrir imagen RAW (dd):</strong></p>
+<ol>
+<li>
+<p><strong>Abrir FTK Imager</strong></p>
+</li>
+<li>
+<p><strong>Cargar imagen RAW:</strong></p>
+</li>
+<li>File → Add Evidence Item</li>
+<li>Seleccionar "Image File"</li>
+<li>Navegar a la ubicación del disco conectado</li>
+<li>Seleccionar <code>CasoA-Evidencia01-Maquina-Sospeitosa-Linux.dd</code></li>
+<li>
+<p>Click en "Finish"</p>
+</li>
+<li>
+<p><strong>Configurar tipo de imagen:</strong></p>
+</li>
+<li>Si FTK no detecta automáticamente:</li>
+<li>Select Image Type: "Raw (dd)"</li>
+<li>
+<p>Si pregunta por offset: 0 (cero)</p>
+</li>
+<li>
+<p><strong>Explorar contenido:</strong></p>
+</li>
+<li>En el panel izquierdo, expandir la imagen</li>
+<li>Ver particiones detectadas</li>
+<li>
+<p>Navegar por sistema de archivos ext4</p>
+</li>
+<li>
+<p><strong>Extraer archivos específicos:</strong></p>
+</li>
+<li>Buscar archivos creados en el ejercicio anterior:<ul>
+<li><code>/home/usuario_sospechoso/proyecto_confidencial.txt</code></li>
+<li><code>/home/usuario_sospechoso/.bash_history</code></li>
+</ul>
+</li>
+<li>Click derecho → Export Files</li>
+</ol>
+<p><strong>B. Verificar acceso:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Script para verificar acceso a imágenes Linux</span>
+<span class="nv">$imagenes</span> <span class="p">=</span> <span class="p">@(</span>
+    <span class="s2">&quot;CasoA-Evidencia01-Maquina-Sospeitosa-Linux.dd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CasoA-Evidencia02-Maquina-Sospeitosa-Linux.dd&quot;</span>
+<span class="p">)</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$img</span> <span class="k">in</span> <span class="nv">$imagenes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;=== Verificando: $img ===&quot;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&quot;G:\$img&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$size</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="s2">&quot;G:\$img&quot;</span><span class="p">).</span><span class="n">Length</span> <span class="p">/</span> <span class="n">1GB</span>
+        <span class="nb">Write-Host</span> <span class="s2">&quot;  Encontrada - Tamaño: $size GB&quot;</span>
+
+        <span class="c"># Intentar obtener información básica</span>
+        <span class="nb">Write-Host</span> <span class="s2">&quot;  Probando acceso con FTK Imager CLI...&quot;</span>
+        <span class="p">&amp;</span> <span class="s2">&quot;C:\Program Files\AccessData\FTK Imager\FTKImager.exe&quot;</span> <span class="p">-</span><span class="n">-info</span> <span class="s2">&quot;G:\$img&quot;</span> <span class="n">2</span><span class="p">&gt;&amp;</span><span class="n">1</span> <span class="p">|</span> <span class="nb">Select-String</span> <span class="n">-Pattern</span> <span class="s2">&quot;Partition\|Filesystem&quot;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nb">Write-Host</span> <span class="s2">&quot;  NO ENCONTRADA&quot;</span>
+    <span class="p">}</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="33-acceso-a-imagenes-encase-linux"><strong>3.3. Acceso a Imágenes EnCase Linux</strong></h3>
+<p><strong>A. Abrir imagen E01 de Linux:</strong></p>
+<ol>
+<li><strong>En FTK Imager:</strong></li>
+<li>File → Add Evidence Item</li>
+<li>Seleccionar "Image File"</li>
+<li>Navegar a <code>CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01</code></li>
+<li>
+<p>FTK detectará automáticamente formato EnCase</p>
+</li>
+<li>
+<p><strong>Explorar diferencias vs RAW:</strong></p>
+</li>
+<li>Comparar velocidad de acceso</li>
+<li>Ver metadatos incluidos</li>
+<li>
+<p>Comprobar compresión</p>
+</li>
+<li>
+<p><strong>Extraer y comparar archivos:</strong></p>
+</li>
+<li>Exportar mismos archivos que en RAW</li>
+<li>Comparar hashes</li>
+<li>Verificar integridad</li>
+</ol>
+<p><strong>B. Documentar proceso:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Crear informe de acceso</span>
+<span class="sh">@&quot;</span>
+<span class="sh">INFORME ACCESO EVIDENCIAS LINUX DESDE WINDOWS</span>
+<span class="sh">=============================================</span>
+<span class="sh">Fecha: </span><span class="p">$(</span><span class="nb">Get-Date</span><span class="p">)</span>
+<span class="sh">Sistema: Windows 11 - LabForense</span>
+<span class="sh">Herramienta: FTK Imager 4.7.1</span>
+
+<span class="sh">1. IMÁGENES RAW (dd):</span>
+<span class="p">$(</span><span class="k">foreach</span> <span class="p">(</span><span class="nv">$img</span> <span class="k">in</span> <span class="p">@(</span><span class="s2">&quot;Evidencia01&quot;</span><span class="p">,</span> <span class="s2">&quot;Evidencia02&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nv">$path</span> <span class="p">=</span> <span class="s2">&quot;G:\CasoA-$img-Maquina-Sospeitosa-Linux.dd&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="nv">$path</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$size</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Item</span> <span class="nv">$path</span><span class="p">).</span><span class="n">Length</span> <span class="p">/</span> <span class="n">1GB</span>
+        <span class="s2">&quot;   - $img.dd: ACCESIBLE ($size GB)&quot;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="s2">&quot;   - $img.dd: NO ACCESIBLE&quot;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="sh">2. IMAGEN ENCASE (E01):</span>
+<span class="p">$(</span><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&quot;G:\CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$size</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ChildItem</span> <span class="s2">&quot;G:\CasoA-Evidencia04*&quot;</span> <span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">Length</span> <span class="n">-Sum</span><span class="p">).</span><span class="n">Sum</span> <span class="p">/</span> <span class="n">1GB</span>
+    <span class="s2">&quot;   - Evidencia04.E01: ACCESIBLE ($size GB comprimido)&quot;</span>
+    <span class="s2">&quot;   - Segmentos: </span><span class="p">$(@(</span><span class="nb">Get-ChildItem</span> <span class="s2">&quot;G:\CasoA-Evidencia04*.E*&quot;</span><span class="p">).</span><span class="n">Count</span><span class="p">)</span><span class="s2">&quot;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="s2">&quot;   - Evidencia04.E01: NO ACCESIBLE&quot;</span>
+<span class="p">})</span>
+
+<span class="sh">3. OBSERVACIONES:</span>
+<span class="sh">   - FTK Imager maneja bien ambos formatos</span>
+<span class="sh">   - Formato E01 ofrece mejor compresión</span>
+<span class="sh">   - RAW permite acceso más directo</span>
+<span class="sh">   - Ambos mantienen integridad forense</span>
+
+<span class="sh">4. ARCHIVOS VERIFICADOS (extraídos de ambas):</span>
+<span class="p">$(</span><span class="k">foreach</span> <span class="p">(</span><span class="nv">$file</span> <span class="k">in</span> <span class="p">@(</span><span class="s2">&quot;proyecto_confidencial.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;.bash_history&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="s2">&quot;   - /home/usuario_sospechoso/$file: EXTRACTO Y VERIFICADO&quot;</span>
+<span class="p">})</span>
+
+<span class="sh">FIRMA ANALISTA: _________________________</span>
+<span class="sh">&quot;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;G:\CasoA\Informe-Acceso-Windows.txt&quot;</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
+</code></pre></div>
+<hr />
+<h2 id="parte-4-acceso-complejo-imagenes-encase-windows"><strong>Parte 4: Acceso Complejo - Imágenes EnCase Windows</strong></h2>
+<h3 id="41-acceso-con-arsenal-recon-image-mounter"><strong>4.1. Acceso con Arsenal Recon Image Mounter</strong></h3>
+<p><strong>A. Instalación de Arsenal Recon Image Mounter:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Descargar desde https://arsenalrecon.com/downloads/</span>
+<span class="c"># 2. Instalar con permisos de administrador</span>
+
+<span class="c"># 3. Verificar instalación</span>
+<span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span> <span class="o">-like</span> <span class="s2">&quot;*Arsenal*&quot;</span><span class="p">}</span>
+
+<span class="c"># 4. Alternativa línea de comandos</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files\Arsenal Recon\Image Mounter&quot;</span>
+<span class="p">.\</span><span class="n">armount</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-help</span>
+</code></pre></div>
+<p><strong>B. Montar imagen EnCase Windows:</strong></p>
+<ol>
+<li>
+<p><strong>Abrir Arsenal Image Mounter</strong></p>
+</li>
+<li>
+<p><strong>Montar imagen:</strong></p>
+</li>
+<li>Click en "Mount Image"</li>
+<li>Seleccionar <code>E:\CASOB\CASOB-Evidencia02-MaquinaSospechosa-W11.E01</code></li>
+<li>Opciones:<ul>
+<li>Read-only: Sí</li>
+<li>Use write cache: No</li>
+<li>Drive letter: Automático</li>
+</ul>
+</li>
+<li>
+<p>Click en "Mount"</p>
+</li>
+<li>
+<p><strong>Acceder a unidad montada:</strong></p>
+</li>
+<li>Abrir "Este equipo"</li>
+<li>Nueva unidad aparecerá (ej: F:)</li>
+<li>
+<p>Intentar acceder a archivos</p>
+</li>
+<li>
+<p><strong>Problema esperado:</strong></p>
+</li>
+<li>Unidad mostrará como "Acceso denegado"</li>
+<li>BitLocker solicitará clave de recuperación</li>
+</ol>
+<p><strong>C. Documentar problema:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Registrar error de acceso</span>
+<span class="sh">@&quot;</span>
+<span class="sh">ERROR ACCESO IMAGEN WINDOWS 11 ENCASE</span>
+<span class="sh">=====================================</span>
+<span class="sh">Fecha intento: </span><span class="p">$(</span><span class="nb">Get-Date</span><span class="p">)</span>
+<span class="sh">Imagen: CASOB-Evidencia02-MaquinaSospechosa-W11.E01</span>
+<span class="sh">Herramienta: Arsenal Recon Image Mounter 1.6</span>
+
+<span class="sh">RESULTADO: ACCESO DENEGADO</span>
+
+<span class="sh">MENSAJE SISTEMA:</span>
+<span class="sh">- &quot;F:\ no es accesible. Acceso denegado.&quot;</span>
+<span class="sh">- &quot;Unidad cifrada con BitLocker&quot;</span>
+
+<span class="sh">ANÁLISIS:</span>
+<span class="sh">1. La imagen se montó correctamente</span>
+<span class="sh">2. El sistema detecta cifrado BitLocker</span>
+<span class="sh">3. Se requiere clave de recuperación o contraseña</span>
+
+<span class="sh">PASOS SIGUIENTES:</span>
+<span class="sh">1. Buscar clave de recuperación de BitLocker</span>
+<span class="sh">2. Intentar con diferentes métodos de montaje</span>
+<span class="sh">3. Considerar herramientas de análisis sin montar</span>
+
+<span class="sh">EVIDENCIA DE CIFRADO:</span>
+<span class="sh">- Presencia de metadatos BitLocker en imagen</span>
+<span class="sh">- Comportamiento típico de Windows 11 con cifrado activado</span>
+
+<span class="sh">FIRMA: _________________________</span>
+<span class="sh">&quot;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;E:\CASOB\Error-Acceso-BitLocker.txt&quot;</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
+</code></pre></div>
+<h3 id="42-investigacion-clave-de-recuperacion-bitlocker"><strong>4.2. Investigación: Clave de Recuperación BitLocker</strong></h3>
+<p><strong>A. Lugares donde buscar clave:</strong></p>
+<ol>
+<li><strong>Cuenta Microsoft del usuario:</strong></li>
+<li>https://account.microsoft.com/devices/recoverykey</li>
+<li>
+<p>Iniciar sesión con credenciales del usuario sospechoso</p>
+</li>
+<li>
+<p><strong>Archivo de texto/PDF guardado:</strong></p>
+</li>
+<li>Buscar en documentos del usuario</li>
+<li>Buscar en correo electrónico</li>
+<li>
+<p>Buscar en nube (OneDrive, Google Drive)</p>
+</li>
+<li>
+<p><strong>Active Directory (en entornos corporativos):</strong></p>
+</li>
+<li>Consultar con administrador de sistemas</li>
+<li>
+<p>Buscar en atributos del objeto equipo</p>
+</li>
+<li>
+<p><strong>Backup de sistema:</strong></p>
+</li>
+<li>Copias de seguridad locales</li>
+<li>Unidades USB de respaldo</li>
+</ol>
+<p><strong>B. Comandos para detectar BitLocker:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># 1. Verificar estado BitLocker en imagen montada</span>
+<span class="n">manage-bde</span> <span class="n">-status</span> <span class="n">F</span><span class="p">:</span>
+
+<span class="c"># 2. Buscar archivos de recuperación en imagen</span>
+<span class="c"># Primero necesitamos explorar la imagen sin montar</span>
+
+<span class="c"># 3. Usar strings para buscar patrones</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files\AccessData\FTK Imager&quot;</span>
+<span class="p">.\</span><span class="n">FTKImager</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-exportstrings</span> <span class="s2">&quot;E:\CASOB\CASOB-Evidencia02-MaquinaSospechosa-W11.E01&quot;</span> <span class="s2">&quot;E:\CASOB\strings.txt&quot;</span>
+
+<span class="c"># 4. Buscar posibles claves en strings</span>
+<span class="nb">Select-String</span> <span class="n">-Path</span> <span class="s2">&quot;E:\CASOB\strings.txt&quot;</span> <span class="n">-Pattern</span> <span class="s2">&quot;[0-9]{6}-[0-9]{6}-[0-9]{6}-[0-9]{6}-[0-9]{6}-[0-9]{6}-[0-9]{6}-[0-9]{6}&quot;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="s2">&quot;E:\CASOB\posibles-claves.txt&quot;</span>
+
+<span class="c"># 5. Buscar documentos con &quot;bitlocker&quot; o &quot;recovery&quot;</span>
+<span class="nb">Select-String</span> <span class="n">-Path</span> <span class="s2">&quot;E:\CASOB\strings.txt&quot;</span> <span class="n">-Pattern</span> <span class="s2">&quot;bitlocker|recovery|recuperación&quot;</span> <span class="o">-CaseSensitive</span><span class="p">:</span><span class="nv">$false</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="s2">&quot;E:\CASOB\referencias-bitlocker.txt&quot;</span>
+</code></pre></div>
+<p><strong>C. Plantilla para hablar con el profesor:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c"># Crear informe para discusión con profesor</span>
+<span class="sh">@&quot;</span>
+<span class="sh">INFORME INVESTIGACIÓN BITLOCKER - CASO B</span>
+<span class="sh">========================================</span>
+<span class="sh">ESTUDIANTE: [Tu Nombre]</span>
+<span class="sh">FECHA: </span><span class="p">$(</span><span class="nb">Get-Date</span><span class="p">)</span>
+<span class="sh">CASO: Máquina sospechosa Windows 11</span>
+
+<span class="sh">1. SITUACIÓN ACTUAL:</span>
+<span class="sh">   - Imagen EnCase adquirida exitosamente</span>
+<span class="sh">   - Intento de montaje con Arsenal Image Mounter</span>
+<span class="sh">   - Error: &quot;Acceso denegado&quot; - BitLocker detectado</span>
+
+<span class="sh">2. INVESTIGACIÓN REALIZADA:</span>
+<span class="sh">   a) Búsqueda de clave en strings de la imagen</span>
+<span class="sh">      - Resultado: </span><span class="p">$(</span><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&quot;E:\CASOB\posibles-claves.txt&quot;</span><span class="p">)</span> <span class="p">{</span><span class="s2">&quot;Patrones encontrados&quot;</span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="s2">&quot;No encontrados&quot;</span><span class="p">})</span>
+
+<span class="sh">   b) Análisis de referencias a BitLocker</span>
+<span class="sh">      - Resultado: </span><span class="p">$(</span><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&quot;E:\CASOB\referencias-bitlocker.txt&quot;</span><span class="p">)</span> <span class="p">{</span><span class="s2">&quot;Referencias encontradas&quot;</span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="s2">&quot;No encontradas&quot;</span><span class="p">})</span>
+
+<span class="sh">   c) Verificación estado cifrado</span>
+<span class="sh">      - Herramienta: manage-bde</span>
+<span class="sh">      - Resultado: Necesita montaje completo</span>
+
+<span class="sh">3. HIPÓTESIS:</span>
+<span class="sh">   - Windows 11 tenía BitLocker activado por defecto</span>
+<span class="sh">   - La clave puede estar en:</span>
+<span class="sh">     * Cuenta Microsoft del usuario</span>
+<span class="sh">     * Documentos guardados en la máquina</span>
+<span class="sh">     * Correo electrónico del usuario</span>
+<span class="sh">     * Active Directory (si era equipo corporativo)</span>
+
+<span class="sh">4. PREGUNTAS PARA EL PROFESOR:</span>
+<span class="sh">   1. ¿Tenemos acceso a credenciales del usuario para buscar en su cuenta Microsoft?</span>
+<span class="sh">   2. ¿Hay información sobre políticas de backup de claves en la organización?</span>
+<span class="sh">   3. ¿Podemos intentar recuperación por fuerza bruta? (tiempo/recursos)</span>
+<span class="sh">   4. ¿Existen herramientas especializadas para análisis de discos BitLocker sin clave?</span>
+
+<span class="sh">5. RECOMENDACIONES:</span>
+<span class="sh">   - Priorizar búsqueda de clave en documentos del usuario</span>
+<span class="sh">   - Considerar análisis de memoria RAM si disponible</span>
+<span class="sh">   - Explorar opciones de elusión (si aplicable legalmente)</span>
+<span class="sh">   - Documentar todos los intentos para cadena de custodia</span>
+
+<span class="sh">6. EVIDENCIAS ADJUNTAS:</span>
+<span class="sh">   [ ] Error-Acceso-BitLocker.txt</span>
+<span class="sh">   [ ] posibles-claves.txt (si existe)</span>
+<span class="sh">   [ ] referencias-bitlocker.txt (si existe)</span>
+<span class="sh">   [ ] Logs de FTK Imager</span>
+
+<span class="sh">FIRMA ESTUDIANTE: _________________________</span>
+<span class="sh">&quot;@</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="s2">&quot;E:\CASOB\Consulta-Profesor-BitLocker.txt&quot;</span> <span class="n">-Encoding</span> <span class="n">UTF8</span>
+
+<span class="c"># Mostrar en pantalla</span>
+<span class="nb">Get-Content</span> <span class="s2">&quot;E:\CASOB\Consulta-Profesor-BitLocker.txt&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="parte-5-acceso-desde-ubuntu-desktop-a-imagenes-encase"><strong>Parte 5: Acceso desde Ubuntu Desktop a Imágenes EnCase</strong></h2>
+<h3 id="51-preparar-entorno-ubuntu"><strong>5.1. Preparar Entorno Ubuntu</strong></h3>
+<p><strong>A. Conectar disco con evidencias:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># En VirtualBox host</span>
+<span class="c1"># Conectar disco de evidencias a máquina Ubuntu</span>
+
+vboxmanage<span class="w"> </span>storageattach<span class="w"> </span><span class="s2">&quot;UbuDesk-Laboratorio Forense&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--storagectl<span class="w"> </span><span class="s2">&quot;SATA Controller&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--device<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--type<span class="w"> </span>hdd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--medium<span class="w"> </span><span class="s2">&quot;disco_evidencias_windows.vdi&quot;</span><span class="w">  </span><span class="c1"># El que usamos en Windows</span>
+</code></pre></div>
+<p><strong>B. En Ubuntu Desktop:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Identificar disco nuevo</span>
+sudo<span class="w"> </span>fdisk<span class="w"> </span>-l
+
+<span class="c1"># 2. Montar disco Windows (NTFS)</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/evidencias_windows
+sudo<span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>ntfs-3g<span class="w"> </span>-o<span class="w"> </span>ro<span class="w"> </span>/dev/sdb1<span class="w"> </span>/mnt/evidencias_windows
+
+<span class="c1"># 3. Verificar contenido</span>
+ls<span class="w"> </span>-la<span class="w"> </span>/mnt/evidencias_windows/CASOB/
+</code></pre></div>
+<h3 id="52-acceso-a-imagen-encase-linux-desde-ubuntu"><strong>5.2. Acceso a Imagen EnCase Linux desde Ubuntu</strong></h3>
+<p><strong>A. Instalar herramientas para formato E01:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Instalar ewf-tools para manejar formato EnCase</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ewf-tools<span class="w"> </span>-y
+
+<span class="c1"># 2. Verificar instalación</span>
+ewfinfo<span class="w"> </span>--version
+</code></pre></div>
+<p><strong>B. Analizar imagen E01 de Linux:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Verificar imagen E01</span>
+<span class="nb">cd</span><span class="w"> </span>/mnt/evidencias_windows/CASOB/
+ewfinfo<span class="w"> </span>CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01
+
+<span class="c1"># 2. Montar imagen E01</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/ecase_linux
+
+<span class="c1"># Crear dispositivo loop para E01</span>
+sudo<span class="w"> </span>losetup<span class="w"> </span>-f<span class="w"> </span>-P<span class="w"> </span>-r<span class="w"> </span>CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01
+sudo<span class="w"> </span>losetup<span class="w"> </span>-a<span class="w">  </span><span class="c1"># Anotar dispositivo loop (ej: /dev/loop1)</span>
+
+<span class="c1"># 3. Montar partición</span>
+sudo<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> </span>ro<span class="w"> </span>/dev/loop1p1<span class="w"> </span>/mnt/ecase_linux
+
+<span class="c1"># 4. Explorar</span>
+ls<span class="w"> </span>-la<span class="w"> </span>/mnt/ecase_linux/
+<span class="nb">cd</span><span class="w"> </span>/mnt/ecase_linux/home/usuario_sospechoso/
+cat<span class="w"> </span>proyecto_confidencial.txt
+cat<span class="w"> </span>.bash_history
+</code></pre></div>
+<p><strong>C. Comparar con imagen RAW original:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Montar también imagen RAW para comparar</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/mnt/raw_linux
+sudo<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> </span>ro,loop<span class="w"> </span>/mnt/evidencias_windows/CasoA/CasoA-Evidencia01-Maquina-Sospeitosa-Linux.dd<span class="w"> </span>/mnt/raw_linux
+
+<span class="c1"># 2. Comparar hashes de archivos específicos</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== COMPARACIÓN RAW vs E01 ===&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Archivo: proyecto_confidencial.txt&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RAW:&quot;</span>
+sha256sum<span class="w"> </span>/mnt/raw_linux/home/usuario_sospechoso/proyecto_confidencial.txt
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;E01:&quot;</span>
+sha256sum<span class="w"> </span>/mnt/ecase_linux/home/usuario_sospechoso/proyecto_confidencial.txt
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Archivo: .bash_history&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;RAW:&quot;</span>
+sha256sum<span class="w"> </span>/mnt/raw_linux/home/usuario_sospechoso/.bash_history
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;E01:&quot;</span>
+sha256sum<span class="w"> </span>/mnt/ecase_linux/home/usuario_sospechoso/.bash_history
+</code></pre></div>
+<p><strong>D. Documentar proceso:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear informe de acceso desde Ubuntu</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>/mnt/evidencias_windows/CASOB/Informe-Acceso-Ubuntu.txt<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">INFORME ACCESO E01 DESDE UBUNTU</span>
+<span class="s">===============================</span>
+<span class="s">Fecha: $(date)</span>
+<span class="s">Sistema: UbuDesk - Lab Forense</span>
+<span class="s">Herramientas: ewf-tools, mount</span>
+
+<span class="s">1. IMAGEN ANALIZADA:</span>
+<span class="s">   - Nombre: CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01</span>
+<span class="s">   - Formato: EnCase E01</span>
+<span class="s">   - Origen: Disco de evidencias Windows</span>
+
+<span class="s">2. PROCESO:</span>
+<span class="s">   a) Montaje E01:</span>
+<span class="s">      - Comando: losetup + mount</span>
+<span class="s">      - Dispositivo: /dev/loop1</span>
+<span class="s">      - Punto montaje: /mnt/ecase_linux</span>
+
+<span class="s">   b) Verificación integridad:</span>
+<span class="s">      - ewfinfo: OK</span>
+<span class="s">      - Acceso archivos: OK</span>
+
+<span class="s">   c) Comparación con RAW:</span>
+<span class="s">      - Hashes archivos: COINCIDEN</span>
+<span class="s">      - Estructura: IDÉNTICA</span>
+
+<span class="s">3. ARCHIVOS VERIFICADOS:</span>
+<span class="s">   - /home/usuario_sospechoso/proyecto_confidencial.txt</span>
+<span class="s">     Hash RAW: $(sha256sum /mnt/raw_linux/home/usuario_sospechoso/proyecto_confidencial.txt | cut -d&#39; &#39; -f1)</span>
+<span class="s">     Hash E01: $(sha256sum /mnt/ecase_linux/home/usuario_sospechoso/proyecto_confidencial.txt | cut -d&#39; &#39; -f1)</span>
+<span class="s">     Resultado: $(if [ &quot;$(sha256sum /mnt/raw_linux/home/usuario_sospechoso/proyecto_confidencial.txt | cut -d&#39; &#39; -f1)&quot; = &quot;$(sha256sum /mnt/ecase_linux/home/usuario_sospechoso/proyecto_confidencial.txt | cut -d&#39; &#39; -f1)&quot; ]; then echo &quot;COINCIDE ✓&quot;; else echo &quot;DIFIERE ✗&quot;; fi)</span>
+
+<span class="s">   - /home/usuario_sospechoso/.bash_history</span>
+<span class="s">     Hash RAW: $(sha256sum /mnt/raw_linux/home/usuario_sospechoso/.bash_history | cut -d&#39; &#39; -f1)</span>
+<span class="s">     Hash E01: $(sha256sum /mnt/ecase_linux/home/usuario_sospechoso/.bash_history | cut -d&#39; &#39; -f1)</span>
+<span class="s">     Resultado: $(if [ &quot;$(sha256sum /mnt/raw_linux/home/usuario_sospechoso/.bash_history | cut -d&#39; &#39; -f1)&quot; = &quot;$(sha256sum /mnt/ecase_linux/home/usuario_sospechoso/.bash_history | cut -d&#39; &#39; -f1)&quot; ]; then echo &quot;COINCIDE ✓&quot;; else echo &quot;DIFIERE ✗&quot;; fi)</span>
+
+<span class="s">4. CONCLUSIONES:</span>
+<span class="s">   - Formato E01 accesible desde GNU/Linux con ewf-tools</span>
+<span class="s">   - Integridad verificada mediante hashes</span>
+<span class="s">   - Compresión funciona correctamente</span>
+<span class="s">   - Metadatos EnCase preservados</span>
+
+<span class="s">5. LIMITACIONES:</span>
+<span class="s">   - ewf-tools solo línea de comandos</span>
+<span class="s">   - Necesario proceso manual de montaje</span>
+<span class="s">   - Menos integrado que en Windows</span>
+
+<span class="s">FIRMA ANALISTA: _________________________</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Mostrar informe</span>
+cat<span class="w"> </span>/mnt/evidencias_windows/CASOB/Informe-Acceso-Ubuntu.txt
+</code></pre></div>
+<h3 id="53-limpieza-y-desmontaje"><strong>5.3. Limpieza y Desmontaje</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Desmontar todo</span>
+sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/ecase_linux
+sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/raw_linux
+sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/evidencias_windows
+
+<span class="c1"># 2. Liberar dispositivos loop</span>
+sudo<span class="w"> </span>losetup<span class="w"> </span>-d<span class="w"> </span>/dev/loop1
+sudo<span class="w"> </span>losetup<span class="w"> </span>-a<span class="w">  </span><span class="c1"># Verificar que estén liberados</span>
+
+<span class="c1"># 3. Eliminar puntos de montaje</span>
+sudo<span class="w"> </span>rmdir<span class="w"> </span>/mnt/ecase_linux<span class="w"> </span>/mnt/raw_linux<span class="w"> </span>/mnt/evidencias_windows
+</code></pre></div>
+<hr />
+<h2 id="solucion-de-problemas-y-preguntas-frecuentes"><strong>Solución de Problemas y Preguntas Frecuentes</strong></h2>
+<h3 id="problema-1-ewf-tools-no-reconoce-imagen-e01"><strong>Problema 1: ewf-tools no reconoce imagen E01</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verificar que la imagen no esté corrupta</span>
+ewfverify<span class="w"> </span>CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01
+
+<span class="c1"># Si falla, intentar reparar</span>
+ewfacquire<span class="w"> </span>-t<span class="w"> </span>raw<span class="w"> </span>-f<span class="w"> </span>files<span class="w"> </span>-u<span class="w"> </span>-i<span class="w"> </span>CasoA-Evidencia04-Maquina-Sospeitosa-Linux.E01<span class="w"> </span>-o<span class="w"> </span>imagen_reparada.dd
+</code></pre></div>
+<h3 id="problema-2-bitlocker-en-ubuntu"><strong>Problema 2: BitLocker en Ubuntu</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instalar herramientas para BitLocker</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>dislocker<span class="w"> </span>-y
+
+<span class="c1"># Intentar montar disco BitLocker (si tenemos clave)</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>/mnt/bitlocker<span class="w"> </span>/mnt/bitlocker_mount
+sudo<span class="w"> </span>dislocker<span class="w"> </span>-V<span class="w"> </span>/dev/sda2<span class="w"> </span>-p123456-123456-123456-123456-123456-123456-123456-123456<span class="w"> </span>--<span class="w"> </span>/mnt/bitlocker
+sudo<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> </span>loop<span class="w"> </span>/mnt/bitlocker/dislocker-file<span class="w"> </span>/mnt/bitlocker_mount
+</code></pre></div>
+<h3 id="problema-3-ftk-imager-no-detecta-disco-fisico"><strong>Problema 3: FTK Imager no detecta disco físico</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Ejecutar como Administrador</span>
+<span class="c"># Verificar permisos</span>
+<span class="nb">Get-Disk</span> <span class="p">|</span> <span class="nb">Format-List</span> <span class="n">Number</span><span class="p">,</span> <span class="n">Size</span><span class="p">,</span> <span class="n">OperationalStatus</span>
+
+<span class="c"># Si el disco no aparece, verificar en Administración de discos</span>
+<span class="n">diskmgmt</span><span class="p">.</span><span class="n">msc</span>
+
+<span class="c"># Forzar rescan</span>
+<span class="n">Rescan-Disk</span>
+</code></pre></div>
+<h3 id="problema-4-arsenal-image-mounter-no-monta-e01"><strong>Problema 4: Arsenal Image Mounter no monta E01</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c"># Verificar que el servicio esté corriendo</span>
+<span class="nb">Get-Service</span> <span class="n">ArsenalImageMounter</span>
+
+<span class="c"># Reiniciar servicio</span>
+<span class="nb">Restart-Service</span> <span class="n">ArsenalImageMounter</span>
+
+<span class="c"># Alternativa: Usar FTK Imager para montar</span>
+<span class="nb">cd </span><span class="s2">&quot;C:\Program Files\AccessData\FTK Imager&quot;</span>
+<span class="p">.\</span><span class="n">FTKImager</span><span class="p">.</span><span class="n">exe</span> <span class="p">/</span><span class="n">m</span> <span class="p">/</span><span class="n">e01</span> <span class="s2">&quot;E:\CASOB\CASOB-Evidencia02-MaquinaSospechosa-W11.E01&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="evaluacion-del-laboratorio"><strong>Evaluación del Laboratorio</strong></h2>
+<h3 id="rubrica-de-evaluacion"><strong>Rúbrica de Evaluación</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Criterio</strong></th>
+<th><strong>Puntos</strong></th>
+<th><strong>Evidencia Requerida</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adquisición RAW en modo Live</td>
+<td>15</td>
+<td>Imagen .raw + hashes verificados</td>
+</tr>
+<tr>
+<td>Clonado disco a disco</td>
+<td>10</td>
+<td>Hashes coincidentes documentados</td>
+</tr>
+<tr>
+<td>Adquisición EnCase desde Windows</td>
+<td>20</td>
+<td>Archivos .E01 + metadata</td>
+</tr>
+<tr>
+<td>Acceso a imágenes RAW Linux desde Windows</td>
+<td>15</td>
+<td>Captura FTK Imager mostrando contenido</td>
+</tr>
+<tr>
+<td>Acceso a imágenes E01 Linux desde Windows</td>
+<td>10</td>
+<td>Captura FTK Imager mostrando E01</td>
+</tr>
+<tr>
+<td>Investigación clave BitLocker</td>
+<td>10</td>
+<td>Documento consulta profesor</td>
+</tr>
+<tr>
+<td>Acceso E01 Linux desde Ubuntu</td>
+<td>10</td>
+<td>Hashes comparativos RAW vs E01</td>
+</tr>
+<tr>
+<td>Documentación completa</td>
+<td>10</td>
+<td>Informes generados en cada parte</td>
+</tr>
+</tbody>
+</table>
+<h3 id="puntos-extra"><strong>Puntos Extra:</strong></h3>
+<ul>
+<li>Automatización con scripts: +5</li>
+<li>Solución creativa a problema BitLocker: +5</li>
+<li>Comparativa detallada formatos: +5</li>
+</ul>
+<p><strong>Total máximo:</strong> 100 puntos + 15 extra</p>
+<hr />
+<h2 id="conclusion-y-aprendizajes"><strong>Conclusión y Aprendizajes</strong></h2>
+<p>Este laboratorio avanzado ha cubierto:</p>
+<ol>
+<li><strong>Adquisición multiplataforma:</strong> Live Linux, Windows nativo</li>
+<li><strong>Formatos diversos:</strong> RAW, EnCase, disco a disco</li>
+<li><strong>Acceso cruzado:</strong> Windows → Linux, Linux → Windows</li>
+<li><strong>Problemas reales:</strong> BitLocker, sistemas de archivos diferentes</li>
+<li><strong>Herramientas profesionales:</strong> FTK Imager, Arsenal Recon, ewf-tools</li>
+</ol>
+<p><strong>Aprendizajes clave:</strong>
+- La elección de formato depende del caso y herramientas disponibles
+- BitLocker es un desafío común en forense Windows moderno
+- La interoperabilidad entre sistemas requiere conocimiento de herramientas específicas
+- La documentación es crucial para la cadena de custodia</p>
+<p><strong>Para investigación adicional:</strong>
+1. Técnicas de elusión de BitLocker (legalmente aplicables)
+2. Análisis de memoria para recuperación de claves
+3. Herramientas de análisis sin montaje (strings, carving)
+4. Automatización completa del proceso forense</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/davidalvarezp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

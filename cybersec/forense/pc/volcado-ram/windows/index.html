@@ -1,0 +1,5006 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación de administración de sistemas y ciberseguridad.">
+      
+      
+        <meta name="author" content="davidalvarezp">
+      
+      
+        <link rel="canonical" href="https://docs.davidalvarezp.com/cybersec/forense/pc/volcado-ram/windows/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../../herramientas-triaje/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Volcado en Windows - SysAdmin & CyberSec Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#adquisicion-de-evidencias-volatiles-en-windows" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../../../.." title="SysAdmin &amp; CyberSec Docs" class="md-header__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SysAdmin & CyberSec Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Volcado en Windows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../../sysadmin/" class="md-tabs__link">
+          
+  
+  
+  SysAdmin
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+  
+  CyberSec
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="SysAdmin &amp; CyberSec Docs" class="md-nav__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SysAdmin & CyberSec Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SysAdmin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SysAdmin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistemas Operativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistemas Operativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/sistemas-operativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/sistemas-operativos/implantacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implantación de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/sistemas-operativos/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/planificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planificación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/redes/servicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bases de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bases de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/bb-dd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/bb-dd/gestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/bb-dd/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Programación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/programacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/programacion/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/seguridad/disponibilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alta Disponibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/web/lenguajes-marcas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes de Marcas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../sysadmin/web/aplicaciones-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aplicaciones Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CyberSec
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CyberSec
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hacking Ético
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hacking Ético
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/recon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reconocimiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/enum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/post-exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/persist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mantener Acceso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Borrado de Huellas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../hacking-etico/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bastionado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../bastionado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../bastionado/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Redes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../bastionado/sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Forense
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Análisis Forense
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en PC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Forense en PC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_2" id="__nav_3_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clonado de discos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clonado de discos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clonado-disco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clonado-disco/adquisicion-basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisicón básica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clonado-disco/adquisicion-avanzada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisición avanzada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_3" id="__nav_3_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado de RAM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volcado de RAM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado en Windows
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-adquisicion-de-evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Adquisición de Evidencias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Adquisición de Evidencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-directrices-para-la-adquisicion-de-evidencias-y-su-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Directrices para la Adquisición de Evidencias y su Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Directrices para la Adquisición de Evidencias y su Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones-previas-de-privacidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consideraciones Previas de Privacidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-orden-de-volatilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Orden de Volatilidad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Orden de Volatilidad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elementos-volatiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elementos Volátiles:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elementos-no-volatiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elementos No Volátiles:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-acciones-que-deben-evitarse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Acciones que Deben Evitarse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-herramientas-necesarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Herramientas Necesarias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Herramientas Necesarias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pautas-para-la-seleccion-de-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pautas para la Selección de Herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kit-de-analisis-minimo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kit de Análisis Mínimo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-consideraciones-previas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Consideraciones Previas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 Consideraciones Previas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-estado-del-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estado del Equipo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-planificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Planificación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-evaluacion-de-capacidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Evaluación de Capacidades:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-autorizaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Autorizaciones:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-preparacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Preparación Técnica:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-inicio-del-proceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Inicio del Proceso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-adquisicion-de-elementos-volatiles-en-entornos-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Adquisición de Elementos Volátiles en Entornos Windows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Adquisición de Elementos Volátiles en Entornos Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notas-importantes-sobre-la-adquisicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas Importantes sobre la Adquisición:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-hora-y-fecha-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Hora y Fecha del Sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-informacion-de-red-y-conexiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Información de Red y Conexiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Información de Red y Conexiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-interfaces-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Interfaces de Red:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consultas-dns-realizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas DNS Realizadas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estado-de-la-cache-arp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado de la Caché ARP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-puertos-abiertos-con-filtrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Puertos Abiertos (con filtrado):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-aplicaciones-con-puertos-abiertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Aplicaciones con Puertos Abiertos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-de-enrutamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de Enrutamiento:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conexiones-netbios-establecidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conexiones NetBIOS Establecidas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ficheros-y-carpetas-compartidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Ficheros y Carpetas Compartidas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Ficheros y Carpetas Compartidas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unidades-mapeadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidades Mapeadas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#carpetas-compartidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carpetas Compartidas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ficheros-copiados-recientemente-mediante-netbios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ficheros Copiados Recientemente mediante NetBIOS:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ficheros-del-equipo-abiertos-remotamente-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ficheros (del equipo) Abiertos Remotamente (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#captura-de-trafico-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Captura de Tráfico de Red
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-historico-de-comandos-de-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Histórico de Comandos de Consola
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Procesos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Procesos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#procesos-en-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesos en Ejecución:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbol-jerarquico-de-los-procesos-en-ejecucion-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Árbol Jerárquico de los Procesos en Ejecución (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procesos-en-ejecucion-y-librerias-dll-asociadas-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesos en Ejecución y Librerías DLL Asociadas (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-handles-abiertos-por-cada-programa-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Handles Abiertos por Cada Programa (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procesos-del-usuario-actual-nirsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesos del Usuario Actual (Nirsoft):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicios-en-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Servicios en Ejecución:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-informacion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Información de Usuarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 Información de Usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nombre-de-equipo-y-grupo-de-trabajo-de-netbios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nombre de Equipo y Grupo de Trabajo de NetBIOS:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-y-grupos-de-usuario-locales-del-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usuarios y Grupos de Usuario Locales del Equipo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informacion-detallada-de-un-usuario-especifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información Detallada de un Usuario Específico:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-remotos-que-iniciaron-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usuarios Remotos que Iniciaron Sesión:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sesiones-activas-en-el-sistema-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sesiones Activas en el Sistema (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-locales-y-remotos-que-iniciaron-sesion-en-el-equipo-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usuarios Locales y Remotos que Iniciaron Sesión en el Equipo (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-contrasenas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Contraseñas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 Contraseñas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webbrowserpassview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WebBrowserPassView:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-password-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Password Recovery:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mail-passview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mail PassView:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-arbol-de-directorios-y-ficheros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Árbol de Directorios y Ficheros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.8 Árbol de Directorios y Ficheros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listado-en-base-a-la-fecha-de-modificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado en Base a la Fecha de Modificación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-en-base-al-ultimo-acceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado en Base al Último Acceso:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-en-base-a-la-fecha-de-creacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado en Base a la Fecha de Creación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-ficheros-abiertos-nirsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Ficheros Abiertos (Nirsoft):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-navegadores-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 Navegadores Web
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 Navegadores Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#291-informacion-cacheada-en-los-navegadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.1 Información Cacheada en los Navegadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#292-historial-de-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.2 Historial de Internet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#293-ultimas-busquedas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.3 Últimas Búsquedas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-volumenes-cifrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 Volúmenes Cifrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-otros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.11 Otros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.11 Otros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fecha-y-hora-de-arranque-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fecha y Hora de Arranque del Sistema:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informacion-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información del Sistema:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-adquisicion-de-la-memoria-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.12 Adquisición de la Memoria RAM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.12 Adquisición de la Memoria RAM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Memoria:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-para-volcado-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas para Volcado de Memoria:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adquisicion-remota" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adquisición Remota:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-de-integridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación de Integridad:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-alternativo-crash-dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método Alternativo: Crash Dump
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../herramientas-triaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de Triaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Móviles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidentes de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidentes de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../incidentes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../incidentes/prevencion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prevención
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../incidentes/taxonomia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taxonomía de Incidentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Puesta en Producción
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Puesta en Producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../produccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normativa de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Normativa de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../normativa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-adquisicion-de-evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Adquisición de Evidencias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Adquisición de Evidencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-directrices-para-la-adquisicion-de-evidencias-y-su-almacenamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Directrices para la Adquisición de Evidencias y su Almacenamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Directrices para la Adquisición de Evidencias y su Almacenamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones-previas-de-privacidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consideraciones Previas de Privacidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-orden-de-volatilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Orden de Volatilidad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Orden de Volatilidad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elementos-volatiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elementos Volátiles:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elementos-no-volatiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elementos No Volátiles:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-acciones-que-deben-evitarse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Acciones que Deben Evitarse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-herramientas-necesarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Herramientas Necesarias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Herramientas Necesarias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pautas-para-la-seleccion-de-herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pautas para la Selección de Herramientas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kit-de-analisis-minimo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kit de Análisis Mínimo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-consideraciones-previas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Consideraciones Previas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 Consideraciones Previas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-estado-del-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estado del Equipo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-planificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Planificación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-evaluacion-de-capacidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Evaluación de Capacidades:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-autorizaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Autorizaciones:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-preparacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Preparación Técnica:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-inicio-del-proceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 Inicio del Proceso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-adquisicion-de-elementos-volatiles-en-entornos-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Adquisición de Elementos Volátiles en Entornos Windows
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Adquisición de Elementos Volátiles en Entornos Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notas-importantes-sobre-la-adquisicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas Importantes sobre la Adquisición:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-hora-y-fecha-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Hora y Fecha del Sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-informacion-de-red-y-conexiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Información de Red y Conexiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Información de Red y Conexiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-interfaces-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Interfaces de Red:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consultas-dns-realizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas DNS Realizadas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estado-de-la-cache-arp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado de la Caché ARP:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-puertos-abiertos-con-filtrado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Puertos Abiertos (con filtrado):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-aplicaciones-con-puertos-abiertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Aplicaciones con Puertos Abiertos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-de-enrutamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de Enrutamiento:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conexiones-netbios-establecidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conexiones NetBIOS Establecidas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ficheros-y-carpetas-compartidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Ficheros y Carpetas Compartidas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Ficheros y Carpetas Compartidas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unidades-mapeadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unidades Mapeadas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#carpetas-compartidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carpetas Compartidas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ficheros-copiados-recientemente-mediante-netbios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ficheros Copiados Recientemente mediante NetBIOS:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ficheros-del-equipo-abiertos-remotamente-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ficheros (del equipo) Abiertos Remotamente (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#captura-de-trafico-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Captura de Tráfico de Red
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-historico-de-comandos-de-consola" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Histórico de Comandos de Consola
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Procesos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Procesos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#procesos-en-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesos en Ejecución:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arbol-jerarquico-de-los-procesos-en-ejecucion-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Árbol Jerárquico de los Procesos en Ejecución (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procesos-en-ejecucion-y-librerias-dll-asociadas-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesos en Ejecución y Librerías DLL Asociadas (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-handles-abiertos-por-cada-programa-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Handles Abiertos por Cada Programa (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procesos-del-usuario-actual-nirsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesos del Usuario Actual (Nirsoft):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicios-en-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Servicios en Ejecución:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-informacion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Información de Usuarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 Información de Usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nombre-de-equipo-y-grupo-de-trabajo-de-netbios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nombre de Equipo y Grupo de Trabajo de NetBIOS:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-y-grupos-de-usuario-locales-del-equipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usuarios y Grupos de Usuario Locales del Equipo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informacion-detallada-de-un-usuario-especifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información Detallada de un Usuario Específico:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-remotos-que-iniciaron-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usuarios Remotos que Iniciaron Sesión:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sesiones-activas-en-el-sistema-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sesiones Activas en el Sistema (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usuarios-locales-y-remotos-que-iniciaron-sesion-en-el-equipo-sysinternals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usuarios Locales y Remotos que Iniciaron Sesión en el Equipo (Sysinternals):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-contrasenas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Contraseñas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 Contraseñas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#webbrowserpassview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WebBrowserPassView:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-password-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Password Recovery:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mail-passview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mail PassView:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-arbol-de-directorios-y-ficheros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Árbol de Directorios y Ficheros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.8 Árbol de Directorios y Ficheros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listado-en-base-a-la-fecha-de-modificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado en Base a la Fecha de Modificación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-en-base-al-ultimo-acceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado en Base al Último Acceso:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-en-base-a-la-fecha-de-creacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado en Base a la Fecha de Creación:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listado-de-ficheros-abiertos-nirsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listado de Ficheros Abiertos (Nirsoft):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-navegadores-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 Navegadores Web
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 Navegadores Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#291-informacion-cacheada-en-los-navegadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.1 Información Cacheada en los Navegadores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#292-historial-de-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.2 Historial de Internet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#293-ultimas-busquedas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9.3 Últimas Búsquedas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-volumenes-cifrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 Volúmenes Cifrados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-otros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.11 Otros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.11 Otros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fecha-y-hora-de-arranque-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fecha y Hora de Arranque del Sistema:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#informacion-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Información del Sistema:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-adquisicion-de-la-memoria-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.12 Adquisición de la Memoria RAM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.12 Adquisición de la Memoria RAM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Memoria:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-para-volcado-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas para Volcado de Memoria:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adquisicion-remota" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adquisición Remota:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-de-integridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación de Integridad:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-alternativo-crash-dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método Alternativo: Crash Dump
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fuentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/davidalvarezp/docs/edit/main/docs/cybersec/forense/pc/volcado-ram/windows/index.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="adquisicion-de-evidencias-volatiles-en-windows">Adquisición de Evidencias Volátiles en Windows</h1>
+<h2 id="introduccion">Introducción</h2>
+<p>Uno de los principales retos a la hora de realizar un análisis forense es tener claro el tipo de incidente al que nos enfrentamos. A partir de ahí, determinar qué evidencias es necesario adquirir y la manera de proceder. Aunque hay aspectos comunes, no es lo mismo realizar un análisis forense en un caso de malware que en un caso de acoso, ya que los puntos donde debe focalizarse el investigador para localizar evidencias son distintos.</p>
+<p>El <strong>RFC 3227</strong> es un documento que recoge las "directrices para la recopilación de evidencias y su almacenamiento" y puede llegar a servir como estándar de facto para la recopilación de información en incidentes de seguridad.</p>
+<h2 id="1-adquisicion-de-evidencias">1. Adquisición de Evidencias</h2>
+<h3 id="11-directrices-para-la-adquisicion-de-evidencias-y-su-almacenamiento">1.1 Directrices para la Adquisición de Evidencias y su Almacenamiento</h3>
+<h4 id="consideraciones-previas-de-privacidad">Consideraciones Previas de Privacidad</h4>
+<p>Hay que asegurarse de que toda la información recopilada durante el proceso sea tratada dentro del marco legal establecido, manteniendo la privacidad exigida. Los ficheros de log están incluidos en este apartado ya que pueden almacenar patrones de comportamiento del usuario del equipo.</p>
+<h3 id="12-orden-de-volatilidad">1.2 Orden de Volatilidad</h3>
+<p>La <strong>orden de volatilidad</strong> hace referencia al período de tiempo en el que está accesible cierta información. Por este motivo se debe recoger en primer lugar aquella información que vaya a estar disponible durante el menor período de tiempo, es decir, aquella cuya volatilidad sea mayor.</p>
+<h4 id="elementos-volatiles">Elementos Volátiles:</h4>
+<ul>
+<li><strong>Configuración y conexiones de red</strong>, tabla ARP, usuarios logueados, procesos en ejecución, etc.</li>
+<li><strong>Memoria RAM</strong> (Random Access Memory)</li>
+</ul>
+<h4 id="elementos-no-volatiles">Elementos No Volátiles:</h4>
+<ul>
+<li><strong>Discos duros</strong></li>
+<li><strong>Pen Drives, CDs, DVDs</strong>, etc.</li>
+</ul>
+<p><strong>Orden de mayor a menor volatilidad:</strong>
+1. Registros y cachés
+2. Tabla de enrutamiento, caché ARP, tabla de procesos, estadísticas del kernel
+3. Memoria RAM
+4. Sistemas de ficheros temporales
+5. Disco duro
+6. Logs remotos del sistema
+7. Configuración física, topología de red
+8. Copias de seguridad</p>
+<h3 id="13-acciones-que-deben-evitarse">1.3 Acciones que Deben Evitarse</h3>
+<p>Deben evitarse las siguientes acciones con el fin de no invalidar el proceso de recolección de información, ya que debe preservarse su integridad para que los resultados obtenidos puedan ser utilizados en un juicio:</p>
+<ul>
+<li><strong>No apagar el computador</strong> hasta que se recopiló toda la información volátil</li>
+<li><strong>No confiar en la información</strong> proporcionada por los programas del sistema ya que pueden verse comprometidos</li>
+<li><strong>Recopilar la información mediante programas</strong> desde un medio protegido contra escritura</li>
+<li><strong>No ejecutar programas</strong> que modifiquen la fecha y hora de acceso de todos los ficheiros del sistema</li>
+</ul>
+<h3 id="14-herramientas-necesarias">1.4 Herramientas Necesarias</h3>
+<h4 id="pautas-para-la-seleccion-de-herramientas">Pautas para la Selección de Herramientas</h4>
+<p>Existen una serie de pautas que deben ser seguidas a la hora de seleccionar las herramientas con las que se va a llevar a cabo el proceso de recolección:</p>
+<ol>
+<li><strong>Utilizar herramientas ajenas al sistema</strong> ya que, como se mencionó anteriormente, estas pueden verse comprometidas</li>
+<li><strong>Procurar utilizar herramientas</strong> que alteren lo menos posible el escenario, evitando, en la medida de lo posible, el uso de herramientas de interfaz gráfico y aquellas cuyo uso de memoria sea grande</li>
+<li><strong>Los programas que se vayan a utilizar</strong> para recoger las evidencias deben estar situados en un dispositivo de sólo lectura (CDROM, USB, etc.)</li>
+<li><strong>Preparar un conjunto de utilidades</strong> adecuadas a los sistemas operativos con los que se trabaje</li>
+</ol>
+<h4 id="kit-de-analisis-minimo">Kit de Análisis Mínimo</h4>
+<p>El kit de análisis debe incluir, entre otros, los siguientes tipos de herramientas:
+- Programas para listar y examinar procesos
+- Programas para examinar el estado del sistema
+- Programas para realizar copias bit a bit</p>
+<h3 id="15-consideraciones-previas">1.5 Consideraciones Previas</h3>
+<p>Existen una serie de consideraciones previas que se deben tener en cuenta antes de comenzar el proceso de toma de evidencias:</p>
+<h4 id="1-estado-del-equipo">1. Estado del Equipo:</h4>
+<ul>
+<li><strong>No modificar el estado del equipo</strong>, dejarlo exactamente como está: ni abrir ficheros, ni ejecutar programas, ni borrar carpetas, etc.</li>
+<li><strong>Si está encendido</strong>, no apagarlo</li>
+<li><strong>Si está apagado</strong>, no encenderlo</li>
+</ul>
+<p><strong>Importante:</strong> Existe gran cantidad de información volátil que desaparece al apagar el computador, por lo que hacerlo podría suponer la pérdida de información muy significativa. De la misma manera, si está apagado, el hecho de encenderlo podría suponer la modificación de fechas o la ocultación de ficheros en caso de que haya un rootkit.</p>
+<h4 id="2-planificacion">2. Planificación:</h4>
+<ul>
+<li><strong>Establecer de manera global</strong> los pasos que se van a seguir con el fin de tener una guía operativa del proceso</li>
+<li><strong>Concretar de manera detallada</strong> los pasos que se van a seguir, teniendo en cuenta diferentes aspectos como:</li>
+<li>Tiempo estimado de duración del análisis</li>
+<li>Urgencia del mismo</li>
+<li>Recursos necesarios para llevarlo a cabo</li>
+</ul>
+<h4 id="3-evaluacion-de-capacidades">3. Evaluación de Capacidades:</h4>
+<ul>
+<li><strong>Valorar si la persona responsable</strong> de realizar el proceso tiene las habilidades y conocimientos necesarios para hacerlo</li>
+<li><strong>En caso de dudas</strong> sobre la capacidad para llevarlo a cabo, es mejor consultar a alguien con experiencia y conocimientos contrastados</li>
+</ul>
+<h4 id="4-autorizaciones">4. Autorizaciones:</h4>
+<ul>
+<li><strong>Obtener una autorización por escrito</strong> de quien corresponda para poder llevar a cabo el análisis y la recolección de evidencias</li>
+<li><strong>En cierto tipo de incidentes</strong> será necesario solicitar una autorización judicial para asegurar la validez de las pruebas recogidas en un futuro juicio</li>
+</ul>
+<h4 id="5-preparacion-tecnica">5. Preparación Técnica:</h4>
+<ul>
+<li><strong>Solicitar las contraseñas</strong> necesarias para acceder al sistema y a ficheros o volúmenes cifrados</li>
+<li><strong>Preparar un kit lo más completo posible</strong> de utilidades siguiendo las pautas indicadas anteriormente</li>
+<li><strong>Preparar una lista de personas</strong> a las que se deba informar y mantener al tanto del proceso</li>
+</ul>
+<h3 id="17-inicio-del-proceso">1.7 Inicio del Proceso</h3>
+<p>Una vez valoradas todas las consideraciones previas que ayuden a tener claro el tipo de incidente al que nos enfrentamos y los pasos que se deben seguir para solucionarlo, comenzará el proceso de recolección de evidencias propiamente dicho.</p>
+<p><strong>Recordatorio:</strong> Es necesario etiquetar, inventariar y fotografiar todos los dispositivos que se van a analizar: discos duros, pendrives, cámaras, etc. Incluso, dependiendo del tipo de incidente, puede ser necesario incluir routers, escáneres, impresoras, etc.</p>
+<p><strong>Datos a anotar para cada dispositivo:</strong>
+- Marca
+- Modelo
+- Número de serie
+- Tipo de conexión (USB, firewire, etc.)
+- Persona responsable del equipo
+- Usuario o usuarios que trabajen en él
+- Cualquier otra información que pueda resultar relevante</p>
+<p><strong>Cadena de custodia:</strong> Es fundamental ya que demuestra que las pruebas obtenidas no fueron manipuladas. Se debe ser especialmente meticuloso en este aspecto, documentando todas y cada una de las evidencias obtenidas.</p>
+<h2 id="2-adquisicion-de-elementos-volatiles-en-entornos-windows">2. Adquisición de Elementos Volátiles en Entornos Windows</h2>
+<p>Una vez etiquetados, inventariados y fotografiados todos los dispositivos se procede a la recopilación de las evidencias. De forma genérica, se puede clasificar el tipo de información a recopilar en dos grandes grupos:</p>
+<ol>
+<li><strong>Información volátil</strong></li>
+<li><strong>Información no volátil</strong></li>
+</ol>
+<p>Así mismo, se puede hablar de:
+- <strong>Adquisición en vivo:</strong> Obtención de información en un sistema en funcionamiento
+- <strong>Adquisición estática o post-mortem:</strong> Obtención de información de un sistema que está apagado</p>
+<h3 id="notas-importantes-sobre-la-adquisicion">Notas Importantes sobre la Adquisición:</h3>
+<p><strong>Enfoque habitual:</strong> Normalmente se suele realizar únicamente el volcado de memoria RAM y el volcado de disco, trabajando a partir de ahí sobre diferentes copias para obtener el resto de evidencias.</p>
+<p><strong>Software no invasivo:</strong> Para realizar una correcta adquisición de evidencias es importante el uso de software no invasivo y que se encuentre en dispositivos protegidos contra escritura (pendrive de sólo lectura, CD-ROM, etc.).</p>
+<p><strong>Herramientas utilizadas en esta guía:</strong>
+- Comandos del sistema
+- Herramientas de la suite Sysinternals
+- Herramientas de Nirsoft (no necesitan instalación y pueden ejecutarse desde línea de comandos)</p>
+<p><strong>Importante:</strong> Muchos de los comandos listados a continuación deben ejecutarse con permisos de administración.</p>
+<p><strong>Nota sobre ejecución de comandos:</strong> En ciertas situaciones puede ser recomendable la ejecución de los comandos del sistema desde una consola (cmd.exe) ejecutada en el propio dispositivo extraíble, para evitar el uso de la consola del sistema que puede estar comprometida.</p>
+<p><strong>Advertencia sobre antivirus:</strong> Los motores antivirus pueden bloquear la ejecución de algunas de las herramientas mostradas, sobre todo aquellas relacionadas con la recuperación de contraseñas. Esto debe tenerse en cuenta ya que, dependiendo del escenario en que nos encontremos, puede no ser posible la deshabilitación del antivirus.</p>
+<h3 id="21-hora-y-fecha-del-sistema">2.1 Hora y Fecha del Sistema</h3>
+<p>En cuanto a la información volátil, lo primero que se debe obtener es la <strong>fecha y hora del sistema</strong> para poder establecer una línea temporal de recopilación de evidencias, duración del proceso, etc.</p>
+<div class="highlight"><pre><span></span><code>date /t &gt; DataEHoraDeInicio.txt &amp; time /t &gt;&gt; DataEHoraDeInicio.txt
+</code></pre></div>
+<p><strong>Debe compararse la fecha obtenida</strong> con el tiempo universal coordinado (UTC), estándar de tiempo por el cual se regula la hora a nivel mundial, para determinar si la fecha establecida en el sistema es correcta o no, y qué desviación existe.</p>
+<p><strong>Al finalizar el proceso</strong>, debe ejecutarse la misma instrucción cambiando el fichero de destino:
+<div class="highlight"><pre><span></span><code>date /t &gt; DataEHora_Fin.txt &amp; time /t &gt;&gt; DataEHora_Fin.txt
+</code></pre></div></p>
+<h3 id="22-informacion-de-red-y-conexiones">2.2 Información de Red y Conexiones</h3>
+<h4 id="configuracion-de-interfaces-de-red">Configuración de Interfaces de Red:</h4>
+<div class="highlight"><pre><span></span><code>ipconfig /all &gt; ConfiguracionRede.txt
+</code></pre></div>
+<h4 id="consultas-dns-realizadas">Consultas DNS Realizadas:</h4>
+<div class="highlight"><pre><span></span><code>ipconfig /displaydns &gt; DNSCache.txt
+</code></pre></div>
+<h4 id="estado-de-la-cache-arp">Estado de la Caché ARP:</h4>
+<div class="highlight"><pre><span></span><code>arp -a &gt; ArpCache.txt
+</code></pre></div>
+<h4 id="listado-de-puertos-abiertos-con-filtrado">Listado de Puertos Abiertos (con filtrado):</h4>
+<div class="highlight"><pre><span></span><code>netstat -an | findstr /i &quot;estado listening established&quot; &gt; PortosAbertos.txt
+</code></pre></div>
+<h4 id="listado-de-aplicaciones-con-puertos-abiertos">Listado de Aplicaciones con Puertos Abiertos:</h4>
+<div class="highlight"><pre><span></span><code>netstat -anob &gt; AplicacionsConPortosAbertos.txt
+</code></pre></div>
+<h4 id="tabla-de-enrutamiento">Tabla de Enrutamiento:</h4>
+<div class="highlight"><pre><span></span><code>netstat -r &gt; TablaEnrutamento.txt
+</code></pre></div>
+<h4 id="conexiones-netbios-establecidas">Conexiones NetBIOS Establecidas:</h4>
+<div class="highlight"><pre><span></span><code>nbtstat -S &gt; ConexiónsNetbiosEstablecidas.txt
+</code></pre></div>
+<h3 id="23-ficheros-y-carpetas-compartidas">2.3 Ficheros y Carpetas Compartidas</h3>
+<h4 id="unidades-mapeadas">Unidades Mapeadas:</h4>
+<div class="highlight"><pre><span></span><code>net use &gt; UnidadesMapeadas.txt
+</code></pre></div>
+<h4 id="carpetas-compartidas">Carpetas Compartidas:</h4>
+<div class="highlight"><pre><span></span><code>net share &gt; CarpetasCompartidas.txt
+</code></pre></div>
+<h4 id="ficheros-copiados-recientemente-mediante-netbios">Ficheros Copiados Recientemente mediante NetBIOS:</h4>
+<div class="highlight"><pre><span></span><code>net file &gt; FicheirosCopiadosMedianteNetbios.txt
+</code></pre></div>
+<h4 id="ficheros-del-equipo-abiertos-remotamente-sysinternals">Ficheros (del equipo) Abiertos Remotamente (Sysinternals):</h4>
+<div class="highlight"><pre><span></span><code>psfile /accepteula &gt; FicherosAbertosRemotamente.txt
+</code></pre></div>
+<h4 id="captura-de-trafico-de-red">Captura de Tráfico de Red</h4>
+<p>En este punto puede ser interesante realizar una captura del tráfico de red para identificar las conversaciones que tiene la máquina con el exterior o dentro de la propia red.</p>
+<p><strong>Herramientas recomendadas:</strong>
+- <strong>TShark</strong> o <strong>Wireshark</strong>
+- <strong>Problema:</strong> Suelen necesitar tener instalado en el sistema un driver de captura de tráfico como Npcap o WinPcap</p>
+<p><strong>Importante:</strong> Una vez realizada la captura de tráfico y de las evidencias anteriores, sería el momento de realizar la captura o volcado de la memoria RAM y podría desconectarse el equipo de la red. Desconectando o aislando un equipo de la red podemos lograr que una determinada acción no siga ocurriendo, por ejemplo una descarga de datos no autorizada o el borrado remoto de datos por parte del atacante.</p>
+<h3 id="24-historico-de-comandos-de-consola">2.4 Histórico de Comandos de Consola</h3>
+<div class="highlight"><pre><span></span><code>doskey /history &gt; HistoricoComandos.txt
+</code></pre></div>
+<h3 id="25-procesos">2.5 Procesos</h3>
+<p>Para obtener la lista de procesos en ejecución y los elementos relacionados con ellos como pueden ser las DLLs y los Handles:</p>
+<h4 id="procesos-en-ejecucion">Procesos en Ejecución:</h4>
+<div class="highlight"><pre><span></span><code>tasklist &gt; ProcesosEnExecucion.txt
+</code></pre></div>
+<h4 id="arbol-jerarquico-de-los-procesos-en-ejecucion-sysinternals">Árbol Jerárquico de los Procesos en Ejecución (Sysinternals):</h4>
+<div class="highlight"><pre><span></span><code>pslist /accepteula /t &gt; ArboreDeProcesosEnExecucion.txt
+</code></pre></div>
+<h4 id="procesos-en-ejecucion-y-librerias-dll-asociadas-sysinternals">Procesos en Ejecución y Librerías DLL Asociadas (Sysinternals):</h4>
+<div class="highlight"><pre><span></span><code>listdlls /accepteula &gt; ProcesosEDlls.txt
+</code></pre></div>
+<h4 id="listado-de-handles-abiertos-por-cada-programa-sysinternals">Listado de Handles Abiertos por Cada Programa (Sysinternals):</h4>
+<div class="highlight"><pre><span></span><code>handle /accepteula /a &gt; Handles.txt
+</code></pre></div>
+<h4 id="procesos-del-usuario-actual-nirsoft">Procesos del Usuario Actual (Nirsoft):</h4>
+<div class="highlight"><pre><span></span><code>cprocess /stext ProcesosUsuario.txt
+</code></pre></div>
+<h4 id="servicios-en-ejecucion">Servicios en Ejecución:</h4>
+<div class="highlight"><pre><span></span><code>sc query &gt; ServiciosEnExecucion.txt
+</code></pre></div>
+<h3 id="26-informacion-de-usuarios">2.6 Información de Usuarios</h3>
+<h4 id="nombre-de-equipo-y-grupo-de-trabajo-de-netbios">Nombre de Equipo y Grupo de Trabajo de NetBIOS:</h4>
+<div class="highlight"><pre><span></span><code>nbtstat -n &gt; NomeEquipoEGrupoDeTraballoNetbios.txt
+</code></pre></div>
+<h4 id="usuarios-y-grupos-de-usuario-locales-del-equipo">Usuarios y Grupos de Usuario Locales del Equipo:</h4>
+<div class="highlight"><pre><span></span><code>net user &gt; UsuariosEGruposDoEquipo.txt &amp;&amp; net localgroup &gt;&gt; UsuariosEGruposDoEquipo.txt
+</code></pre></div>
+<h4 id="informacion-detallada-de-un-usuario-especifico">Información Detallada de un Usuario Específico:</h4>
+<div class="highlight"><pre><span></span><code>net user nombre_usuario &gt; InformacionUsuario_nombre_usuario.txt
+</code></pre></div>
+<h4 id="usuarios-remotos-que-iniciaron-sesion">Usuarios Remotos que Iniciaron Sesión:</h4>
+<div class="highlight"><pre><span></span><code>net session &gt; UsuariosRemotos.txt
+</code></pre></div>
+<h4 id="sesiones-activas-en-el-sistema-sysinternals">Sesiones Activas en el Sistema (Sysinternals):</h4>
+<div class="highlight"><pre><span></span><code>logonsessions /accepteula &gt; SesionsActivas.txt
+</code></pre></div>
+<h4 id="usuarios-locales-y-remotos-que-iniciaron-sesion-en-el-equipo-sysinternals">Usuarios Locales y Remotos que Iniciaron Sesión en el Equipo (Sysinternals):</h4>
+<div class="highlight"><pre><span></span><code>psloggedon /accepteula &gt; UsuariosIniciadoSesion.txt
+</code></pre></div>
+<h3 id="27-contrasenas">2.7 Contraseñas</h3>
+<p>En ciertos incidentes puede resultar muy útil conocer los diferentes nombres de usuario y contraseñas almacenadas en el equipo. Existen multitud de contraseñas que pueden estar almacenadas en el equipo, de diferentes servicios como correo electrónico, banca en línea, recursos compartidos, etc.</p>
+<p><strong>Herramientas de Nirsoft para recuperación de contraseñas:</strong></p>
+<h4 id="webbrowserpassview">WebBrowserPassView:</h4>
+<p>Recoge las contraseñas almacenadas en los siguientes navegadores:
+- Internet Explorer (versión 4.0-11.0)
+- Mozilla Firefox (todas las versiones)
+- Google Chrome
+- Safari
+- Opera</p>
+<div class="highlight"><pre><span></span><code>WebBrowserPassView /stab &quot;ContraseñasNavegadores.txt&quot;
+</code></pre></div>
+<h4 id="network-password-recovery">Network Password Recovery:</h4>
+<p>Recoge las contraseñas correspondientes a los recursos de red a los que está conectado el usuario actual.
+<div class="highlight"><pre><span></span><code>Netpass /stab &quot;NetworkPasswordRecovery.txt&quot;
+</code></pre></div></p>
+<h4 id="mail-passview">Mail PassView:</h4>
+<p>Recoge las contraseñas de los principales gestores de correo.
+<div class="highlight"><pre><span></span><code>mailpv /stab &quot;MailPassView.txt&quot;
+</code></pre></div></p>
+<p><strong>Nota sobre versiones de Nirsoft:</strong> En la página principal de descarga de algunas herramientas de Nirsoft, la versión descargada no permite el uso de parámetros para línea de comandos. Para descargar la versión que sí lo permite hay que seguir las indicaciones mostradas en esta página.</p>
+<h3 id="28-arbol-de-directorios-y-ficheros">2.8 Árbol de Directorios y Ficheros</h3>
+<p>Puede resultar interesante conocer el árbol de directorios y ficheros con el fin de poder comprobar la existencia de ficheros sospechosos. Para esto, podemos obtener 3 listados ordenados por los tiempos MAC (Modificación, Acceso, Creación) de los ficheros.</p>
+<p><strong>Nota:</strong> Para unos mejores resultados, estos comandos deben ser realizados desde la consola del sistema y no desde una externa.</p>
+<h4 id="listado-en-base-a-la-fecha-de-modificacion">Listado en Base a la Fecha de Modificación:</h4>
+<div class="highlight"><pre><span></span><code>dir /t:w /a /s /o:d c:\ &gt; &quot;ListadoFicheirosPorDataDeModificacion.txt&quot;
+</code></pre></div>
+<h4 id="listado-en-base-al-ultimo-acceso">Listado en Base al Último Acceso:</h4>
+<div class="highlight"><pre><span></span><code>dir /t:a /a /s /o:d c:\ &gt; &quot;ListadoFicheirosPorUltimoAcceso.txt&quot;
+</code></pre></div>
+<h4 id="listado-en-base-a-la-fecha-de-creacion">Listado en Base a la Fecha de Creación:</h4>
+<div class="highlight"><pre><span></span><code>dir /t:c /a /s /o:d c:\ &gt; &quot;ListadoFicheirosPorDataDeCreacion.txt&quot;
+</code></pre></div>
+<p><strong>Importante:</strong> En caso de que existan varios discos duros o particiones deberá ejecutarse la instrucción por cada disco o partición, es decir, habría que ejecutar el comando tantas veces como fuese necesario cambiando el directorio sobre el que se hace el listado (en este caso <code>c:\</code>) y cambiando a su vez el nombre del fichero que almacenará el listado.</p>
+<h4 id="listado-de-ficheros-abiertos-nirsoft">Listado de Ficheros Abiertos (Nirsoft):</h4>
+<div class="highlight"><pre><span></span><code>openedfilesview /stext &gt; FicherosAbertos.txt
+</code></pre></div>
+<h3 id="29-navegadores-web">2.9 Navegadores Web</h3>
+<p>Veremos más adelante en el curso con mayor profundidad el análisis de las evidencias disponibles en los navegadores web, pero podemos adelantar el uso de algunas herramientas de línea de comandos que nos van a permitir realizar una adquisición previa.</p>
+<h4 id="291-informacion-cacheada-en-los-navegadores">2.9.1 Información Cacheada en los Navegadores</h4>
+<p>Utilizaremos las herramientas de Nirsoft:</p>
+<div class="highlight"><pre><span></span><code>IECacheView /stab &quot;IECache.txt&quot;
+Chromecacheview /stab &quot;ChromeCacheView.txt&quot;
+MZCacheView /stab &quot;FirefoxCacheView.txt&quot;
+</code></pre></div>
+<h4 id="292-historial-de-internet">2.9.2 Historial de Internet</h4>
+<p>El historial de internet puede resultar una fuente muy importante de información tanto en caso de pericias judiciales para saber las páginas visitadas por algún usuario, como en casos de incidentes de seguridad ya que los ciberdelincuentes pueden aprovechar vulnerabilidades en los navegadores.</p>
+<p><strong>BrowsingHistoryView:</strong> Herramienta capaz de recoger el historial de navegación de varias versiones de navegadores web (Internet Explorer, Mozilla Firefox, Google Chrome, y Safari).</p>
+<div class="highlight"><pre><span></span><code>BrowsingHistoryView.exe /VisitTimeFilterType 1 /HistorySource 2 /LoadIE 1 /LoadFirefox 1 /LoadChrome 1 /LoadSafari 1 /stab Historial.txt
+</code></pre></div>
+<h4 id="293-ultimas-busquedas">2.9.3 Últimas Búsquedas</h4>
+<p>Conocer las últimas búsquedas realizadas en los principales motores puede resultar de interés dependiendo del tipo de incidente. Para recopilar toda esta información se pueden utilizar herramientas como <strong>MyLastSearch (Nirsoft)</strong>, la cual obtiene todas las búsquedas realizadas en los principales motores de búsqueda (Google, Yahoo y MSN) y en varias redes sociales (por ejemplo Twitter y Facebook).</p>
+<div class="highlight"><pre><span></span><code>MyLastSearch /stab &quot;MyLastSearch.txt&quot;
+</code></pre></div>
+<h3 id="210-volumenes-cifrados">2.10 Volúmenes Cifrados</h3>
+<p>Cada vez es más habitual utilizar herramientas de cifrado con el fin de añadir cierto nivel de privacidad y seguridad a la información. Puede resultar de interés en un proceso forense identificar volúmenes cifrados ya que es probable que almacenen información relevante.</p>
+<p><strong>Elcomsoft Encrypted Disk Hunter:</strong> Analiza las unidades de almacenamiento del computador y determina si alguna de ellas corresponde a un volumen cifrado con las principales herramientas, como TrueCrypt, PGP, Safeboot, o Bitlocker.</p>
+<div class="highlight"><pre><span></span><code>eedh.exe &gt; &quot;VolumesCifrados.txt&quot;
+</code></pre></div>
+<h3 id="211-otros">2.11 Otros</h3>
+<h4 id="fecha-y-hora-de-arranque-del-sistema">Fecha y Hora de Arranque del Sistema:</h4>
+<p><strong>Windows Server:</strong>
+<div class="highlight"><pre><span></span><code>net stats srv &gt; ArranqueSistema.txt
+</code></pre></div></p>
+<p><strong>Windows Workstation:</strong>
+<div class="highlight"><pre><span></span><code>net stats workstation &gt; ArranqueSistema.txt
+</code></pre></div></p>
+<h4 id="informacion-del-sistema">Información del Sistema:</h4>
+<div class="highlight"><pre><span></span><code>systeminfo &gt; InformacionSistema.txt
+</code></pre></div>
+<h3 id="212-adquisicion-de-la-memoria-ram">2.12 Adquisición de la Memoria RAM</h3>
+<p>La captura o volcado de memoria es uno de los aspectos más importantes y críticos de la fase de adquisición. Realizar una correcta adquisición de memoria puede suponer la diferencia entre la resolución del incidente o no. Debido a esto debe ser cuidadoso durante el proceso.</p>
+<h4 id="tipos-de-memoria">Tipos de Memoria:</h4>
+<ul>
+<li><strong>Memoria física:</strong> Corresponde a la memoria real del sistema</li>
+<li><strong>Memoria virtual:</strong> Corresponde principalmente al fichero de paginación <code>pagefile.sys</code>, aunque también hay que tener en cuenta el fichero <code>hiberfile.sys</code> y, más recientemente, el fichero <code>swapfile.sys</code></li>
+</ul>
+<h4 id="herramientas-para-volcado-de-memoria">Herramientas para Volcado de Memoria:</h4>
+<p>Existen un gran número de utilidades que permiten realizar un volcado de memoria, pero entre todas destaca <strong>DumpIt</strong> por su simplicidad y compatibilidad con las distintas versiones de Windows.</p>
+<p><strong>DumpIt:</strong>
+- Ejecutar la aplicación desde el intérprete de comandos
+- Realiza un volcado de memoria en formato RAW en el mismo directorio desde donde se ejecute el programa
+- Al finalizar obtiene un fichero del tamaño de la memoria RAM del equipo
+- Genera un fichero JSON con un log de la ejecución del comando, incluyendo el hash en SHA256 del fichero</p>
+<p><strong>Otras herramientas disponibles:</strong>
+- Winpmem
+- Memoryze
+- RamCapture
+- FTK Imager
+- VARC, etc.</p>
+<h4 id="adquisicion-remota">Adquisición Remota:</h4>
+<p>Si no tenemos acceso físico al equipo, pero nos encontramos en otro equipo que pertenece al mismo dominio y conocemos las credenciales de acceso de un usuario administrador, siempre podemos hacer una adquisición remota mediante la herramienta <strong>PsExec de Sysinternals</strong>, que permite la ejecución de comandos remotos.</p>
+<h4 id="verificacion-de-integridad">Verificación de Integridad:</h4>
+<p>Una vez obtenida la imagen correspondiente al volcado de memoria física, si la herramienta utilizada no lo proporciona directamente, será necesario obtener un hash del fichero generado, que será anotado en la documentación de la cadena de custodia.</p>
+<p><strong>Herramientas para cálculo de hash:</strong>
+- HashMyFiles
+- HashCalc</p>
+<p><strong>Ejemplo con HashMyFiles:</strong>
+<div class="highlight"><pre><span></span><code>HashMyFiles /save &quot;hashes.txt&quot; &quot;C:\ruta\al\volcado.dmp&quot;
+</code></pre></div></p>
+<h4 id="metodo-alternativo-crash-dump">Método Alternativo: Crash Dump</h4>
+<p>Otra manera de obtener la memoria física es mediante un <strong>"crash dump"</strong>, el cual corresponde a un fallo del que el sistema no puede recuperarse. Cuando se produce este tipo de fallos se genera un fichero:
+- <strong>Minidump:</strong> Volcado parcial de la memoria física
+- <strong>Volcado completo:</strong> Configurándolo expresamente (<code>%SystemRoot%\Memory.dmp</code>)</p>
+<p>Estos fallos pueden ser provocados mediante herramientas como <strong>NotMyFault (SysInternals)</strong>.</p>
+<h2 id="3-fuentes">3. Fuentes</h2>
+<ol>
+<li>MARTÍNEZ RETENAGA, Asier. Guía de toma de evidencias en entornos Windows.</li>
+<li>VILA AVENDAÑO, Pilar. Técnicas de análisis forense informático para peritos judiciales profesionales. 0XWord, 2018. ISBN: 9788469777008.</li>
+</ol>
+<hr />
+<p><strong>Nota Final sobre la Adquisición:</strong> 
+La decisión final de cómo realizar la adquisición de las distintas evidencias será del analista que esté realizando el proceso, apoyado en su conocimiento, experiencia y manejo de las distintas técnicas y herramientas de las que dispone.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/davidalvarezp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

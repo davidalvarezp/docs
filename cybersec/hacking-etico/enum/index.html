@@ -1,0 +1,4632 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación de administración de sistemas y ciberseguridad.">
+      
+      
+        <meta name="author" content="davidalvarezp">
+      
+      
+        <link rel="canonical" href="https://docs.davidalvarezp.com/cybersec/hacking-etico/enum/">
+      
+      
+        <link rel="prev" href="../recon/">
+      
+      
+        <link rel="next" href="../exploit/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Enumeración - SysAdmin & CyberSec Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#escaneo-y-enumeracion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="SysAdmin &amp; CyberSec Docs" class="md-header__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SysAdmin & CyberSec Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Enumeración
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../sysadmin/" class="md-tabs__link">
+          
+  
+  
+  SysAdmin
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  CyberSec
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SysAdmin &amp; CyberSec Docs" class="md-nav__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SysAdmin & CyberSec Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SysAdmin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SysAdmin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistemas Operativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistemas Operativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/sistemas-operativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/sistemas-operativos/implantacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implantación de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/sistemas-operativos/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/planificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planificación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/servicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bases de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bases de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/bb-dd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/bb-dd/gestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/bb-dd/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Programación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/programacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/programacion/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/seguridad/disponibilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alta Disponibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/web/lenguajes-marcas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes de Marcas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/web/aplicaciones-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aplicaciones Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CyberSec
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CyberSec
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hacking Ético
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hacking Ético
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reconocimiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeración
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion-a-la-fase-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción a la Fase de Enumeración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción a la Fase de Enumeración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-contexto-y-objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Contexto y Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-informacion-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Información Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-objetivos-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Objetivos de Enumeración
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-caracteristicas-de-la-fase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Características de la Fase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-tecnicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Técnicas Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-fases-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fases de Enumeración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Fases de Enumeración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-flujo-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Flujo General
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fase-1-descubrimiento-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Fase 1: Descubrimiento de Red
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fase-2-escaneo-de-puertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Fase 2: Escaneo de Puertos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fase-3-identificacion-de-servicios-y-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Fase 3: Identificación de Servicios y Versiones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-fase-4-identificacion-del-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Fase 4: Identificación del Sistema Operativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-fase-5-enumeracion-de-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Fase 5: Enumeración de Servicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-fase-6-enumeracion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Fase 6: Enumeración de Usuarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fase-1-descubrimiento-de-red-en-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fase 1: Descubrimiento de Red en Detalle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Fase 1: Descubrimiento de Red en Detalle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-trazado-de-rutas-traceroute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Trazado de Rutas (Traceroute)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-barrido-de-red-ping-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Barrido de Red (Ping Sweep)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-descubrimiento-arp-netdiscover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Descubrimiento ARP (netdiscover)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fase-2-escaneo-de-puertos-en-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Fase 2: Escaneo de Puertos en Detalle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Fase 2: Escaneo de Puertos en Detalle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-analisis-tcp-de-conexion-completa-tcp-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Análisis TCP de Conexión Completa (TCP Connect)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-analisis-tcp-half-connect-syn-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Análisis TCP Half-Connect (SYN Scan)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-analisis-tcp-ack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Análisis TCP ACK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-analisis-udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Análisis UDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-escaneos-especiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Escaneos Especiales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fase-3-identificacion-de-servicios-y-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Fase 3: Identificación de Servicios y Versiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Fase 3: Identificación de Servicios y Versiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-enfoque-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Enfoque General
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-nmap-para-identificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Nmap para Identificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-captura-de-banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Captura de Banner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-ejemplo-practico-ftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Ejemplo Práctico: FTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-ejemplo-practico-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Ejemplo Práctico: SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-fase-4-enumeracion-del-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Fase 4: Enumeración del Sistema Operativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Fase 4: Enumeración del Sistema Operativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-metodos-de-deteccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Métodos de Detección
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-deteccion-pasiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Detección Pasiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-deteccion-activa-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Detección Activa (Nmap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-fase-5-enumeracion-de-servicios-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Fase 5: Enumeración de Servicios - HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Fase 5: Enumeración de Servicios - HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-pasos-para-enumeracion-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Pasos para Enumeración Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-inspeccion-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Inspección Visual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-deteccion-de-tecnologias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Detección de Tecnologías
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-enumeracion-de-cms-especificos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Enumeración de CMS Específicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-fuzzing-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Fuzzing Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-fuzzing-con-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Fuzzing con Nmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-fuzzing-con-wfuzz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 Fuzzing con Wfuzz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-fase-5-enumeracion-de-servicios-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Fase 5: Enumeración de Servicios - SMB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Fase 5: Enumeración de Servicios - SMB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-configuracion-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Configuración Inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-herramientas-de-enumeracion-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Herramientas de Enumeración SMB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-nbtscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Nbtscan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-nmap-para-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Nmap para SMB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-smbmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Smbmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-descubrimiento-automatizado-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Descubrimiento Automatizado de Vulnerabilidades
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Descubrimiento Automatizado de Vulnerabilidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-proceso-general-de-escaneres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Proceso General de Escáneres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-herramientas-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Herramientas Comunes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-nikto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Nikto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-nuclei" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Nuclei
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-openvasgvm-greenbone-vulnerability-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 OpenVAS/GVM (Greenbone Vulnerability Management)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-laboratorios-y-actividades-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Laboratorios y Actividades Prácticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Laboratorios y Actividades Prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratorio-3-implementacion-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Laboratorio 3: Implementación Práctica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividades-especificas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actividades Específicas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../post-exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../persist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mantener Acceso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Borrado de Huellas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bastionado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bastionado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bastionado/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Redes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bastionado/sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Forense
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Análisis Forense
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en PC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Forense en PC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_2" id="__nav_3_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clonado de discos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clonado de discos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/clonado-disco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/clonado-disco/adquisicion-basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisicón básica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/clonado-disco/adquisicion-avanzada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisición avanzada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_3" id="__nav_3_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado de RAM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volcado de RAM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/volcado-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/volcado-ram/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/herramientas-triaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de Triaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/phone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Móviles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidentes de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidentes de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incidentes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incidentes/prevencion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prevención
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incidentes/taxonomia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taxonomía de Incidentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Puesta en Producción
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Puesta en Producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../produccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normativa de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Normativa de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../normativa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduccion-a-la-fase-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introducción a la Fase de Enumeración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introducción a la Fase de Enumeración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-contexto-y-objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Contexto y Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-informacion-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Información Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-objetivos-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Objetivos de Enumeración
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-caracteristicas-de-la-fase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 Características de la Fase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-tecnicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 Técnicas Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-fases-de-enumeracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fases de Enumeración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Fases de Enumeración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-flujo-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Flujo General
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fase-1-descubrimiento-de-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Fase 1: Descubrimiento de Red
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fase-2-escaneo-de-puertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Fase 2: Escaneo de Puertos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fase-3-identificacion-de-servicios-y-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Fase 3: Identificación de Servicios y Versiones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-fase-4-identificacion-del-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Fase 4: Identificación del Sistema Operativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-fase-5-enumeracion-de-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Fase 5: Enumeración de Servicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-fase-6-enumeracion-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 Fase 6: Enumeración de Usuarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fase-1-descubrimiento-de-red-en-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fase 1: Descubrimiento de Red en Detalle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Fase 1: Descubrimiento de Red en Detalle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-trazado-de-rutas-traceroute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Trazado de Rutas (Traceroute)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-barrido-de-red-ping-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Barrido de Red (Ping Sweep)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-descubrimiento-arp-netdiscover" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Descubrimiento ARP (netdiscover)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-fase-2-escaneo-de-puertos-en-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Fase 2: Escaneo de Puertos en Detalle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Fase 2: Escaneo de Puertos en Detalle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-analisis-tcp-de-conexion-completa-tcp-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Análisis TCP de Conexión Completa (TCP Connect)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-analisis-tcp-half-connect-syn-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Análisis TCP Half-Connect (SYN Scan)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-analisis-tcp-ack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Análisis TCP ACK
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-analisis-udp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Análisis UDP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-escaneos-especiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Escaneos Especiales
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-fase-3-identificacion-de-servicios-y-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Fase 3: Identificación de Servicios y Versiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Fase 3: Identificación de Servicios y Versiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-enfoque-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Enfoque General
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-nmap-para-identificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Nmap para Identificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-captura-de-banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Captura de Banner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-ejemplo-practico-ftp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Ejemplo Práctico: FTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-ejemplo-practico-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Ejemplo Práctico: SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-fase-4-enumeracion-del-sistema-operativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Fase 4: Enumeración del Sistema Operativo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Fase 4: Enumeración del Sistema Operativo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-metodos-de-deteccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Métodos de Detección
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-deteccion-pasiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Detección Pasiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-deteccion-activa-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Detección Activa (Nmap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-fase-5-enumeracion-de-servicios-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Fase 5: Enumeración de Servicios - HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Fase 5: Enumeración de Servicios - HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-pasos-para-enumeracion-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Pasos para Enumeración Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-inspeccion-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Inspección Visual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-deteccion-de-tecnologias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Detección de Tecnologías
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-enumeracion-de-cms-especificos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Enumeración de CMS Específicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-fuzzing-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 Fuzzing Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-fuzzing-con-nmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Fuzzing con Nmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-fuzzing-con-wfuzz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 Fuzzing con Wfuzz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-fase-5-enumeracion-de-servicios-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Fase 5: Enumeración de Servicios - SMB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Fase 5: Enumeración de Servicios - SMB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-configuracion-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Configuración Inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-herramientas-de-enumeracion-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Herramientas de Enumeración SMB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-nbtscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Nbtscan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-nmap-para-smb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Nmap para SMB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-smbmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Smbmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-descubrimiento-automatizado-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Descubrimiento Automatizado de Vulnerabilidades
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Descubrimiento Automatizado de Vulnerabilidades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-proceso-general-de-escaneres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Proceso General de Escáneres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-herramientas-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Herramientas Comunes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-nikto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Nikto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-nuclei" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4 Nuclei
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-openvasgvm-greenbone-vulnerability-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5 OpenVAS/GVM (Greenbone Vulnerability Management)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-laboratorios-y-actividades-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Laboratorios y Actividades Prácticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Laboratorios y Actividades Prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratorio-3-implementacion-practica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Laboratorio 3: Implementación Práctica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actividades-especificas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actividades Específicas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/davidalvarezp/docs/edit/main/docs/cybersec/hacking-etico/enum/index.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="escaneo-y-enumeracion">Escaneo y Enumeración</h1>
+<h2 id="1-introduccion-a-la-fase-de-enumeracion">1. Introducción a la Fase de Enumeración</h2>
+<h3 id="11-contexto-y-objetivos">1.1 Contexto y Objetivos</h3>
+<ul>
+<li><strong>Previo</strong>: Fase de reconocimiento (información pasiva)</li>
+<li><strong>Actual</strong>: Enumeración activa (fingerprinting) - interacción directa con objetivos</li>
+<li><strong>Propósito principal</strong>: Identificar vectores de ataque mediante enumeración detallada</li>
+</ul>
+<h3 id="12-informacion-objetivo">1.2 Información Objetivo</h3>
+<p><strong>Reconocimiento Externo:</strong>
+- IP públicas asignadas al cliente
+- Direcciones de equipos individuales específicos</p>
+<p><strong>Reconocimiento Interno:</strong>
+- Subredes de la organización identificadas
+- Topología de red interna</p>
+<h3 id="13-objetivos-de-enumeracion">1.3 Objetivos de Enumeración</h3>
+<ol>
+<li><strong>Identificar hosts activos</strong> en la red objetivo</li>
+<li><strong>Determinar puertos abiertos</strong> en hosts activos (puerto, servicio, versión)</li>
+<li><strong>Profundizar en información de servicios</strong> específicos</li>
+<li><strong>Ocasionalmente</strong>: Pruebas de identificación de SO</li>
+<li><strong>Posteriormente</strong>: Enumeración de vulnerabilidades</li>
+</ol>
+<h3 id="14-caracteristicas-de-la-fase">1.4 Características de la Fase</h3>
+<ul>
+<li><strong>Actividad activa</strong>: Interacción con objetivos</li>
+<li><strong>Verificación</strong>: Confirmación de direcciones IP y dominios obtenidos</li>
+<li><strong>Detección de nuevos elementos</strong>: Rúteres, cortafuegos, equipos adicionales</li>
+<li><strong>Riesgo de detección</strong>: Deja señales en logs, IDS/IPS, cortafuegos</li>
+<li><strong>Pruebas controladas</strong>: Para evitar daños y detección temprana</li>
+</ul>
+<h3 id="15-tecnicas-principales">1.5 Técnicas Principales</h3>
+<ul>
+<li>Escáneres de red y vulnerabilidades</li>
+<li>Análisis de aplicaciones web</li>
+<li>Ingeniería social</li>
+</ul>
+<h2 id="2-fases-de-enumeracion">2. Fases de Enumeración</h2>
+<h3 id="21-flujo-general">2.1 Flujo General</h3>
+<p>Las fases se realimentan - información de una fase alimenta la siguiente</p>
+<h3 id="22-fase-1-descubrimiento-de-red">2.2 Fase 1: Descubrimiento de Red</h3>
+<p><strong>Objetivo</strong>: Identificar equipos activos y crear mapa de red</p>
+<p><strong>Técnicas:</strong>
+- <strong>Trazado de rutas</strong> (traceroute/tracert)
+- <strong>Barrido de red</strong> (ping sweep)
+- <strong>Descubrimiento ARP</strong> (netdiscover)</p>
+<p><strong>Herramientas principales:</strong>
+- <code>ping</code>, <code>traceroute</code>, <code>tracert</code>
+- <code>fping</code>, <code>nmap</code>
+- <code>netdiscover</code> (activo/pasivo)</p>
+<h3 id="23-fase-2-escaneo-de-puertos">2.3 Fase 2: Escaneo de Puertos</h3>
+<p><strong>Objetivo</strong>: Buscar puertos abiertos TCP/UDP (cada puerto abierto = servicio en escucha)</p>
+<p><strong>Consideraciones:</strong>
+- Aumenta hostilidad y ruido
+- Omisión posible si servicio ya conocido
+- Ejemplo: Aplicaciones web accesibles desde Internet</p>
+<p><strong>Estados de puertos:</strong>
+- <strong>Abierto</strong>: Disponible con servicio esperando conexiones
+- <strong>Cerrado</strong>: Accesible pero sin servicio respondiendo
+- <strong>Filtrado</strong>: No alcanzable por cortafuegos</p>
+<h3 id="24-fase-3-identificacion-de-servicios-y-versiones">2.4 Fase 3: Identificación de Servicios y Versiones</h3>
+<p><strong>Objetivo</strong>: Determinar servicios específicos detrás de puertos abiertos</p>
+<p><strong>Consideraciones:</strong>
+- Puertos no siempre corresponden a servicios por defecto
+- Verificación manual a menudo necesaria
+- Identificación de versiones crítico para búsqueda de vulnerabilidades</p>
+<h3 id="25-fase-4-identificacion-del-sistema-operativo">2.5 Fase 4: Identificación del Sistema Operativo</h3>
+<p><strong>Objetivo</strong>: Determinar SO de dispositivos basado en comportamiento</p>
+<p><strong>Métodos:</strong>
+- <strong>Pasivo</strong>: Observación de tráfico (p0f, Wireshark, NetworkMiner)
+- <strong>Activo</strong>: Envío de paquetes específicos (nmap -O)</p>
+<h3 id="26-fase-5-enumeracion-de-servicios">2.6 Fase 5: Enumeración de Servicios</h3>
+<p><strong>Objetivo</strong>: Profundizar en información específica de servicios</p>
+<p><strong>Enfoque por protocolo:</strong>
+- HTTP: directorios, tecnologías, vulnerabilidades
+- SMB: shares, usuarios, permisos
+- FTP: configuración, accesos
+- SSH: versión, configuración</p>
+<h3 id="27-fase-6-enumeracion-de-usuarios">2.7 Fase 6: Enumeración de Usuarios</h3>
+<p><strong>Objetivo</strong>: Identificar usuarios existentes y patrones de nomenclatura</p>
+<p><strong>Utilidad</strong>: Generación de diccionarios para fases posteriores</p>
+<h2 id="3-fase-1-descubrimiento-de-red-en-detalle">3. Fase 1: Descubrimiento de Red en Detalle</h2>
+<h3 id="31-trazado-de-rutas-traceroute">3.1 Trazado de Rutas (Traceroute)</h3>
+<p><strong>Propósito</strong>: Determinar ruta de paquetes y nodos intermedios</p>
+<p><strong>Herramientas:</strong>
+- <strong>Linux</strong>: <code>traceroute</code> (UDP puerto 33434 por defecto)
+- <strong>Windows</strong>: <code>tracert</code> (ICMP por defecto)
+- <strong>Parámetros comunes</strong>: Tiempos de espera, IPv6, protocolos alternativos</p>
+<p><strong>Interpretación de resultados:</strong>
+- Asterisco (*): Paquete perdido o no respondido
+- Tiempos elevados: Recursos sobrecargados
+- Sin respuesta: Configuraciones de seguridad</p>
+<p><strong>TTL/ICMP en acción:</strong>
+- TTL inicial = 1, incrementa progresivamente
+- Respuesta ICMP "Time Exceeded" en cada salto
+- Respuesta final indica destino alcanzado</p>
+<h3 id="32-barrido-de-red-ping-sweep">3.2 Barrido de Red (Ping Sweep)</h3>
+<p><strong>Técnica</strong>: Envío de ICMP echo requests a rango de red</p>
+<p><strong>Limitaciones:</strong>
+- Filtros comunes a peticiones ICMP
+- Hosts Windows no responden por defecto
+- Posible omisión de equipos</p>
+<p><strong>Implementaciones:</strong>
+- <strong>Bucles con <code>ping</code></strong>: Scripting básico
+- <strong><code>fping</code></strong>: Optimizado para barridos
+- <strong><code>nmap</code></strong>: Opciones avanzadas (-sn)</p>
+<h3 id="33-descubrimiento-arp-netdiscover">3.3 Descubrimiento ARP (netdiscover)</h3>
+<p><strong>Alcance</strong>: Solo misma red local (protocolo ARP)</p>
+<p><strong>Modos:</strong>
+- <strong>Pasivo</strong>: Espera tráfico ARP existente (sigiloso, lento)
+- <strong>Activo</strong>: Genera tráfico ARP (rápido, menos sigiloso)</p>
+<p><strong>Comando</strong>: <code>netdiscover</code></p>
+<h2 id="4-fase-2-escaneo-de-puertos-en-detalle">4. Fase 2: Escaneo de Puertos en Detalle</h2>
+<h3 id="41-analisis-tcp-de-conexion-completa-tcp-connect">4.1 Análisis TCP de Conexión Completa (TCP Connect)</h3>
+<p><strong>Proceso</strong>: Three-way handshake completo</p>
+<p><strong>Respuestas:</strong>
+- <strong>SYN+ACK → Abierto</strong> (conexión completada)
+- <strong>RST → Cerrado</strong> (host activo)
+- <strong>Sin respuesta/ICMP error → Filtrado</strong></p>
+<p><strong>Características:</strong>
+- No requiere privilegios especiales
+- Deja logs en servidor
+- Método más fiable pero menos sigiloso</p>
+<h3 id="42-analisis-tcp-half-connect-syn-scan">4.2 Análisis TCP Half-Connect (SYN Scan)</h3>
+<p><strong>Proceso</strong>: SYN enviado, RST enviado al recibir SYN+ACK</p>
+<p><strong>Respuestas:</strong>
+- <strong>SYN+ACK → Abierto</strong>
+- <strong>RST → Cerrado</strong>
+- <strong>Sin respuesta/ICMP error → Filtrado</strong></p>
+<p><strong>Ventajas:</strong>
+- Más eficiente (sin reserva de recursos)
+- Más sigiloso (posiblemente)
+- Requiere permisos de administrador</p>
+<h3 id="43-analisis-tcp-ack">4.3 Análisis TCP ACK</h3>
+<p><strong>Propósito</strong>: Determinar actividad de host y filtrado</p>
+<p><strong>Respuestas:</strong>
+- <strong>RST → Host activo</strong>
+- <strong>Sin respuesta → Inactivo o fuertemente filtrado</strong></p>
+<p><strong>Utilidad</strong>: Penetración de cortafuegos (menos atención que SYN)</p>
+<h3 id="44-analisis-udp">4.4 Análisis UDP</h3>
+<p><strong>Desafío</strong>: Protocolo no orientado a conexión</p>
+<p><strong>Respuestas:</strong>
+- <strong>ICMP Port Unreachable → Cerrado</strong> (host activo)
+- <strong>Otros errores ICMP → Host no activo</strong>
+- <strong>Sin respuesta → Abierto/Filtrado</strong> (ambiguo)</p>
+<h3 id="45-escaneos-especiales">4.5 Escaneos Especiales</h3>
+<p><strong>FIN Scan</strong>: Segmento solo con FIN activado
+<strong>XMAS Scan</strong>: FIN, URG y PUSH activos
+<strong>NULL Scan</strong>: Todos bits de control a cero</p>
+<p><strong>Comportamiento por SO:</strong>
+- <strong>Linux</strong>: Respuestas predecibles
+- <strong>Windows/Cisco</strong>: Comportamiento variable</p>
+<p><strong>Respuestas:</strong>
+- <strong>RST → Cerrado</strong> (host activo)
+- <strong>ICMP Unreachable → Filtrado</strong>
+- <strong>Sin respuesta → Abierto/Filtrado</strong></p>
+<h2 id="5-fase-3-identificacion-de-servicios-y-versiones">5. Fase 3: Identificación de Servicios y Versiones</h2>
+<h3 id="51-enfoque-general">5.1 Enfoque General</h3>
+<ul>
+<li>Verificación de servicios en puertos identificados</li>
+<li>Confirmación manual frecuentemente necesaria</li>
+<li>Uso combinado de herramientas</li>
+</ul>
+<h3 id="52-nmap-para-identificacion">5.2 Nmap para Identificación</h3>
+<p><strong>Comando</strong>: <code>nmap -sV [objetivo]</code>
+<strong>Precisión</strong>: Variable según servicio y configuración</p>
+<h3 id="53-captura-de-banner">5.3 Captura de Banner</h3>
+<p><strong>Definición</strong>: Mensaje de bienvenida/información de servicio</p>
+<p><strong>Herramientas:</strong>
+- <strong>Protocolo específico</strong>: Conexiones directas
+- <strong>Netcat</strong>: <code>nc [objetivo] [puerto]</code>
+- <strong>Scripts Nmap</strong>: Ej. <code>banner</code>, servicio-específicos</p>
+<h3 id="54-ejemplo-practico-ftp">5.4 Ejemplo Práctico: FTP</h3>
+<p><strong>Protocolo</strong>: Puertos 20/21 por defecto</p>
+<p><strong>Métodos:</strong>
+1. <strong>Nmap -sV</strong>: Identificación básica
+2. <strong>Scripts Nmap</strong>: <code>ftp-anon</code>, <code>ftp-bounce</code>, <code>ftp-syst</code>
+3. <strong>Conexión directa</strong>: <code>ftp [objetivo]</code> o <code>nc [objetivo] 21</code></p>
+<p><strong>Comandos FTP útiles:</strong>
+- <code>SYST</code>: Información del sistema
+- <code>STAT</code>: Estado del servidor</p>
+<h3 id="55-ejemplo-practico-ssh">5.5 Ejemplo Práctico: SSH</h3>
+<p><strong>Protocolo</strong>: Puerto 22 por defecto</p>
+<p><strong>Característica</strong>: Pide contraseña antes de banner</p>
+<p><strong>Herramienta preferida</strong>: Netcat sobre cliente SSH</p>
+<h2 id="6-fase-4-enumeracion-del-sistema-operativo">6. Fase 4: Enumeración del Sistema Operativo</h2>
+<h3 id="61-metodos-de-deteccion">6.1 Métodos de Detección</h3>
+<p><strong>Basados en</strong>: Implementaciones de protocolos y comportamientos</p>
+<p><strong>Marcadores comunes</strong>: 
+- Valores en cabeceras TCP (tamaño ventana, TTL)
+- Respuestas a paquetes específicos</p>
+<h3 id="62-deteccion-pasiva">6.2 Detección Pasiva</h3>
+<p><strong>Ventaja</strong>: Sigilosa
+<strong>Desventaja</strong>: Lenta
+<strong>Herramientas</strong>:
+- <strong>Wireshark</strong>: Análisis manual de tráfico
+- <strong>p0f</strong>: Preinstalado en Kali
+- <strong>NetworkMiner</strong>: Análisis forense
+- <strong>Satori</strong>: Herramienta especializada</p>
+<h3 id="63-deteccion-activa-nmap">6.3 Detección Activa (Nmap)</h3>
+<p><strong>Comando</strong>: <code>nmap -O [objetivo]</code>
+<strong>Precisión</strong>: Alta pero no infalible
+<strong>Limitación</strong>: Menos precisa con Windows</p>
+<p><strong>Resultados</strong>: Ordenados por probabilidad</p>
+<h2 id="7-fase-5-enumeracion-de-servicios-http">7. Fase 5: Enumeración de Servicios - HTTP</h2>
+<h3 id="71-pasos-para-enumeracion-web">7.1 Pasos para Enumeración Web</h3>
+<ol>
+<li><strong>Inspección visual</strong>: Navegación manual</li>
+<li><strong>Detección de tecnologías</strong>: Servidores, frameworks, lenguajes</li>
+<li><strong>Fuzzing web</strong>: Descubrimiento de contenido oculto</li>
+<li><strong>Análisis automático</strong>: Herramientas especializadas</li>
+</ol>
+<h3 id="72-inspeccion-visual">7.2 Inspección Visual</h3>
+<p><strong>Elementos a revisar:</strong>
+- <strong>Código JavaScript</strong>: Funcionalidad y lógica
+- <strong>Comentarios HTML</strong>: Información reveladora
+- <strong>Archivos incluidos</strong>: JS/CSS personalizados
+- <strong>Cookies</strong>: Posible session hijacking
+- <strong>Páginas de login</strong>: Credenciales por defecto
+- <strong>Footers/About</strong>: Información de versión</p>
+<p><strong>Herramientas del navegador:</strong>
+- Inspector de elementos
+- Depurador JavaScript
+- Gestor de cookies</p>
+<h3 id="73-deteccion-de-tecnologias">7.3 Detección de Tecnologías</h3>
+<p><strong>Wappalyzer</strong>: Plugin de navegador
+<strong>Whatweb</strong>: Herramienta de terminal preinstalada en Kali</p>
+<p><strong>Ejemplo</strong>: <code>whatweb [URL]</code></p>
+<h3 id="74-enumeracion-de-cms-especificos">7.4 Enumeración de CMS Específicos</h3>
+<p><strong>WordPress:</strong>
+- <strong>WPScan</strong>: Herramienta principal
+- <strong>Scripts Nmap</strong>: <code>http-wordpress-users</code>, <code>http-wordpress-enum</code>, <code>http-wordpress-brute</code></p>
+<p><strong>Joomla:</strong>
+- <strong>Joomscan</strong>: Herramienta en Perl</p>
+<p><strong>Drupal:</strong>
+- <strong>Drupwn</strong>: Soporte versiones 7 y 8</p>
+<p><strong>Multi-CMS:</strong>
+- <strong>CMSeek</strong>: Soporte para 180+ CMS</p>
+<h3 id="75-fuzzing-web">7.5 Fuzzing Web</h3>
+<p><strong>Definición</strong>: Envío automático de peticiones con diccionarios</p>
+<p><strong>Códigos HTTP relevantes:</strong>
+- <strong>200 OK</strong>: Recurso encontrado
+- <strong>301/302</strong>: Redirección
+- <strong>403 Forbidden</strong>: Acceso denegado
+- <strong>404 Not Found</strong>: Recurso no existe</p>
+<p><strong>Herramientas en Kali:</strong>
+- <strong>Wfuzz</strong>: Muy configurable
+- <strong>Dirbuster</strong>: Interfaz gráfica disponible
+- <strong>Gobuster</strong>: Escrita en Go, eficiente
+- <strong>Dirb</strong>: Preinstalada
+- <strong>Dirsearch</strong>: Preinstalada
+- <strong>Ffuf</strong>: Alto rendimiento (Go)
+- <strong>Ferobuster</strong>: Potente y rápida (Rust)</p>
+<p><strong>Diccionarios comunes</strong> (<code>/usr/share/wordlists/</code>):
+- <code>/usr/share/wfuzz/wordlist/general/</code>
+- <code>/usr/share/dirb/wordlists/</code>
+- <code>/usr/share/dirbuster/wordlists/</code></p>
+<h3 id="76-fuzzing-con-nmap">7.6 Fuzzing con Nmap</h3>
+<p><strong>Script</strong>: <code>http-enum</code>
+<strong>Ejemplo</strong>: <code>nmap -p80 --script http-enum -v [objetivo]</code></p>
+<p><strong>Parámetros avanzados</strong>:
+- <code>http-enum.basepath</code>: Ruta base específica</p>
+<h3 id="77-fuzzing-con-wfuzz">7.7 Fuzzing con Wfuzz</h3>
+<p><strong>Sintaxis básica</strong>: 
+<div class="highlight"><pre><span></span><code>wfuzz<span class="w"> </span>-c<span class="w"> </span>-t<span class="w"> </span><span class="o">[</span>hilos<span class="o">]</span><span class="w"> </span>-w<span class="w"> </span><span class="o">[</span>diccionario<span class="o">]</span><span class="w"> </span>--hc<span class="o">=</span><span class="m">404</span><span class="w"> </span><span class="o">[</span>URL<span class="o">]</span>/FUZZ
+</code></pre></div></p>
+<p><strong>Características</strong>:
+- <code>-c</code>: Salida coloreada
+- <code>-t</code>: Número de hilos (ej. 400)
+- <code>-w</code>: Diccionario a usar
+- <code>--hc</code>: Ocultar códigos específicos
+- <code>FUZZ</code>: Marcador para sustitución</p>
+<p><strong>Búsqueda con extensiones</strong>:
+- Crear archivo con extensiones
+- Usar doble marcador: <code>FUZZ.FUZ2Z</code></p>
+<p><strong>Seguimiento de redirecciones</strong>: Opción <code>-L</code></p>
+<h2 id="8-fase-5-enumeracion-de-servicios-smb">8. Fase 5: Enumeración de Servicios - SMB</h2>
+<h3 id="81-configuracion-inicial">8.1 Configuración Inicial</h3>
+<p><strong>Problema</strong>: Herramientas modernas reacias a protocolos inseguros</p>
+<p><strong>Solución en Linux</strong>: Editar <code>/etc/samba/smb.conf</code>
+<div class="highlight"><pre><span></span><code>client min protocol = NT1
+</code></pre></div></p>
+<p><strong>Reinicio</strong>: <code>systemctl restart smbd</code></p>
+<h3 id="82-herramientas-de-enumeracion-smb">8.2 Herramientas de Enumeración SMB</h3>
+<ol>
+<li><strong>Nbtscan</strong>: Escaneo NetBIOS</li>
+<li><strong>Enum4linux</strong>: Combinación de múltiples herramientas</li>
+<li><strong>Nmap</strong>: Scripts especializados</li>
+<li><strong>Smbmap</strong>: Enumeración de shares y permisos</li>
+<li><strong>Smbclient</strong>: Cliente SMB interactivo</li>
+<li><strong>Rpcclient</strong>: Cliente RPC interactivo</li>
+</ol>
+<h3 id="83-nbtscan">8.3 Nbtscan</h3>
+<p><strong>Propósito</strong>: Encontrar máquinas con SMB/SAMBA</p>
+<p><strong>Uso</strong>: <code>nbtscan [IP o subred]</code></p>
+<p><strong>Información</strong>: Nombre NetBIOS, usuario logueado, servicios</p>
+<h3 id="84-nmap-para-smb">8.4 Nmap para SMB</h3>
+<p><strong>Escaneo básico</strong>: <code>nmap -sC [objetivo]</code></p>
+<p><strong>Scripts específicos</strong>:
+- <code>smb-protocols</code>: Versiones SMB soportadas
+- <code>smb-os-discovery</code>: Información del SO (mejor con SMB1)
+- <code>smb-enum-shares</code>: Enumeración de shares
+- <code>smb-enum-users</code>: Enumeración de usuarios (SAMR/LSA)
+- <code>smb-vuln-*</code>: Detección de vulnerabilidades específicas</p>
+<p><strong>Ejemplo vulnerabilidades</strong>:
+- <code>smb-vuln-ms08-067</code>: Netapi (CVE-2008-4250)
+- <code>smb-vuln-ms17-010</code>: EternalBlue</p>
+<h3 id="85-smbmap">8.5 Smbmap</h3>
+<p><strong>Funcionalidad</strong>: Enumeración de shares y permisos</p>
+<p><strong>Parámetros comunes</strong>:
+- <code>-H</code>: IP del host
+- <code>-P</code>: Puerto SMB (445 por defecto)
+- <code>-v</code>: Información de versión
+- <code>-u/-p</code>: Credenciales si necesarias
+- <code>-r</code>: Mostrar contenido de shares</p>
+<h2 id="9-descubrimiento-automatizado-de-vulnerabilidades">9. Descubrimiento Automatizado de Vulnerabilidades</h2>
+<h3 id="91-proceso-general-de-escaneres">9.1 Proceso General de Escáneres</h3>
+<ol>
+<li><strong>Descubrimiento</strong>: Enumeración de hosts y puertos (Nmap-like)</li>
+<li><strong>Identificación</strong>: Determinación de software y versiones</li>
+<li><strong>Correlación</strong>: Comparación con base de datos de vulnerabilidades</li>
+<li><strong>Reporte</strong>: Generación de informes (validación manual requerida)</li>
+</ol>
+<h3 id="92-herramientas-comunes">9.2 Herramientas Comunes</h3>
+<ul>
+<li><strong>Legion</strong>: Código abierto, extensible (Python)</li>
+<li><strong>Nessus</strong>: Reconocida, versión académica disponible</li>
+<li><strong>OpenVAS/GVM</strong>: Open source ampliamente usado</li>
+<li><strong>Nikto</strong>: Especializado en web</li>
+<li><strong>Nuclei</strong>: Basado en plantillas YAML</li>
+<li><strong>Wapiti/Uniscan/OWASP ZAP</strong>: Especializadas web</li>
+</ul>
+<h3 id="93-nikto">9.3 Nikto</h3>
+<p><strong>Características</strong>:
+- Escáner de servidores web open source
+- Más de 7000 archivos/programas peligrosos verificados
+- 1250+ versiones de servidores verificadas
+- 270+ problemas específicos por versión
+- No sigiloso - deja logs</p>
+<p><strong>Ejemplo</strong>: <code>nikto -h [URL]</code></p>
+<p><strong>Salida</strong>: Cabeceras de seguridad, métodos HTTP, directorios, vulnerabilidades</p>
+<h3 id="94-nuclei">9.4 Nuclei</h3>
+<p><strong>Concepto</strong>: Escaneo basado en plantillas YAML</p>
+<p><strong>Características</strong>:
+- Plantillas actualizables automáticamente
+- Configuración en <code>~/.config/nuclei/config.yaml</code>
+- Plantillas en <code>~/.local/nuclei-templates</code>
+- Secciones de plantilla: id, info, requests</p>
+<p><strong>Uso</strong>: <code>nuclei -u [URL]</code></p>
+<h3 id="95-openvasgvm-greenbone-vulnerability-management">9.5 OpenVAS/GVM (Greenbone Vulnerability Management)</h3>
+<p><strong>Historia</strong>: Evolución de OpenVAS a GVM</p>
+<p><strong>Características</strong>:
+- Solución completa de gestión de vulnerabilidades
+- Framework open source
+- Componentes: Escáner, gestor, consola web</p>
+<h2 id="10-laboratorios-y-actividades-practicas">10. Laboratorios y Actividades Prácticas</h2>
+<h3 id="laboratorio-3-implementacion-practica">Laboratorio 3: Implementación Práctica</h3>
+<ol>
+<li><strong>Traceroute</strong>: Análisis de rutas y nodos</li>
+<li><strong>Ping Sweep</strong>: Descubrimiento de hosts activos</li>
+<li><strong>Técnicas de evasión con Nmap</strong>: Escaneos sigilosos</li>
+<li><strong>Identificación de servicios</strong>: FTP, SSH, otros</li>
+<li><strong>Enumeración HTTP</strong>: Fuzzing, detección de tecnologías</li>
+<li><strong>Enumeración SMB</strong>: Shares, usuarios, vulnerabilidades</li>
+<li><strong>Escáneres de vulnerabilidades</strong>: Nikto, Nuclei, OpenVAS</li>
+<li><strong>Creación de plantillas Nuclei</strong>: Personalización de escaneos</li>
+</ol>
+<h3 id="actividades-especificas">Actividades Específicas</h3>
+<ul>
+<li>Análisis de máquina Five86-1: Enumeración completa</li>
+<li>Identificación de banners FTP en Metasploitable3</li>
+<li>Búsqueda de scripts Nmap específicos por servicio</li>
+<li>Comparación de resultados entre Nikto y Nuclei</li>
+<li>Configuración de herramientas SMB para protocolos antiguos</li>
+<li>Pruebas de evasión de cortafuegos con técnicas Nmap avanzadas</li>
+</ul>
+<hr />
+<p><strong>Nota Crítica</strong>: La enumeración es una fase intensiva que genera tráfico notable y puede activar sistemas de detección. Es esencial:
+1. Mantener pruebas controladas según alcance acordado
+2. Documentar exhaustivamente todos los hallazgos
+3. Validar resultados automáticos manualmente
+4. Considerar el balance entre exhaustividad y sigilo según objetivos
+5. Respetar siempre los límites contractuales y legales</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/davidalvarezp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

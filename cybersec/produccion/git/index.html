@@ -1,0 +1,5042 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación de administración de sistemas y ciberseguridad.">
+      
+      
+        <meta name="author" content="davidalvarezp">
+      
+      
+        <link rel="canonical" href="https://docs.davidalvarezp.com/cybersec/produccion/git/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Git: Control de Versiones Profesional - SysAdmin & CyberSec Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#git-control-de-versiones-profesional" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="SysAdmin &amp; CyberSec Docs" class="md-header__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SysAdmin & CyberSec Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Git: Control de Versiones Profesional
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../sysadmin/" class="md-tabs__link">
+          
+  
+  
+  SysAdmin
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  CyberSec
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SysAdmin &amp; CyberSec Docs" class="md-nav__button md-logo" aria-label="SysAdmin & CyberSec Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SysAdmin & CyberSec Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SysAdmin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SysAdmin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistemas Operativos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistemas Operativos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/sistemas-operativos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/sistemas-operativos/implantacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implantación de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/sistemas-operativos/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion de SO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/planificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planificación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administracion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/redes/servicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bases de Datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bases de Datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/bb-dd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/bb-dd/gestion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/bb-dd/administracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administración de BBDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Programación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/programacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/programacion/python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/seguridad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/seguridad/disponibilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alta Disponibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/web/lenguajes-marcas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lenguajes de Marcas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sysadmin/web/aplicaciones-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aplicaciones Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CyberSec
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CyberSec
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hacking Ético
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hacking Ético
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/recon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reconocimiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/enum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/post-exploit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-Explotación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/persist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mantener Acceso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/cover/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Borrado de Huellas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hacking-etico/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bastionado
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bastionado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bastionado/redes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Redes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bastionado/sistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bastionado de Sistemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis Forense
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Análisis Forense
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en PC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Forense en PC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_2" id="__nav_3_4_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clonado de discos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clonado de discos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/clonado-disco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/clonado-disco/adquisicion-basica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisicón básica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/clonado-disco/adquisicion-avanzada/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adquisición avanzada
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2_3" id="__nav_3_4_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado de RAM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Volcado de RAM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/volcado-ram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/volcado-ram/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volcado en Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/pc/herramientas-triaje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de Triaje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/cloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../forense/phone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forense en Móviles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incidentes de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Incidentes de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incidentes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incidentes/prevencion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prevención
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../incidentes/taxonomia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Taxonomía de Incidentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Puesta en Producción
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Puesta en Producción
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normativa de Ciberseguridad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Normativa de Ciberseguridad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../normativa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción a Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducción a Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Git?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceptos-fundamentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos Fundamentales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos Fundamentales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorio-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorio (Repo)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#areas-de-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Áreas de Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-trabajo-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Trabajo Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-esenciales-de-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos Esenciales de Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos Esenciales de Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git-commit-confirmar-cambios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. git commit - Confirmar Cambios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. git commit - Confirmar Cambios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convenciones-de-mensajes-conventional-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convenciones de Mensajes (Conventional Commits)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-git-branch-gestion-de-ramas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. git branch - Gestión de Ramas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. git branch - Gestión de Ramas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflows-avanzados-con-ramas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflows Avanzados con Ramas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-git-checkout-navegacion-entre-estados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. git checkout - Navegación entre Estados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. git checkout - Navegación entre Estados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detached-head-y-recuperacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detached HEAD y Recuperación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-git-cherry-pick-aplicar-commits-selectivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. git cherry-pick - Aplicar Commits Selectivos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. git cherry-pick - Aplicar Commits Selectivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-avanzados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Uso Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-git-reset-reiniciar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. git reset - Reiniciar el Estado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. git reset - Reiniciar el Estado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tres-modos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tres Modos Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-avanzado-con-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Avanzado con Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperacion-despues-de-reset-hard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recuperación después de Reset Hard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-git-revert-revertir-commits-de-forma-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. git revert - Revertir Commits de Forma Segura
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. git revert - Revertir Commits de Forma Segura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manejo-de-conflictos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manejo de Conflictos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-git-rebase-reorganizar-historial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. git rebase - Reorganizar Historial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. git rebase - Reorganizar Historial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-del-rebase-interactivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos del Rebase Interactivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rebase-vs-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebase vs Merge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-git-merge-combinar-ramas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. git merge - Combinar Ramas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. git merge - Combinar Ramas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepto_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concepto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-basico_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Prácticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategias-de-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estrategias de Merge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-avanzados_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros Avanzados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-avanzado-mas-alla-de-los-comandos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Avanzado: Más Allá de los Comandos Básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Git Avanzado: Más Allá de los Comandos Básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptos-avanzados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conceptos Avanzados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conceptos Avanzados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-arbol-de-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El Árbol de Git
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias-refs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias (Refs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stashing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hooks-de-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hooks de Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hooks de Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos Útiles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-worktrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Worktrees
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bisect-encontrar-bugs-binariamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bisect: Encontrar Bugs Binariamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submodules-y-subtrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Submodules y Subtrees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-profesional-de-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Profesional de Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Profesional de Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#archivo-gitconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivo .gitconfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Attributes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-ignore-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Ignore Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujos-de-trabajo-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujos de Trabajo (Workflows)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flujos de Trabajo (Workflows)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitHub Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitlab-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GitLab Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguridad-en-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguridad en Git
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seguridad en Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#commits-firmados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commits Firmados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branch-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch Protection Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret Scanning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-y-optimizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance y Optimización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance y Optimización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorios-grandes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositorios Grandes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#busqueda-eficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Búsqueda Eficiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-y-extensiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas y Extensiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Herramientas y Extensiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gui-clients" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GUI Clients
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Enhancements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integraciones-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integraciones IDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucion-de-problemas-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución de Problemas Comunes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolución de Problemas Comunes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perdi-mis-cambios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Perdí mis cambios!"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-conflict-complejo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Merge Conflict Complejo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commit-en-rama-equivocada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commit en Rama Equivocada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-de-buenas-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de Buenas Prácticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist de Buenas Prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-cada-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de Cada Commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de Push
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mantenimiento-regular" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenimiento Regular
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conclusión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recursos-para-aprender-mas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recursos para Aprender Más
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/davidalvarezp/docs/edit/main/docs/cybersec/produccion/git/index.md" title="Editar esta página" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="git-control-de-versiones-profesional">Git: Control de Versiones Profesional</h1>
+<h2 id="introduccion-a-git">Introducción a Git</h2>
+<h3 id="que-es-git"><strong>¿Qué es Git?</strong></h3>
+<p>Git es un <strong>sistema de control de versiones distribuido</strong> creado por Linus Torvalds en 2005. Es la herramienta estándar para el control de versiones en el desarrollo de software moderno, permitiendo a equipos colaborar de manera eficiente y mantener un historial completo de cambios.</p>
+<h3 id="conceptos-fundamentales"><strong>Conceptos Fundamentales</strong></h3>
+<h4 id="repositorio-repo"><strong>Repositorio (Repo)</strong></h4>
+<p>Un repositorio es una colección de archivos y el historial completo de sus cambios. Existen dos tipos:
+- <strong>Repositorio local:</strong> En tu máquina
+- <strong>Repositorio remoto:</strong> En un servidor (GitHub, GitLab, Bitbucket)</p>
+<h4 id="commit"><strong>Commit</strong></h4>
+<p>Un commit es una <strong>instantánea</strong> de tu proyecto en un momento específico. Cada commit tiene:
+- <strong>Hash único:</strong> Identificador de 40 caracteres (ej: <code>a1b2c3d4...</code>)
+- <strong>Mensaje:</strong> Descripción de los cambios
+- <strong>Autor:</strong> Quien hizo el cambio
+- <strong>Fecha:</strong> Cuándo se hizo
+- <strong>Referencia al commit anterior</strong></p>
+<h4 id="areas-de-git"><strong>Áreas de Git</strong></h4>
+<p>Git tiene tres áreas principales:
+1. <strong>Working Directory:</strong> Archivos en tu sistema de archivos
+2. <strong>Staging Area (Index):</strong> Archivos preparados para commit
+3. <strong>Repository:</strong> Base de datos con todos los commits</p>
+<div class="highlight"><pre><span></span><code>┌─────────────────┐    add    ┌─────────────┐    commit    ┌─────────────┐
+│ Working         │ ─────────&gt; │ Staging     │ ───────────&gt; │ Repository  │
+│ Directory       │            │ Area        │              │             │
+└─────────────────┘            └─────────────┘              └─────────────┘
+</code></pre></div>
+<h3 id="flujo-de-trabajo-basico"><strong>Flujo de Trabajo Básico</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Clonar repositorio existente</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/usuario/proyecto.git
+
+<span class="c1"># 2. Crear nueva rama para feature</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/nueva-funcionalidad
+
+<span class="c1"># 3. Hacer cambios y añadirlos al staging</span>
+git<span class="w"> </span>add<span class="w"> </span>archivo1.js<span class="w"> </span>archivo2.py
+
+<span class="c1"># 4. Confirmar cambios con mensaje descriptivo</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Agrega nueva funcionalidad X&quot;</span>
+
+<span class="c1"># 5. Subir cambios al repositorio remoto</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/nueva-funcionalidad
+</code></pre></div>
+<h2 id="comandos-esenciales-de-git">Comandos Esenciales de Git</h2>
+<h3 id="1-git-commit-confirmar-cambios"><strong>1. <code>git commit</code> - Confirmar Cambios</strong></h3>
+<h4 id="concepto"><strong>Concepto</strong></h4>
+<p>Un commit es la unidad fundamental en Git. Representa un conjunto de cambios lógicamente relacionados que se guardan permanentemente en el historial.</p>
+<h4 id="uso-basico"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Commit con mensaje simple</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Mensaje descriptivo del cambio&quot;</span>
+
+<span class="c1"># Commit abriendo editor para mensaje largo</span>
+git<span class="w"> </span>commit
+
+<span class="c1"># Añadir todos los cambios y commit en un paso</span>
+git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">&quot;Mensaje descriptivo&quot;</span>
+
+<span class="c1"># Modificar el commit más reciente</span>
+git<span class="w"> </span>commit<span class="w"> </span>--amend
+</code></pre></div>
+<h4 id="ejemplos-practicos"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Commit básico con buenas prácticas</span>
+git<span class="w"> </span>add<span class="w"> </span>archivos-modificados.txt
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;fix: corrige error de validación en formulario</span>
+
+<span class="s2">- Valida correo electrónico correctamente</span>
+<span class="s2">- Agrega mensajes de error más claros</span>
+<span class="s2">- Actualiza tests relacionados</span>
+
+<span class="s2">Closes #123&quot;</span>
+
+<span class="c1"># Ejemplo 2: Commit amend para corrección</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Agrega función de login&quot;</span>
+<span class="c1"># Oops, olvidé un archivo</span>
+git<span class="w"> </span>add<span class="w"> </span>archivo-olvidado.js
+git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>--no-edit
+
+<span class="c1"># Ejemplo 3: Commit con firma GPG</span>
+git<span class="w"> </span>commit<span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Feature: añade autenticación OAuth&quot;</span>
+</code></pre></div>
+<h4 id="convenciones-de-mensajes-conventional-commits"><strong>Convenciones de Mensajes (Conventional Commits)</strong></h4>
+<div class="highlight"><pre><span></span><code>&lt;type&gt;[optional scope]: &lt;description&gt;
+
+[optional body]
+
+[optional footer(s)]
+</code></pre></div>
+<p><strong>Tipos comunes:</strong>
+- <code>feat:</code> Nueva funcionalidad
+- <code>fix:</code> Corrección de bug
+- <code>docs:</code> Cambios en documentación
+- <code>style:</code> Cambios de formato (sin afectar código)
+- <code>refactor:</code> Reestructuración de código
+- <code>test:</code> Añade o modifica tests
+- <code>chore:</code> Tareas de mantenimiento</p>
+<p><strong>Ejemplo completo:</strong>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat(auth): implementa autenticación con Google</span>
+
+<span class="s2">- Añade botón de login con Google</span>
+<span class="s2">- Implementa callback handling</span>
+<span class="s2">- Guarda tokens de forma segura</span>
+
+<span class="s2">BREAKING CHANGE: Se requiere nueva variable de entorno GOOGLE_CLIENT_ID&quot;</span>
+</code></pre></div></p>
+<h4 id="parametros-avanzados"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Commit vacío (útil para triggers CI/CD)</span>
+git<span class="w"> </span>commit<span class="w"> </span>--allow-empty<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;trigger: inicia pipeline de despliegue&quot;</span>
+
+<span class="c1"># Commit saltando hooks</span>
+git<span class="w"> </span>commit<span class="w"> </span>--no-verify<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Commit rápido sin validaciones&quot;</span>
+
+<span class="c1"># Commit con fecha específica</span>
+git<span class="w"> </span>commit<span class="w"> </span>--date<span class="o">=</span><span class="s2">&quot;2024-01-15T10:30:00&quot;</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Backdate commit&quot;</span>
+
+<span class="c1"># Commit firmando con clave específica</span>
+git<span class="w"> </span>commit<span class="w"> </span>-S<span class="w"> </span>--gpg-sign<span class="o">=</span>key-id<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Commit firmado&quot;</span>
+</code></pre></div>
+<h3 id="2-git-branch-gestion-de-ramas"><strong>2. <code>git branch</code> - Gestión de Ramas</strong></h3>
+<h4 id="concepto_1"><strong>Concepto</strong></h4>
+<p>Una rama es un <strong>puntero móvil</strong> a un commit específico. Permite desarrollar funcionalidades de forma aislada sin afectar la rama principal.</p>
+<h4 id="uso-basico_1"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Listar ramas locales</span>
+git<span class="w"> </span>branch
+
+<span class="c1"># Listar ramas locales y remotas</span>
+git<span class="w"> </span>branch<span class="w"> </span>-a
+
+<span class="c1"># Crear nueva rama</span>
+git<span class="w"> </span>branch<span class="w"> </span>nombre-rama
+
+<span class="c1"># Eliminar rama (solo si está mergeada)</span>
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>nombre-rama
+
+<span class="c1"># Eliminar rama forzadamente</span>
+git<span class="w"> </span>branch<span class="w"> </span>-D<span class="w"> </span>nombre-rama
+</code></pre></div>
+<h4 id="ejemplos-practicos_1"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Flujo de trabajo con ramas</span>
+<span class="c1"># Crear rama para nueva feature</span>
+git<span class="w"> </span>branch<span class="w"> </span>feature/nueva-api
+git<span class="w"> </span>checkout<span class="w"> </span>feature/nueva-api
+
+<span class="c1"># Equivalente en un paso</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/nueva-api
+
+<span class="c1"># Trabajar en la feature...</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Implementa endpoint /api/v1/users&quot;</span>
+
+<span class="c1"># Listar ramas con información adicional</span>
+git<span class="w"> </span>branch<span class="w"> </span>-vv
+<span class="c1"># Muestra:</span>
+<span class="c1"># * feature/nueva-api a1b2c3d [origin/main] Implementa endpoint</span>
+
+<span class="c1"># Ejemplo 2: Ramas remotas</span>
+<span class="c1"># Traer todas las ramas remotas</span>
+git<span class="w"> </span>fetch<span class="w"> </span>--all
+
+<span class="c1"># Crear rama local desde rama remota</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>hotfix<span class="w"> </span>origin/hotfix
+
+<span class="c1"># Configurar rama upstream</span>
+git<span class="w"> </span>branch<span class="w"> </span>-u<span class="w"> </span>origin/feature/nueva-api
+</code></pre></div>
+<h4 id="workflows-avanzados-con-ramas"><strong>Workflows Avanzados con Ramas</strong></h4>
+<p><strong>Git Flow:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Rama principal de desarrollo</span>
+git<span class="w"> </span>branch<span class="w"> </span>develop
+git<span class="w"> </span>checkout<span class="w"> </span>develop
+
+<span class="c1"># Rama para release</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>release/1.2.0
+
+<span class="c1"># Rama para hotfix desde main</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>hotfix/critical-bug<span class="w"> </span>main
+</code></pre></div></p>
+<p><strong>GitHub Flow (más simple):</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Todo desde main</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature-branch
+
+<span class="c1"># Desarrollo...</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Agrega feature&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature-branch
+<span class="c1"># Crear Pull Request en GitHub</span>
+</code></pre></div></p>
+<h4 id="parametros-avanzados_1"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear rama desde commit específico</span>
+git<span class="w"> </span>branch<span class="w"> </span>nueva-rama<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Renombrar rama actual</span>
+git<span class="w"> </span>branch<span class="w"> </span>-m<span class="w"> </span>nuevo-nombre
+
+<span class="c1"># Mover rama a commit diferente</span>
+git<span class="w"> </span>branch<span class="w"> </span>-f<span class="w"> </span>nombre-rama<span class="w"> </span>nuevo-commit
+
+<span class="c1"># Listar ramas mergeadas/no mergeadas</span>
+git<span class="w"> </span>branch<span class="w"> </span>--merged<span class="w">    </span><span class="c1"># Ramas mergeadas con la actual</span>
+git<span class="w"> </span>branch<span class="w"> </span>--no-merged<span class="w"> </span><span class="c1"># Ramas no mergeadas</span>
+
+<span class="c1"># Crear rama con tracking automático</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/x<span class="w"> </span>--track<span class="w"> </span>origin/develop
+
+<span class="c1"># Ver última modificación por rama</span>
+git<span class="w"> </span><span class="k">for</span>-each-ref<span class="w"> </span>--sort<span class="o">=</span>-committerdate<span class="w"> </span>refs/heads/<span class="w"> </span>--format<span class="o">=</span><span class="s1">&#39;%(refname:short) %(committerdate:relative)&#39;</span>
+</code></pre></div>
+<h3 id="3-git-checkout-navegacion-entre-estados"><strong>3. <code>git checkout</code> - Navegación entre Estados</strong></h3>
+<h4 id="concepto_2"><strong>Concepto</strong></h4>
+<p><code>git checkout</code> permite <strong>moverse entre ramas, commits y archivos</strong>, restaurando el estado del working directory.</p>
+<h4 id="uso-basico_2"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cambiar a rama existente</span>
+git<span class="w"> </span>checkout<span class="w"> </span>nombre-rama
+
+<span class="c1"># Crear y cambiar a nueva rama</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>nueva-rama
+
+<span class="c1"># Restaurar archivo del último commit</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>archivo.txt
+
+<span class="c1"># Ver estado en commit específico (detached HEAD)</span>
+git<span class="w"> </span>checkout<span class="w"> </span>a1b2c3d4
+</code></pre></div>
+<h4 id="ejemplos-practicos_2"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Trabajo con archivos</span>
+<span class="c1"># Descartar cambios no staged</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>archivo-daniado.js
+
+<span class="c1"># Descartar cambios staged (dos pasos)</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD<span class="w"> </span>archivo-modificado.py
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>archivo-modificado.py
+
+<span class="c1"># Restaurar archivo desde rama específica</span>
+git<span class="w"> </span>checkout<span class="w"> </span>otra-rama<span class="w"> </span>--<span class="w"> </span>config/database.yml
+
+<span class="c1"># Ejemplo 2: Trabajo con commits</span>
+<span class="c1"># Ver proyecto en estado pasado</span>
+git<span class="w"> </span>checkout<span class="w"> </span>HEAD~3<span class="w">  </span><span class="c1"># 3 commits atrás</span>
+
+<span class="c1"># Volver a rama después de detached HEAD</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+
+<span class="c1"># Crear rama desde detached HEAD</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>nueva-rama-desde-commit
+
+<span class="c1"># Ejemplo 3: Trabajo con paths</span>
+<span class="c1"># Cambiar múltiples archivos</span>
+git<span class="w"> </span>checkout<span class="w"> </span>develop<span class="w"> </span>--<span class="w"> </span>src/**/*.js<span class="w"> </span>tests/**/*.js
+</code></pre></div>
+<h4 id="detached-head-y-recuperacion"><strong>Detached HEAD y Recuperación</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Situación: Trabajando en detached HEAD</span>
+git<span class="w"> </span>checkout<span class="w"> </span>a1b2c3d4
+<span class="c1"># Hacer algunos cambios...</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Cambios en estado antiguo&quot;</span>
+
+<span class="c1"># Recuperación opción 1: Crear rama</span>
+git<span class="w"> </span>branch<span class="w"> </span>salvacion-commits
+git<span class="w"> </span>checkout<span class="w"> </span>main
+
+<span class="c1"># Recuperación opción 2: Reflog</span>
+git<span class="w"> </span>reflog
+<span class="c1"># Encontrar commit: a1b2c3d4 HEAD@{2}: commit: Cambios en estado antiguo</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>rescate<span class="w"> </span>a1b2c3d4
+</code></pre></div>
+<h4 id="parametros-avanzados_2"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Checkout forzado (descarta cambios locales)</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-f<span class="w"> </span>nombre-rama
+
+<span class="c1"># Checkout con merge (preserva cambios locales)</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-m<span class="w"> </span>otra-rama
+
+<span class="c1"># Checkout de archivo ignorando index</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--ours<span class="w"> </span>archivo-conflicto.js
+git<span class="w"> </span>checkout<span class="w"> </span>--theirs<span class="w"> </span>archivo-conflicto.js
+
+<span class="c1"># Checkout de todo el árbol desde commit</span>
+git<span class="w"> </span>checkout<span class="w"> </span>a1b2c3d4<span class="w"> </span>--<span class="w"> </span>.
+
+<span class="c1"># Checkout interactivo por hunk</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-p<span class="w"> </span>archivo-modificado
+<span class="c1"># Para cada hunk: y/n/q etc.</span>
+</code></pre></div>
+<h3 id="4-git-cherry-pick-aplicar-commits-selectivos"><strong>4. <code>git cherry-pick</code> - Aplicar Commits Selectivos</strong></h3>
+<h4 id="concepto_3"><strong>Concepto</strong></h4>
+<p><code>git cherry-pick</code> <strong>aplica un commit específico de otra rama</strong> a tu rama actual, creando un nuevo commit con los mismos cambios.</p>
+<h4 id="uso-basico_3"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Aplicar un commit específico</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Aplicar rango de commits</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>inicio..fin
+
+<span class="c1"># Aplicar sin hacer commit automático</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-n<span class="w"> </span>a1b2c3d4
+</code></pre></div>
+<h4 id="ejemplos-practicos_3"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Portar fix a múltiples ramas</span>
+<span class="c1"># En main: se hizo fix crítico</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+<span class="c1"># a1b2c3d4 fix: corrige vulnerabilidad XSS</span>
+
+<span class="c1"># Portar a rama de release</span>
+git<span class="w"> </span>checkout<span class="w"> </span>release/1.0
+git<span class="w"> </span>cherry-pick<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Ejemplo 2: Múltiples commits</span>
+<span class="c1"># Seleccionar commits específicos</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>a1b2c3d4<span class="w"> </span>b2c3d4e5<span class="w"> </span>c3d4e5f6
+
+<span class="c1"># Ejemplo 3: Con conflictos</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>conflictico-commit
+<span class="c1"># Si hay conflictos, resolver y:</span>
+git<span class="w"> </span>add<span class="w"> </span>archivos-resueltos
+git<span class="w"> </span>cherry-pick<span class="w"> </span>--continue
+
+<span class="c1"># O abortar si es necesario</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>--abort
+</code></pre></div>
+<h4 id="casos-de-uso-avanzados"><strong>Casos de Uso Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Portar feature sin todo el historial</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-x<span class="w"> </span>feature-start..feature-end
+
+<span class="c1"># Editando mensaje del commit</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-e<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Sin commit automático (útil para múltiples picks)</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-n<span class="w"> </span>a1b2c3d4<span class="w"> </span>b2c3d4e5
+<span class="c1"># Revisar cambios...</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Port fixes de seguridad&quot;</span>
+
+<span class="c1"># Con firma</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-S<span class="w"> </span>a1b2c3d4
+</code></pre></div>
+<h4 id="parametros-avanzados_3"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cherry-pick manteniendo autor original</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-x<span class="w"> </span>a1b2c3d4
+<span class="c1"># Añade: (cherry picked from commit a1b2c3d4)</span>
+
+<span class="c1"># Con estrategia de merge específica</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>-X<span class="w"> </span>theirs<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Saltando commits que ya están aplicados</span>
+git<span class="w"> </span>cherry-pick<span class="w"> </span>--ff<span class="w"> </span>a1b2c3d4..b2c3d4e5
+
+<span class="c1"># Cherry-pick desde PR (GitHub)</span>
+<span class="c1"># Obtener commits de PR</span>
+git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w"> </span>pull/123/head:pr-123
+git<span class="w"> </span>cherry-pick<span class="w"> </span>pr-123~2..pr-123
+</code></pre></div>
+<h3 id="5-git-reset-reiniciar-el-estado"><strong>5. <code>git reset</code> - Reiniciar el Estado</strong></h3>
+<h4 id="concepto_4"><strong>Concepto</strong></h4>
+<p><code>git reset</code> <strong>mueve la rama actual a un commit diferente</strong>, con diferentes niveles de afectación al working directory.</p>
+<h4 id="tres-modos-principales"><strong>Tres Modos Principales</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Soft: solo mueve HEAD, deja staging y working intactos</span>
+git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>HEAD~1
+
+<span class="c1"># Mixed (default): mueve HEAD y staging, deja working intacto</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD~1
+git<span class="w"> </span>reset<span class="w"> </span>--mixed<span class="w"> </span>HEAD~1
+
+<span class="c1"># Hard: mueve HEAD, staging y working (¡PELIGROSO!)</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1
+</code></pre></div>
+<h4 id="ejemplos-practicos_4"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Deshacer commit sin perder cambios</span>
+git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>HEAD~1
+<span class="c1"># Los cambios quedan en staging</span>
+
+git<span class="w"> </span>reset<span class="w"> </span>HEAD~1
+<span class="c1"># Los cambios quedan en working directory</span>
+
+<span class="c1"># Ejemplo 2: Deshacer múltiples commits</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~3
+<span class="c1"># ¡Cuidado! Pierdes 3 commits completamente</span>
+
+<span class="c1"># Ejemplo 3: Limpiar staging area</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD<span class="w"> </span>archivo.txt<span class="w">  </span><span class="c1"># Quita del staging</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD<span class="w"> </span>.<span class="w">            </span><span class="c1"># Quita todos</span>
+
+<span class="c1"># Ejemplo 4: Reset a commit específico</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>a1b2c3d4
+git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>origin/main
+</code></pre></div>
+<h4 id="uso-avanzado-con-paths"><strong>Uso Avanzado con Paths</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reset parcial de archivos</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD~1<span class="w"> </span>--<span class="w"> </span>archivo1.js<span class="w"> </span>archivo2.py
+
+<span class="c1"># Reset manteniendo cambios en working</span>
+git<span class="w"> </span>reset<span class="w"> </span>--keep<span class="w"> </span>HEAD~1
+
+<span class="c1"># Reset interactivo</span>
+git<span class="w"> </span>reset<span class="w"> </span>-p<span class="w"> </span>HEAD~1
+<span class="c1"># Seleccionar hunks para reset</span>
+</code></pre></div>
+<h4 id="recuperacion-despues-de-reset-hard"><strong>Recuperación después de Reset Hard</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># ¡Acabas de hacer reset --hard y perdiste commits!</span>
+git<span class="w"> </span>reflog
+<span class="c1"># Buscar el commit perdido</span>
+<span class="c1"># Ejemplo: a1b2c3d4 HEAD@{1}: commit: Feature importante</span>
+
+<span class="c1"># Recuperar</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>recuperacion<span class="w"> </span>a1b2c3d4
+<span class="c1"># O</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>a1b2c3d4
+</code></pre></div>
+<h4 id="parametros-avanzados_4"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reset con merge (para unmerged paths)</span>
+git<span class="w"> </span>reset<span class="w"> </span>--merge<span class="w"> </span>HEAD~1
+
+<span class="c1"># Reset manteniendo cambios no commitados</span>
+git<span class="w"> </span>reset<span class="w"> </span>--keep<span class="w"> </span>HEAD~1
+
+<span class="c1"># Reset específico de archivo desde commit</span>
+git<span class="w"> </span>reset<span class="w"> </span>HEAD~2<span class="w"> </span>--<span class="w"> </span>config/database.yml
+
+<span class="c1"># Ver qué haría reset sin hacerlo</span>
+git<span class="w"> </span>reset<span class="w"> </span>--dry-run<span class="w"> </span>HEAD~1
+</code></pre></div>
+<h3 id="6-git-revert-revertir-commits-de-forma-segura"><strong>6. <code>git revert</code> - Revertir Commits de Forma Segura</strong></h3>
+<h4 id="concepto_5"><strong>Concepto</strong></h4>
+<p><code>git revert</code> <strong>crea un nuevo commit</strong> que deshace los cambios de un commit anterior. Es la forma <strong>segura</strong> de deshacer cambios en historial compartido.</p>
+<h4 id="uso-basico_4"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Revertir un commit específico</span>
+git<span class="w"> </span>revert<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Revertir el último commit</span>
+git<span class="w"> </span>revert<span class="w"> </span>HEAD
+
+<span class="c1"># Revertir múltiples commits</span>
+git<span class="w"> </span>revert<span class="w"> </span>inicio..fin
+</code></pre></div>
+<h4 id="ejemplos-practicos_5"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Revertir commit problemático</span>
+<span class="c1"># Commit que introdujo bug</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+<span class="c1"># a1b2c3d4 feat: añade función experimental</span>
+
+git<span class="w"> </span>revert<span class="w"> </span>a1b2c3d4
+<span class="c1"># Abre editor para mensaje (por defecto: &quot;Revert &#39;feat: añade...&#39;&quot;)</span>
+
+<span class="c1"># Ejemplo 2: Revertir sin abrir editor</span>
+git<span class="w"> </span>revert<span class="w"> </span>--no-edit<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Ejemplo 3: Revertir merge commit</span>
+git<span class="w"> </span>revert<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span>merge-commit-hash
+<span class="c1"># -m 1: mantiene rama principal</span>
+<span class="c1"># -m 2: mantiene rama mergeada</span>
+
+<span class="c1"># Ejemplo 4: Revertir rango</span>
+git<span class="w"> </span>revert<span class="w"> </span>HEAD~3..HEAD
+<span class="c1"># Revierte últimos 3 commits</span>
+</code></pre></div>
+<h4 id="manejo-de-conflictos"><strong>Manejo de Conflictos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Si hay conflictos al revertir</span>
+git<span class="w"> </span>revert<span class="w"> </span>conflictico-commit
+<span class="c1"># Resolver conflictos manualmente</span>
+git<span class="w"> </span>add<span class="w"> </span>archivos-resueltos
+git<span class="w"> </span>revert<span class="w"> </span>--continue
+
+<span class="c1"># O abortar</span>
+git<span class="w"> </span>revert<span class="w"> </span>--abort
+
+<span class="c1"># Omitir commit si ya fue revertido</span>
+git<span class="w"> </span>revert<span class="w"> </span>--skip
+</code></pre></div>
+<h4 id="parametros-avanzados_5"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Revertir con estrategia específica</span>
+git<span class="w"> </span>revert<span class="w"> </span>-X<span class="w"> </span>theirs<span class="w"> </span>a1b2c3d4
+git<span class="w"> </span>revert<span class="w"> </span>-X<span class="w"> </span>ours<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Revertir sin commit automático</span>
+git<span class="w"> </span>revert<span class="w"> </span>-n<span class="w"> </span>a1b2c3d4
+<span class="c1"># Revisar cambios...</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Revert: razón específica&quot;</span>
+
+<span class="c1"># Revertir y firmar commit</span>
+git<span class="w"> </span>revert<span class="w"> </span>-S<span class="w"> </span>a1b2c3d4
+
+<span class="c1"># Revertir con GPG signing</span>
+git<span class="w"> </span>revert<span class="w"> </span>--gpg-sign<span class="w"> </span>a1b2c3d4
+</code></pre></div>
+<h3 id="7-git-rebase-reorganizar-historial"><strong>7. <code>git rebase</code> - Reorganizar Historial</strong></h3>
+<h4 id="concepto_6"><strong>Concepto</strong></h4>
+<p><code>git rebase</code> <strong>re-aplica commits</strong> sobre una base diferente, permitiendo reescribir historial de forma limpia.</p>
+<h4 id="uso-basico_5"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Rebase interactivo (últimos 3 commits)</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~3
+
+<span class="c1"># Rebase sobre rama actualizada</span>
+git<span class="w"> </span>rebase<span class="w"> </span>main
+
+<span class="c1"># Continuar rebase después de conflicto</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--continue
+</code></pre></div>
+<h4 id="ejemplos-practicos_6"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Actualizar feature branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>feature/nueva-api
+git<span class="w"> </span>rebase<span class="w"> </span>main
+<span class="c1"># Resolver conflictos si los hay</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>rebase<span class="w"> </span>--continue
+
+<span class="c1"># Ejemplo 2: Rebase interactivo</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~5
+<span class="c1"># Editor se abre con:</span>
+<span class="c1"># pick a1b2c3d4 feat: añade endpoint</span>
+<span class="c1"># pick b2c3d4e5 fix: corrige bug</span>
+<span class="c1"># pick c3d4e5f6 docs: actualiza README</span>
+
+<span class="c1"># Cambiar a:</span>
+<span class="c1"># pick a1b2c3d4 feat: añade endpoint</span>
+<span class="c1"># fixup b2c3d4e5 fix: corrige bug  # Combina con anterior</span>
+<span class="c1"># reword c3d4e5f6 docs: actualiza README  # Edita mensaje</span>
+
+<span class="c1"># Ejemplo 3: Squash commits</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~3
+<span class="c1"># Cambiar todos menos el primero a &quot;squash&quot;</span>
+</code></pre></div>
+<h4 id="comandos-del-rebase-interactivo"><strong>Comandos del Rebase Interactivo</strong></h4>
+<div class="highlight"><pre><span></span><code>pick    = Usar commit
+reword  = Usar commit, pero editar mensaje
+edit    = Usar commit, pero parar para amend
+squash  = Usar commit, pero combinar con anterior
+fixup   = Como squash, pero descartar mensaje
+drop    = Eliminar commit
+exec    = Ejecutar comando shell
+break   = Parar aquí (continuar con git rebase --continue)
+</code></pre></div>
+<h4 id="parametros-avanzados_6"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Rebase preservando merges</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-p<span class="w"> </span>main
+
+<span class="c1"># Rebase con estrategia de merge</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-X<span class="w"> </span>theirs<span class="w"> </span>main
+
+<span class="c1"># Rebase sin auto-stash</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--no-autostash<span class="w"> </span>main
+
+<span class="c1"># Rebase solo sobre commits específicos</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--onto<span class="w"> </span>nueva-base<span class="w"> </span>vieja-base<span class="w"> </span>feature-branch
+
+<span class="c1"># Rebase manteniendo fechas originales</span>
+git<span class="w"> </span>rebase<span class="w"> </span>--committer-date-is-author-date<span class="w"> </span>main
+</code></pre></div>
+<h4 id="rebase-vs-merge"><strong>Rebase vs Merge</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Merge: mantiene historial completo</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>feature-branch
+<span class="c1"># Crea merge commit</span>
+
+<span class="c1"># Rebase: historial lineal</span>
+git<span class="w"> </span>checkout<span class="w"> </span>feature-branch
+git<span class="w"> </span>rebase<span class="w"> </span>main
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>feature-branch
+<span class="c1"># Fast-forward (sin merge commit)</span>
+</code></pre></div>
+<h3 id="8-git-merge-combinar-ramas"><strong>8. <code>git merge</code> - Combinar Ramas</strong></h3>
+<h4 id="concepto_7"><strong>Concepto</strong></h4>
+<p><code>git merge</code> <strong>integra cambios de una rama</strong> en la rama actual, combinando historiales.</p>
+<h4 id="uso-basico_6"><strong>Uso Básico</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Merge desde rama actual</span>
+git<span class="w"> </span>merge<span class="w"> </span>otra-rama
+
+<span class="c1"># Merge con mensaje específico</span>
+git<span class="w"> </span>merge<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Merge feature X&quot;</span><span class="w"> </span>feature/x
+
+<span class="c1"># Abortar merge con conflictos</span>
+git<span class="w"> </span>merge<span class="w"> </span>--abort
+</code></pre></div>
+<h4 id="ejemplos-practicos_7"><strong>Ejemplos Prácticos</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejemplo 1: Merge simple</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>feature/nueva-api
+
+<span class="c1"># Ejemplo 2: Merge con squash</span>
+git<span class="w"> </span>merge<span class="w"> </span>--squash<span class="w"> </span>feature/muchos-commits
+<span class="c1"># Combina todos los commits en uno</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Feature completa: nueva API&quot;</span>
+
+<span class="c1"># Ejemplo 3: Merge commit explícito (no fast-forward)</span>
+git<span class="w"> </span>merge<span class="w"> </span>--no-ff<span class="w"> </span>feature/x
+<span class="c1"># Siempre crea merge commit</span>
+
+<span class="c1"># Ejemplo 4: Resolver conflictos</span>
+git<span class="w"> </span>merge<span class="w"> </span>conflictica-rama
+<span class="c1"># Si hay conflictos, editar archivos</span>
+git<span class="w"> </span>add<span class="w"> </span>archivos-resueltos
+git<span class="w"> </span>commit<span class="w">  </span><span class="c1"># Completa el merge</span>
+</code></pre></div>
+<h4 id="estrategias-de-merge"><strong>Estrategias de Merge</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Recursiva (default)</span>
+git<span class="w"> </span>merge<span class="w"> </span>-s<span class="w"> </span>recursive<span class="w"> </span>feature
+
+<span class="c1"># Ours (toma nuestra versión en conflictos)</span>
+git<span class="w"> </span>merge<span class="w"> </span>-s<span class="w"> </span>ours<span class="w"> </span>otra-rama
+
+<span class="c1"># Octopus (múltiples ramas)</span>
+git<span class="w"> </span>merge<span class="w"> </span>-s<span class="w"> </span>octopus<span class="w"> </span>rama1<span class="w"> </span>rama2<span class="w"> </span>rama3
+
+<span class="c1"># Resolve (más simple, para una rama)</span>
+git<span class="w"> </span>merge<span class="w"> </span>-s<span class="w"> </span>resolve<span class="w"> </span>feature
+</code></pre></div>
+<h4 id="parametros-avanzados_7"><strong>Parámetros Avanzados</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verificar que se puede hacer merge</span>
+git<span class="w"> </span>merge<span class="w"> </span>--no-commit<span class="w"> </span>--no-ff<span class="w"> </span>otra-rama
+<span class="c1"># Si todo bien:</span>
+git<span class="w"> </span>merge<span class="w"> </span>--continue
+<span class="c1"># Si no:</span>
+git<span class="w"> </span>merge<span class="w"> </span>--abort
+
+<span class="c1"># Merge con verificación de GPG</span>
+git<span class="w"> </span>merge<span class="w"> </span>--verify-signatures<span class="w"> </span>otra-rama
+
+<span class="c1"># Merge editando mensaje</span>
+git<span class="w"> </span>merge<span class="w"> </span>-e<span class="w"> </span>otra-rama
+
+<span class="c1"># Merge con estrategia específica para archivos</span>
+git<span class="w"> </span>merge<span class="w"> </span>-X<span class="w"> </span>patience<span class="w"> </span>otra-rama
+git<span class="w"> </span>merge<span class="w"> </span>-X<span class="w"> </span>diff-algorithm<span class="o">=</span>histogram<span class="w"> </span>otra-rama
+
+<span class="c1"># Log después del merge</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--all
+</code></pre></div>
+<h2 id="git-avanzado-mas-alla-de-los-comandos-basicos">Git Avanzado: Más Allá de los Comandos Básicos</h2>
+<h3 id="conceptos-avanzados"><strong>Conceptos Avanzados</strong></h3>
+<h4 id="el-arbol-de-git"><strong>El Árbol de Git</strong></h4>
+<p>Git almacena todo como objetos en un grafo dirigido acíclico (DAG):
+- <strong>Blobs:</strong> Contenido de archivos
+- <strong>Trees:</strong> Directorios (referencias a blobs y otros trees)
+- <strong>Commits:</strong> Instantáneas con autor, mensaje, y referencia a tree padre
+- <strong>Tags:</strong> Referencias permanentes a commits</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ver objetos</span>
+git<span class="w"> </span>cat-file<span class="w"> </span>-p<span class="w"> </span>a1b2c3d4
+git<span class="w"> </span>ls-tree<span class="w"> </span>HEAD
+</code></pre></div>
+<h4 id="referencias-refs"><strong>Referencias (Refs)</strong></h4>
+<ul>
+<li><strong>HEAD:</strong> Commit actual</li>
+<li><strong>refs/heads/:</strong> Ramas locales</li>
+<li><strong>refs/remotes/:</strong> Ramas remotas</li>
+<li><strong>refs/tags/:</strong> Tags</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ver todas las refs</span>
+git<span class="w"> </span>show-ref
+
+<span class="c1"># Ver contenido de HEAD</span>
+cat<span class="w"> </span>.git/HEAD
+</code></pre></div>
+<h4 id="stashing"><strong>Stashing</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Guardar cambios temporales</span>
+git<span class="w"> </span>stash<span class="w"> </span>push<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;WIP: trabajo en progreso&quot;</span>
+
+<span class="c1"># Listar stashes</span>
+git<span class="w"> </span>stash<span class="w"> </span>list
+
+<span class="c1"># Aplicar stash</span>
+git<span class="w"> </span>stash<span class="w"> </span>apply<span class="w"> </span>stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
+
+<span class="c1"># Crear rama desde stash</span>
+git<span class="w"> </span>stash<span class="w"> </span>branch<span class="w"> </span>nueva-rama<span class="w"> </span>stash@<span class="o">{</span><span class="m">1</span><span class="o">}</span>
+
+<span class="c1"># Stash interactivo</span>
+git<span class="w"> </span>stash<span class="w"> </span>-p
+</code></pre></div>
+<h3 id="hooks-de-git"><strong>Hooks de Git</strong></h3>
+<p>Scripts que se ejecutan automáticamente en eventos específicos.</p>
+<h4 id="ejemplos-utiles"><strong>Ejemplos Útiles</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># .git/hooks/pre-commit</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># Ejecutar tests antes de commit</span>
+npm<span class="w"> </span><span class="nb">test</span>
+
+<span class="c1"># .git/hooks/pre-push</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1"># Validar que todos los commits están firmados</span>
+<span class="k">for</span><span class="w"> </span>commit<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>@<span class="o">{</span>u<span class="o">}</span>..<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;%H&quot;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>git<span class="w"> </span>verify-commit<span class="w"> </span><span class="nv">$commit</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Commit </span><span class="nv">$commit</span><span class="s2"> no está firmado&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">done</span>
+</code></pre></div>
+<h3 id="git-worktrees"><strong>Git Worktrees</strong></h3>
+<p>Trabajar con múltiples ramas simultáneamente.
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear nuevo worktree</span>
+git<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>../mi-proyecto-feature<span class="w"> </span>feature/nueva
+
+<span class="c1"># Listar worktrees</span>
+git<span class="w"> </span>worktree<span class="w"> </span>list
+
+<span class="c1"># Eliminar worktree</span>
+git<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>../mi-proyecto-feature
+</code></pre></div></p>
+<h3 id="bisect-encontrar-bugs-binariamente"><strong>Bisect: Encontrar Bugs Binariamente</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Iniciar bisect</span>
+git<span class="w"> </span>bisect<span class="w"> </span>start
+git<span class="w"> </span>bisect<span class="w"> </span>bad<span class="w"> </span>HEAD
+git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w"> </span>v1.0.0
+
+<span class="c1"># Probar commit actual</span>
+<span class="c1"># Si hay bug:</span>
+git<span class="w"> </span>bisect<span class="w"> </span>bad
+<span class="c1"># Si no hay bug:</span>
+git<span class="w"> </span>bisect<span class="w"> </span>good
+
+<span class="c1"># Finalizar</span>
+git<span class="w"> </span>bisect<span class="w"> </span>reset
+</code></pre></div>
+<h3 id="submodules-y-subtrees"><strong>Submodules y Subtrees</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Submodules (repositorios dentro de repositorios)</span>
+git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/lib/lib.git
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive
+
+<span class="c1"># Subtrees (merge de repositorios)</span>
+git<span class="w"> </span>subtree<span class="w"> </span>add<span class="w"> </span>--prefix<span class="o">=</span>vendor/lib<span class="w"> </span>https://github.com/lib/lib.git<span class="w"> </span>main<span class="w"> </span>--squash
+git<span class="w"> </span>subtree<span class="w"> </span>pull<span class="w"> </span>--prefix<span class="o">=</span>vendor/lib<span class="w"> </span>https://github.com/lib/lib.git<span class="w"> </span>main<span class="w"> </span>--squash
+</code></pre></div>
+<h2 id="configuracion-profesional-de-git">Configuración Profesional de Git</h2>
+<h3 id="archivo-gitconfig"><strong>Archivo .gitconfig</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[user]</span>
+<span class="w">    </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Tu Nombre</span>
+<span class="w">    </span><span class="na">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">tu.email@empresa.com</span>
+<span class="w">    </span><span class="na">signingkey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ABCD1234</span>
+
+<span class="k">[core]</span>
+<span class="w">    </span><span class="na">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">nano</span>
+<span class="w">    </span><span class="na">autocrlf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">input</span>
+<span class="w">    </span><span class="na">excludesfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/.gitignore_global</span>
+
+<span class="k">[commit]</span>
+<span class="w">    </span><span class="na">gpgsign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+
+<span class="k">[push]</span>
+<span class="w">    </span><span class="na">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">current</span>
+
+<span class="k">[pull]</span>
+<span class="w">    </span><span class="na">rebase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
+
+<span class="k">[merge]</span>
+<span class="w">    </span><span class="na">conflictstyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">diff3</span>
+
+<span class="k">[alias]</span>
+<span class="w">    </span><span class="na">st</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">status</span>
+<span class="w">    </span><span class="na">ci</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">commit</span>
+<span class="w">    </span><span class="na">br</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">branch</span>
+<span class="w">    </span><span class="na">co</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">checkout</span>
+<span class="w">    </span><span class="na">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">diff</span>
+<span class="w">    </span><span class="na">lg = log --graph --pretty=format</span><span class="o">:</span><span class="s">&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span><span class="w"> </span><span class="na">--abbrev-commit --date</span><span class="o">=</span><span class="s">relative</span>
+<span class="w">    </span><span class="na">lol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">log --graph --decorate --pretty=oneline --abbrev-commit --all</span>
+<span class="w">    </span><span class="na">unstage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">reset HEAD --</span>
+<span class="w">    </span><span class="na">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">log -1 HEAD</span>
+<span class="w">    </span><span class="na">undo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">reset --soft HEAD~1</span>
+</code></pre></div>
+<h3 id="git-attributes"><strong>Git Attributes</strong></h3>
+<div class="highlight"><pre><span></span><code># .gitattributes
+*.js    diff=javascript
+*.py    diff=python
+*.java  diff=java
+
+# Diferencias específicas
+*.sql   diff=sql
+
+# Normalización de línea finales
+*.txt   text
+*.js    text eol=lf
+*.bat   text eol=crlf
+
+# Archivos binarios
+*.png   binary
+*.jpg   binary
+*.pdf   binary
+
+# Merge estrategias
+database.yml merge=ours
+</code></pre></div>
+<h3 id="git-ignore-patterns"><strong>Git Ignore Patterns</strong></h3>
+<div class="highlight"><pre><span></span><code># .gitignore profesional
+# Dependencias
+node_modules/
+vendor/
+*.gem
+
+# Entornos
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+dist/
+build/
+*.exe
+*.dll
+</code></pre></div>
+<h2 id="flujos-de-trabajo-workflows">Flujos de Trabajo (Workflows)</h2>
+<h3 id="git-flow"><strong>Git Flow</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inicializar</span>
+git<span class="w"> </span>flow<span class="w"> </span>init
+
+<span class="c1"># Feature</span>
+git<span class="w"> </span>flow<span class="w"> </span>feature<span class="w"> </span>start<span class="w"> </span>nueva-funcionalidad
+git<span class="w"> </span>flow<span class="w"> </span>feature<span class="w"> </span>finish<span class="w"> </span>nueva-funcionalidad
+
+<span class="c1"># Release</span>
+git<span class="w"> </span>flow<span class="w"> </span>release<span class="w"> </span>start<span class="w"> </span><span class="m">1</span>.2.0
+git<span class="w"> </span>flow<span class="w"> </span>release<span class="w"> </span>finish<span class="w"> </span><span class="m">1</span>.2.0
+
+<span class="c1"># Hotfix</span>
+git<span class="w"> </span>flow<span class="w"> </span>hotfix<span class="w"> </span>start<span class="w"> </span>critical-bug
+git<span class="w"> </span>flow<span class="w"> </span>hotfix<span class="w"> </span>finish<span class="w"> </span>critical-bug
+</code></pre></div>
+<h3 id="github-flow"><strong>GitHub Flow</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Siempre desde main</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+
+<span class="c1"># Feature branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/descripcion
+<span class="c1"># Desarrollo...</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/descripcion
+<span class="c1"># Crear Pull Request en GitHub</span>
+
+<span class="c1"># Merge via PR (squash o merge)</span>
+</code></pre></div>
+<h3 id="gitlab-flow"><strong>GitLab Flow</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ramas environment-based</span>
+main
+<span class="w">  </span>└──<span class="w"> </span>staging
+<span class="w">        </span>└──<span class="w"> </span>production
+
+<span class="c1"># Merge requests con approval rules</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature
+<span class="c1"># Desarrollo...</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature
+<span class="c1"># Merge request con pipelines</span>
+</code></pre></div>
+<h2 id="seguridad-en-git">Seguridad en Git</h2>
+<h3 id="commits-firmados"><strong>Commits Firmados</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configurar GPG</span>
+gpg<span class="w"> </span>--gen-key
+gpg<span class="w"> </span>--list-secret-keys<span class="w"> </span>--keyid-format<span class="w"> </span>LONG
+
+<span class="c1"># Configurar Git</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.signingkey<span class="w"> </span>ABCDEF1234567890
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>commit.gpgsign<span class="w"> </span><span class="nb">true</span>
+
+<span class="c1"># Commit firmado</span>
+git<span class="w"> </span>commit<span class="w"> </span>-S<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Mensaje firmado&quot;</span>
+
+<span class="c1"># Verificar firma</span>
+git<span class="w"> </span>log<span class="w"> </span>--show-signature
+</code></pre></div>
+<h3 id="branch-protection-rules"><strong>Branch Protection Rules</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># GitHub .github/branch-protection.yml</span>
+<span class="nt">branch_protection_rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;main&quot;</span>
+<span class="w">    </span><span class="nt">required_status_checks</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">contexts</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;ci/build&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;ci/test&quot;</span>
+<span class="w">    </span><span class="nt">required_pull_request_reviews</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">required_approving_review_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">      </span><span class="nt">dismiss_stale_reviews</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">required_signatures</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">enforce_admins</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<h3 id="secret-scanning"><strong>Secret Scanning</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pre-commit hook para secrets</span>
+<span class="c1"># .git/hooks/pre-commit</span>
+<span class="c1">#!/bin/bash</span>
+<span class="k">if</span><span class="w"> </span>git<span class="w"> </span>diff<span class="w"> </span>--cached<span class="w"> </span>--name-only<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(password|token|secret|key)[=:]\s*\S+&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;⚠️  Posible secreto detectado en cambios&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+</code></pre></div>
+<h2 id="performance-y-optimizacion">Performance y Optimización</h2>
+<h3 id="repositorios-grandes"><strong>Repositorios Grandes</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clone shallow</span>
+git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/proyecto/grande.git
+
+<span class="c1"># Partial clone</span>
+git<span class="w"> </span>clone<span class="w"> </span>--filter<span class="o">=</span>blob:none<span class="w"> </span>https://github.com/proyecto/grande.git
+
+<span class="c1"># Sparse checkout</span>
+git<span class="w"> </span>sparse-checkout<span class="w"> </span>init<span class="w"> </span>--cone
+git<span class="w"> </span>sparse-checkout<span class="w"> </span><span class="nb">set</span><span class="w"> </span>src/libs
+
+<span class="c1"># GC y mantenimiento</span>
+git<span class="w"> </span>gc<span class="w"> </span>--aggressive<span class="w"> </span>--prune<span class="o">=</span>now
+git<span class="w"> </span>repack<span class="w"> </span>-a<span class="w"> </span>-d<span class="w"> </span>--depth<span class="o">=</span><span class="m">250</span><span class="w"> </span>--window<span class="o">=</span><span class="m">250</span>
+</code></pre></div>
+<h3 id="busqueda-eficiente"><strong>Búsqueda Eficiente</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Buscar en código</span>
+git<span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;palabra clave&quot;</span>
+
+<span class="c1"># Buscar en historial</span>
+git<span class="w"> </span>log<span class="w"> </span>-S<span class="w"> </span><span class="s2">&quot;función eliminada&quot;</span><span class="w"> </span>--oneline
+
+<span class="c1"># Buscar por autor</span>
+git<span class="w"> </span>log<span class="w"> </span>--author<span class="o">=</span><span class="s2">&quot;nombre&quot;</span><span class="w"> </span>--since<span class="o">=</span><span class="s2">&quot;2024-01-01&quot;</span>
+
+<span class="c1"># Blame con contexto</span>
+git<span class="w"> </span>blame<span class="w"> </span>-L<span class="w"> </span><span class="m">10</span>,20<span class="w"> </span>archivo.js
+</code></pre></div>
+<h2 id="herramientas-y-extensiones">Herramientas y Extensiones</h2>
+<h3 id="gui-clients"><strong>GUI Clients</strong></h3>
+<ul>
+<li><strong>GitKraken:</strong> Excelente visualización</li>
+<li><strong>SourceTree:</strong> Gratis de Atlassian</li>
+<li><strong>GitHub Desktop:</strong> Simple para GitHub</li>
+<li><strong>Git Tower:</strong> Pago pero muy completo</li>
+</ul>
+<h3 id="cli-enhancements"><strong>CLI Enhancements</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tig - navegador TUI</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tig
+tig
+
+<span class="c1"># diff-so-fancy - diffs bonitos</span>
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>diff-so-fancy
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.pager<span class="w"> </span><span class="s2">&quot;diff-so-fancy | less --tabs=4 -RFX&quot;</span>
+
+<span class="c1"># git-extras - comandos adicionales</span>
+brew<span class="w"> </span>install<span class="w"> </span>git-extras
+git<span class="w"> </span>summary
+git<span class="w"> </span>effort
+git<span class="w"> </span>ignore
+</code></pre></div>
+<h3 id="integraciones-ide"><strong>Integraciones IDE</strong></h3>
+<ul>
+<li><strong>VS Code:</strong> GitLens extensión</li>
+<li><strong>IntelliJ:</strong> Integración nativa excelente</li>
+<li><strong>Vim:</strong> Fugitive.vim</li>
+<li><strong>Emacs:</strong> Magit</li>
+</ul>
+<h2 id="resolucion-de-problemas-comunes">Resolución de Problemas Comunes</h2>
+<h3 id="perdi-mis-cambios"><strong>"Perdí mis cambios!"</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Buscar en reflog</span>
+git<span class="w"> </span>reflog
+
+<span class="c1"># Buscar commits perdidos</span>
+git<span class="w"> </span>fsck<span class="w"> </span>--lost-found
+
+<span class="c1"># Buscar por mensaje</span>
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--grep<span class="o">=</span><span class="s2">&quot;parte del mensaje&quot;</span>
+</code></pre></div>
+<h3 id="merge-conflict-complejo"><strong>Merge Conflict Complejo</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Usar herramientas de merge</span>
+git<span class="w"> </span>mergetool
+
+<span class="c1"># Ver conflictos</span>
+git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w"> </span>--diff-filter<span class="o">=</span>U
+
+<span class="c1"># Abortar todo</span>
+git<span class="w"> </span>merge<span class="w"> </span>--abort
+git<span class="w"> </span>rebase<span class="w"> </span>--abort
+
+<span class="c1"># Reset a estado seguro</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>ORIG_HEAD
+</code></pre></div>
+<h3 id="commit-en-rama-equivocada"><strong>Commit en Rama Equivocada</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Crear parche</span>
+git<span class="w"> </span>format-patch<span class="w"> </span>HEAD~1
+
+<span class="c1"># 2. Reset branch original</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1
+
+<span class="c1"># 3. Cambiar a branch correcta</span>
+git<span class="w"> </span>checkout<span class="w"> </span>branch-correcta
+
+<span class="c1"># 4. Aplicar parche</span>
+git<span class="w"> </span>am<span class="w"> </span><span class="m">0001</span>-commit.patch
+</code></pre></div>
+<h2 id="checklist-de-buenas-practicas">Checklist de Buenas Prácticas</h2>
+<h3 id="antes-de-cada-commit"><strong>Antes de Cada Commit</strong></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>git status</code> ver estado</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>git diff --cached</code> ver qué se va a commit</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Tests pasan localmente</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Mensaje sigue convenciones</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No hay secrets en el código</li>
+</ul>
+<h3 id="antes-de-push"><strong>Antes de Push</strong></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>git pull --rebase</code> actualizar local</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>git log --oneline origin/main..</code> ver qué se sube</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> CI pasa localmente (si es posible)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Review propio del código</li>
+</ul>
+<h3 id="mantenimiento-regular"><strong>Mantenimiento Regular</strong></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>git gc --auto</code> limpieza</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>git remote prune origin</code> limpiar ramas remotas</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Actualizar hooks de seguridad</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Review configuración global</li>
+</ul>
+<h2 id="conclusion">Conclusión</h2>
+<p>Git es una herramienta poderosa que, cuando se domina, transforma completamente el flujo de trabajo de desarrollo. La clave está en:</p>
+<ol>
+<li><strong>Entender los conceptos fundamentales:</strong> Commits, ramas, merging</li>
+<li><strong>Practicar los comandos esenciales:</strong> commit, branch, checkout, merge</li>
+<li><strong>Aprender técnicas avanzadas:</strong> rebase, cherry-pick, bisect</li>
+<li><strong>Configurar tu entorno:</strong> aliases, hooks, herramientas</li>
+<li><strong>Seguir buenas prácticas:</strong> mensajes claros, historial limpio</li>
+</ol>
+<p>Recuerda: <strong>Git no es solo un sistema de control de versiones, es una herramienta de colaboración.</strong> Domina Git y dominarás el desarrollo de software moderno.</p>
+<h3 id="recursos-para-aprender-mas"><strong>Recursos para Aprender Más</strong></h3>
+<ul>
+<li><strong>Pro Git Book:</strong> https://git-scm.com/book</li>
+<li><strong>Git Visualizer:</strong> https://git-school.github.io/visualizing-git/</li>
+<li><strong>Oh Shit, Git!:</strong> https://ohshitgit.com/</li>
+<li><strong>Git Flight Rules:</strong> https://github.com/k88hudson/git-flight-rules</li>
+</ul>
+<p><strong>"Git no es difícil, solo es diferente. Una vez que entiendas su modelo mental, todo tiene sentido."</strong> - Scott Chacon, cofundador de GitHub</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2026 <a href="https://davidalvarezp.com" target="_blank">davidalvarezp</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/davidalvarezp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
