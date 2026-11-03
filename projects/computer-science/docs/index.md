@@ -2,17 +2,19 @@
 title: Bachelor Degree in Computer Science | Apuntes, Teoría y Tests
 description: Documentación académica del Bachelor Degree en Computer Science. Apuntes de ciencias de la computación, matemáticas, programación, algoritmos, sistemas operativos, redes, bases de datos e inteligencia artificial. Incluye teoría, ejercicios resueltos y tests interactivos.
 hide:
+  - navigation
   - toc
+  - feedback
 ---
 
 # Bachelor Degree in Computer Science
 
-![Status](https://img.shields.io/badge/Estado-En%20desarrollo-green?logo=github)
-![Degree](https://img.shields.io/badge/Nivel-Bachelor%20Degree-blue?logo=academia)
-![Content](https://img.shields.io/badge/Especialidad-Computer%20Science-purple)
-![Language](https://img.shields.io/badge/Idioma-Español-orange)
+![Status](https://img.shields.io/badge/Estado-Actualizado-white?logo=github)
+![Degree](https://img.shields.io/badge/Estudios-Bachelor%20Degree-blue)
+![Content](https://img.shields.io/badge/Área-Computer%20Science-green)
+![Language](https://img.shields.io/badge/Idioma-Español-red)
 
-Bienvenido a **Bachelor Degree in Computer Science**, un repositorio académico dedicado al estudio de las **Ciencias de la Computación (Computer Science)**.
+Bienvenido a **Bachelor Degree in Computer Science**, un repositorio académico dedicado a las **Ciencias de la Computación**.
 
 Esta documentación reúne y organiza los conocimientos fundamentales y avanzados de la informática, siguiendo una estructura académica progresiva inspirada en los planes de estudio universitarios de un grado en Ciencias de la Computación.
 

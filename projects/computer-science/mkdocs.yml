@@ -7,10 +7,7 @@ site_description: >-
 site_author: dap
 site_url: https://davidalvarezp.com/docs/computer-science/
 
-copyright: >-
-  Copyright &copy; 2026
-  <a href="https://davidalvarezp.com/" rel="noopener noreferrer">dap</a>.
-  Material académico y documentación técnica.
+copyright: Copyright &copy; 2026 <a href="https://davidalvarezp.com/" rel="noopener noreferrer"><strong>dap</strong></a> | All rights reserved.
 
 # --------------------------------------------------
 # REPOSITORIO
@@ -35,8 +32,8 @@ theme:
   name: material
   language: es
 
-  logo: assets/avatar.png
-  favicon: assets/avatar.png
+  logo: /docs/assets/img/logo.webp
+  favicon: /docs/assets/img/favicon.ico
 
   features:
     # Navegación
@@ -180,7 +177,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
 
   # Lógica de los tests interactivos
-  - javascripts/quiz.js
+#  - javascripts/quiz.js
 
   # Cerrar submenus anteriores
   - javascripts/navigation.js
@@ -193,9 +190,18 @@ extra:
   generator: false
 
   social:
+
+    - icon: simple/bluesky
+      link: https://bsky.app/profile/davidalvarezp.com
+      name: Sitio web de dap
+
     - icon: simple/youtube
       link: https://youtube.com/@davidalvarezp
       name: Canal de YouTube de dap
+
+    - icon: simple/github
+      link: https://github.com/davidalvarezp
+      name: Github de dap
 
     - icon: simple/twitch
       link: https://twitch.tv/sudodap
