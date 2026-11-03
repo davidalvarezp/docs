@@ -77,7 +77,7 @@ extra:
 
   analytics:
     provider: google
-    property: G-XXXXXX
+    property: G-F0G1797238
     feedback:
       title: Fue útil esta página?
       ratings:

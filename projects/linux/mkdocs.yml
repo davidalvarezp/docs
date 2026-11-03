@@ -102,6 +102,11 @@ plugins:
 # Extra
 extra:
   generator: false
+
+  analytics:
+    provider: google
+    property: G-F0G1797238
+
   social:
     - icon: simple/youtube
       link: https://youtube.com/@davidalvarezp
