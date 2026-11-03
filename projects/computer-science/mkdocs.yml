@@ -43,7 +43,6 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
-    - navigation.expand
     - navigation.path
     - navigation.top
     - navigation.indexes
@@ -226,5 +225,45 @@ nav:
 
   - Álgebra y Matemática Discreta:
       - Visión general: algebra/index.md
+      - Tema 01: 
+        - Inicio: algebra/tema01/index.md
+      - Tema 02:
+        - Inicio: algebra/tema02/index.md
+      - Tema 03:
+        - Inicio: algebra/index.md
+      - Tema 04:
+        - Inicio: algebra/index.md
+      - Tema 05:
+        - Inicio: algebra/index.md
+      - Tema 06:
+        - Inicio: algebra/index.md
+      - Tema 07:
+        - Inicio: algebra/index.md
+      - Tema 08:
+        - Inicio: algebra/index.md
+      - Tema 09:
+        - Inicio: algebra/index.md
+      - Tema 10:
+        - Inicio: algebra/index.md
       - Tests:
-          - Tema 1: algebra/tests/tema01/test01.md
+        - Inicio: algebra/index.md
+        - Tema 01:
+          - Test 01: algebra/tests/tema01/test01.md
+        - Tema 02:
+          - Test 01: algebra/tests/tema02/test01.md
+        - Tema 03:
+          - Test 01: algebra/tests/tema03/test01.md
+        - Tema 04:
+          - Test 01: algebra/tests/tema04/test01.md
+        - Tema 05:
+          - Test 01: algebra/tests/tema05/test01.md
+        - Tema 06:
+          - Test 01: algebra/tests/tema06/test01.md
+        - Tema 07:
+          - Test 01: algebra/tests/tema07/test01.md
+        - Tema 08:
+          - Test 01: algebra/tests/tema08/test01.md
+        - Tema 09:
+          - Test 01: algebra/tests/tema09/test01.md
+        - Tema 10:
+          - Test 01: algebra/tests/tema10/test01.md
