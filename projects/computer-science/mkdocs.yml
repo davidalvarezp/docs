@@ -1,0 +1,230 @@
+site_name: Bachelor Degree in Computer Science
+site_description: >-
+  Documentación académica del Bachelor Degree in Computer Science.
+  Apuntes, teoría, ejercicios resueltos, tests interactivos y recursos
+  de aprendizaje sobre ciencias de la computación, matemáticas,
+  programación, algoritmos, sistemas y tecnologías informáticas.
+site_author: dap
+site_url: https://davidalvarezp.com/docs/computer-science/
+
+copyright: >-
+  Copyright &copy; 2026
+  <a href="https://davidalvarezp.com/" rel="noopener noreferrer">dap</a>.
+  Material académico y documentación técnica.
+
+# --------------------------------------------------
+# REPOSITORIO
+# --------------------------------------------------
+
+repo_name: davidalvarezp/docs
+repo_url: https://github.com/davidalvarezp/docs
+edit_uri: edit/main/projects/computer-science/docs/
+
+# --------------------------------------------------
+# CONFIGURACIÓN GENERAL
+# --------------------------------------------------
+
+use_directory_urls: true
+strict: true
+
+# --------------------------------------------------
+# TEMA
+# --------------------------------------------------
+
+theme:
+  name: material
+  language: es
+
+  logo: assets/avatar.png
+  favicon: assets/avatar.png
+
+  features:
+    # Navegación
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.indexes
+    - navigation.tracking
+    - navigation.footer
+
+    # Búsqueda
+    - search.suggest
+    - search.highlight
+    - search.share
+
+    # Contenido
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+
+    # Índices
+    - toc.follow
+
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+
+# --------------------------------------------------
+# PLUGINS
+# --------------------------------------------------
+
+plugins:
+  - search:
+      lang:
+        - es
+        - en
+
+# --------------------------------------------------
+# EXTENSIONES MARKDOWN
+# --------------------------------------------------
+
+markdown_extensions:
+
+  # Metadatos y estructura
+  - meta
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+
+  - toc:
+      permalink: true
+      toc_depth: 3
+      title: En esta página
+
+  # Matemáticas
+  - pymdownx.arithmatex:
+      generic: true
+
+  # Formato
+  - pymdownx.betterem:
+      smart_enable: all
+
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
+
+  # Emojis
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+  # Código
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+
+  # Enlaces
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+
+  # Bloques de código avanzados
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  # Pestañas
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  # Checklists
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  # Detalles desplegables
+  - pymdownx.details
+
+# --------------------------------------------------
+# CSS
+# --------------------------------------------------
+
+extra_css:
+  - stylesheets/extra.css
+
+# --------------------------------------------------
+# JAVASCRIPT
+# --------------------------------------------------
+
+extra_javascript:
+  # Configuración MathJax: siempre antes del motor
+  - javascripts/mathjax.js
+
+  # Renderizado matemático
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
+
+  # Diagramas Mermaid
+  - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
+
+  # Lógica de los tests interactivos
+  - javascripts/quiz.js
+
+# --------------------------------------------------
+# METADATOS Y REDES SOCIALES
+# --------------------------------------------------
+
+extra:
+  generator: false
+
+  social:
+    - icon: simple/youtube
+      link: https://youtube.com/@davidalvarezp
+      name: Canal de YouTube de dap
+
+    - icon: simple/twitch
+      link: https://twitch.tv/sudodap
+      name: Twitch de dap
+
+    - icon: simple/telegram
+      link: https://t.me/sudodap
+      name: Telegram de dap
+
+    - icon: simple/x
+      link: https://x.com/sudodap
+      name: X de dap
+
+    - icon: simple/instagram
+      link: https://instagram.com/davidalvarezzp
+      name: Instagram de dap
+
+    - icon: simple/discord
+      link: https://discord.gg/x7JFKT2n4X
+      name: Comunidad de Discord de dap
+
+# --------------------------------------------------
+# NAVEGACIÓN
+# --------------------------------------------------
+
+nav:
+  - Docs: https://davidalvarezp.com/docs/
+
+  - Inicio: index.md
+
+  - Álgebra y Matemática Discreta:
+      - Visión general: algebra/index.md
+      - Tests:
+          - Tema 1: algebra/tests/tema01/test01.md

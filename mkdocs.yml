@@ -1,0 +1,111 @@
+site_name: davidalvarezp's Docs
+site_description: Documentación técnica avanzada, guías y tips. Administración de sistemas, desarrollo y seguridad informática.
+site_author: davidalvarezp
+site_url: https://davidalvarezp.com/docs
+use_directory_urls: true
+
+docs_dir: main
+copyright: >-
+  &copy; 2020-<script>document.write(new Date().getFullYear())</script> <a href="https://davidalvarezp.com" target="_blank" rel="noopener noreferrer" style="color:DDDDDD"><strong>dap</strong></a> | All rights reserved.
+
+repo_name: davidalvarezp/docs
+repo_url: https://github.com/davidalvarezp/docs
+edit_uri: edit/main/main/
+
+theme:
+ name: material
+ language: es
+ logo: assets/img/logo.webp
+ favicon: assets/img/favicon.ico
+ font:
+  text: JetBrains Mono
+ features:
+  - navigation.instant
+  - navigation.instant.progress
+  - navigation.tabs
+  - navigation.top
+  - navigation.sections
+  - search.suggest
+  - search.highlight
+  - content.code.copy
+  - content.code.annotate
+ palette:
+  scheme: slate
+  primary: black
+  accent: green
+
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+# Plugins
+plugins:
+  - search
+  - tags
+  - meta
+  - projects
+
+# Extra
+extra:
+  scope: /
+  generator: false
+  social:
+    - icon: simple/x 
+      link: https://x.com/sudodap
+    - icon: simple/youtube
+      link: https://youtube.com/@davidalvarezp
+    - icon: simple/twitch
+      link: https://twitch.tv/sudodap
+    - icon: simple/telegram
+      link: https://t.me/sudodap
+    - icon: simple/instagram
+      link: https://instagram.com/davidalvarezzp
+    - icon: simple/discord
+      link: https://discord.gg/x7JFKT2n4X
+
+  analytics:
+    provider: google
+    property: G-XXXXXX
+    feedback:
+      title: Fue útil esta página?
+      ratings:
+        - icon: material/thumb-up-outline
+          name: Si
+          data: 1
+          note: Gracias por el feedback!
+        - icon: material/thumb-down-outline
+          name: Non
+          data: 0
+          note: Gracias, seguiré mejorando.
+  consent:
+    #title: Uso de Cookies
+    description: >- 
+      Utilizamos cookies para mejorar tu experiencia en nuestro sitio web y analizar el tráfico de forma anónima. 
+      Al continuar navegando, aceptas su uso. Puedes cambiar tus preferencias en cualquier momento.
+    actions:
+      - accept
+      - manage
+ 
+extra_css:
+  - assets/css/extra.css
+
+# Navegación
+nav:
+  - Inicio: index.md
+  - Manual de Linux: /docs/linux/
+  - Computer Science: /docs/computer-science/
+  - Blog: https://davidalvarezp.com/blog/
+  - Contacto: /docs/contacto/
+
