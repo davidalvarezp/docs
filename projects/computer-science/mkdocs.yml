@@ -189,6 +189,10 @@ extra_javascript:
 extra:
   generator: false
 
+  analytics:
+    provider: google
+    property: G-XXXXXX
+
   social:
 
     - icon: simple/bluesky

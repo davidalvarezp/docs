@@ -8,9 +8,9 @@ docs_dir: main
 copyright: >-
   &copy; Since 2020 <a href="https://davidalvarezp.com" target="_blank" rel="noopener noreferrer" style="color:DDDDDD"><strong>dap</strong></a> | All rights reserved.
 
-repo_name: davidalvarezp/docs
-repo_url: https://github.com/davidalvarezp/docs
-edit_uri: edit/main/main/
+# repo_name: davidalvarezp/docs
+# repo_url: https://github.com/davidalvarezp/docs
+# edit_uri: edit/main/main/
 
 theme:
  name: material
@@ -96,6 +96,7 @@ extra:
       Al continuar navegando, aceptas su uso. Puedes cambiar tus preferencias en cualquier momento.
     actions:
       - accept
+      - reject
       - manage
  
 extra_css:
