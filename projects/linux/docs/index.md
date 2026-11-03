@@ -1,5 +1,5 @@
 ---
-title: Manual SysAdmin Linux | dap.gal
+title: Manual SysAdmin Linux | By dap
 description: Ruta completa de aprendizaje para administradores de sistemas Linux, de fundamentos a producción.
 hide:
   - navigation
@@ -67,4 +67,4 @@ Cada artículo está estructurado para maximizar el aprendizaje técnico:
 ---
 
 !!! info "Créditos y Herramientas"
-    Esta documentación ha sido redactada por [dap](https://dap.gal) con el apoyo de un LLM local entrenado específicamente para esta documentación, garantizando un flujo de trabajo privado, rápido y técnico.
+    Esta documentación ha sido redactada por [dap](https://davidalvarezp.com) con el apoyo de un LLM local entrenado específicamente para esta documentación, garantizando un flujo de trabajo privado, rápido y técnico.

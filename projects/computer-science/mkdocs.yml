@@ -42,7 +42,7 @@ theme:
     # Navegación
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
+    #- navigation.sections
     - navigation.path
     - navigation.top
     - navigation.indexes
@@ -162,8 +162,8 @@ markdown_extensions:
 # CSS
 # --------------------------------------------------
 
-extra_css:
-  - stylesheets/extra.css
+#extra_css:
+#  - stylesheets/extra.css
 
 # --------------------------------------------------
 # JAVASCRIPT
@@ -181,6 +181,9 @@ extra_javascript:
 
   # Lógica de los tests interactivos
   - javascripts/quiz.js
+
+  # Cerrar submenus anteriores
+  - javascripts/navigation.js
 
 # --------------------------------------------------
 # METADATOS Y REDES SOCIALES
@@ -246,7 +249,7 @@ nav:
       - Tema 10:
         - Inicio: algebra/index.md
       - Tests:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tests/tema01/test01.md
         - Tema 01:
           - Test 01: algebra/tests/tema01/test01.md
         - Tema 02:
