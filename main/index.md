@@ -7,6 +7,7 @@ hide:
   - toc
   - feedback
 ---
+<meta name="google-site-verification" content="aBAm_Md9dlC2vPAtJb5iMrP0WbnXnHQ12_fR0yEb3NM" />
 <section class="dap-hero" id="home">
  
   <div class="dap-hero__floats" aria-hidden="true">
