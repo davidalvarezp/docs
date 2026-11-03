@@ -3,7 +3,7 @@ site_description: De 0 a Senior - Ruta completa de aprendizaje para administrado
 site_author: davidalvarezp
 site_url: https://davidalvarezp.com/docs/linux
 copyright: >-
-  &copy; 2020-<script>document.write(new Date().getFullYear())</script> <a href="https://davidalvarezp.com" target="_blank" rel="noopener noreferrer" style="color:DDDDDD"><strong>dap</strong></a> | All rights reserved.
+  &copy; Since 2020 <a href="https://davidalvarezp.com" target="_blank" rel="noopener noreferrer" style="color:DDDDDD"><strong>dap</strong></a> | All rights reserved.
 
 # Configuración del Repositorio (Opcional)
 repo_name: docs/linux

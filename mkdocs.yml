@@ -6,7 +6,7 @@ use_directory_urls: true
 
 docs_dir: main
 copyright: >-
-  &copy; 2020-<script>document.write(new Date().getFullYear())</script> <a href="https://davidalvarezp.com" target="_blank" rel="noopener noreferrer" style="color:DDDDDD"><strong>dap</strong></a> | All rights reserved.
+  &copy; Since 2020 <a href="https://davidalvarezp.com" target="_blank" rel="noopener noreferrer" style="color:DDDDDD"><strong>dap</strong></a> | All rights reserved.
 
 repo_name: davidalvarezp/docs
 repo_url: https://github.com/davidalvarezp/docs
