@@ -1,9 +1,12 @@
-# Test de repaso — Tema 2: Inducción matemática y recursión
+---
+title: Test Tema 2 - Inducción matemática y recursión
+---
+# Test Tema 2: Inducción matemática y recursión
 
-Este test está basado en las 15 preguntas del cuestionario original. Tiene **una sola respuesta correcta por pregunta**. Responde y pulsa **Comprobar respuestas** para conocer tu nota y ver qué preguntas has acertado o fallado. Al final encontrarás las soluciones explicadas paso a paso.
+Este test está basado en las 15 preguntas del cuestionario original. Tiene **una sola respuesta correcta por pregunta**. Selecciona tus respuestas y pulsa **Comprobar respuestas** para conocer tu nota, ver la explicación rápida de cada pregunta y consultar al final las soluciones explicadas paso a paso.
 
 !!! tip "Cómo estudiar"
-    Haz primero el test sin mirar las soluciones. Después lee las explicaciones, especialmente las preguntas que hayas fallado, y vuelve a intentarlo.
+    Haz primero el test sin mirar las soluciones. Al corregirlo, lee la **explicación rápida** de cada pregunta y, si necesitas profundizar, despliega la **explicación detallada paso a paso** al final de la página.
 
 <div id="quiz-tema2" class="quiz-container">
 
@@ -13,139 +16,200 @@ Este test está basado en las 15 preguntas del cuestionario original. Tiene **un
   </div>
 
   <form id="quiz-form">
-    <fieldset class="quiz-question" data-answer="b">
+    
+    <!-- Pregunta 1 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="La inducción matemática es un método de demostración que permite probar propiedades para todos los números naturales a partir de un caso base inicial.">
       <legend>1. ¿Qué es la inducción matemática?</legend>
       <label><input type="radio" name="q1" value="a"> A. Un método para calcular límites.</label>
       <label><input type="radio" name="q1" value="b"> B. Un método de demostración para proposiciones sobre números naturales.</label>
       <label><input type="radio" name="q1" value="c"> C. Una técnica para resolver ecuaciones diferenciales.</label>
       <label><input type="radio" name="q1" value="d"> D. Un procedimiento para simplificar expresiones algebraicas.</label>
-      <p class="question-feedback" id="feedback-q1"></p>
+      <div class="question-feedback" id="feedback-q1">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 2 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="El primer paso indispensable es probar el caso base, garantizando que la afirmación se cumple para el valor inicial (por ejemplo, \(n=1\)).">
       <legend>2. ¿Cuál es el primer paso de una demostración por inducción?</legend>
       <label><input type="radio" name="q2" value="a"> A. Definir la hipótesis inductiva.</label>
       <label><input type="radio" name="q2" value="b"> B. Probar el paso inductivo.</label>
       <label><input type="radio" name="q2" value="c"> C. Demostrar el caso base.</label>
       <label><input type="radio" name="q2" value="d"> D. Comprobar todos los números naturales uno por uno.</label>
-      <p class="question-feedback" id="feedback-q2"></p>
+      <div class="question-feedback" id="feedback-q2">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 3 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="En el paso inductivo se demuestra la implicación \(P(n) \Rightarrow P(n+1)\): asumiendo que vale para \(n\), se prueba que se cumple para el siguiente.">
       <legend>3. ¿Qué se hace en el paso inductivo?</legend>
       <label><input type="radio" name="q3" value="a"> A. Se supone que la proposición es falsa para algún número.</label>
       <label><input type="radio" name="q3" value="b"> B. Se demuestra que, si es cierta para \(n\), también lo es para \(n+1\).</label>
       <label><input type="radio" name="q3" value="c"> C. Se concluye que la proposición es falsa para todos los naturales.</label>
       <label><input type="radio" name="q3" value="d"> D. Se inventa una proposición diferente.</label>
-      <p class="question-feedback" id="feedback-q3"></p>
+      <div class="question-feedback" id="feedback-q3">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 4 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="La inducción fuerte permite suponer cierta la propiedad para todos los términos desde el caso inicial hasta \(n\), facilitando demostrar \(n+1\).">
       <legend>4. ¿En qué consiste la inducción matemática fuerte?</legend>
       <label><input type="radio" name="q4" value="a"> A. En no demostrar ningún caso inicial.</label>
       <label><input type="radio" name="q4" value="b"> B. En suponer que la propiedad se cumple para todos los naturales anteriores hasta \(n\), y usarlo para demostrar el siguiente caso.</label>
       <label><input type="radio" name="q4" value="c"> C. En resolver ecuaciones de grado alto.</label>
       <label><input type="radio" name="q4" value="d"> D. En comprobar únicamente el último número de una sucesión.</label>
-      <p class="question-feedback" id="feedback-q4"></p>
+      <div class="question-feedback" id="feedback-q4">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="a">
+    <!-- Pregunta 5 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Las fórmulas explícitas dependientes de un número natural \(n\) (como la suma de los primeros \(n\) enteros) son el ejemplo canónico de prueba inductiva.">
       <legend>5. ¿Cuál de estas afirmaciones es un ejemplo típico para demostrar por inducción?</legend>
       <label><input type="radio" name="q5" value="a"> A. Una fórmula para la suma de los primeros \(n\) números naturales.</label>
       <label><input type="radio" name="q5" value="b"> B. La derivada de una función polinómica.</label>
       <label><input type="radio" name="q5" value="c"> C. El cálculo de una integral definida concreta.</label>
       <label><input type="radio" name="q5" value="d"> D. El cálculo de un límite de una función.</label>
-      <p class="question-feedback" id="feedback-q5"></p>
+      <div class="question-feedback" id="feedback-q5">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 6 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="La clave diferencial radica en la amplitud de la hipótesis: la ordinaria usa solo el estado inmediatamente anterior (\(n\)), la fuerte utiliza todos los anteriores (\(n_0 \dots n\)).">
       <legend>6. ¿Cuál es la diferencia principal entre inducción ordinaria e inducción fuerte?</legend>
       <label><input type="radio" name="q6" value="a"> A. La ordinaria no necesita caso base.</label>
       <label><input type="radio" name="q6" value="b"> B. La fuerte no necesita hipótesis inductiva.</label>
       <label><input type="radio" name="q6" value="c"> C. La fuerte permite utilizar como hipótesis todos los casos anteriores, no solo el caso \(n\).</label>
       <label><input type="radio" name="q6" value="d"> D. La ordinaria solo sirve para sucesiones finitas.</label>
-      <p class="question-feedback" id="feedback-q6"></p>
+      <div class="question-feedback" id="feedback-q6">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 7 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="El caso base sirve como punto de anclaje inicial: demuestra que la propiedad es cierta para el primer valor del dominio considerado.">
       <legend>7. ¿Qué se demuestra en el caso base?</legend>
       <label><input type="radio" name="q7" value="a"> A. Que la propiedad es falsa para el primer natural.</label>
       <label><input type="radio" name="q7" value="b"> B. Que la propiedad se cumple para todos los naturales de golpe.</label>
       <label><input type="radio" name="q7" value="c"> C. Que la propiedad es verdadera para el primer valor considerado.</label>
       <label><input type="radio" name="q7" value="d"> D. Que la propiedad es verdadera para \(n+1\), sin hipótesis.</label>
-      <p class="question-feedback" id="feedback-q7"></p>
+      <div class="question-feedback" id="feedback-q7">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 8 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Dado que en Fibonacci cada valor se calcula con la suma de los dos anteriores (\(F_n = F_{n-1} + F_{n-2}\)), se necesita la hipótesis fuerte sobre todos los términos previos.">
       <legend>8. En una demostración por inducción fuerte sobre Fibonacci, ¿qué se supone en la hipótesis inductiva?</legend>
       <label><input type="radio" name="q8" value="a"> A. Que la propiedad solo se cumple para el primer término.</label>
       <label><input type="radio" name="q8" value="b"> B. Que la propiedad se cumple para todos los términos anteriores hasta un índice \(n\).</label>
       <label><input type="radio" name="q8" value="c"> C. Que la propiedad solo se cumple para los términos pares.</label>
       <label><input type="radio" name="q8" value="d"> D. Que la propiedad ya se cumple para \(n+1\).</label>
-      <p class="question-feedback" id="feedback-q8"></p>
+      <div class="question-feedback" id="feedback-q8">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 9 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="El objetivo del paso inductivo ordinario es establecer un puente condicional: asegurar que el cumplimiento en \(n\) propaga la verdad hacia \(n+1\).">
       <legend>9. ¿Qué hay que probar en el paso inductivo ordinario?</legend>
       <label><input type="radio" name="q9" value="a"> A. Que la proposición es cierta para un número cualquiera, sin partir de nada.</label>
       <label><input type="radio" name="q9" value="b"> B. Que si la proposición vale para \(n\), entonces también vale para \(n+1\).</label>
       <label><input type="radio" name="q9" value="c"> C. Que la proposición es falsa para \(n+1\).</label>
       <label><input type="radio" name="q9" value="d"> D. Que la proposición no sirve para los números naturales.</label>
-      <p class="question-feedback" id="feedback-q9"></p>
+      <div class="question-feedback" id="feedback-q9">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 10 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Al ser una lista infinita de valores definidos recursivamente, la inducción es la herramienta rigurosa para validar propiedades universales en toda la serie.">
       <legend>10. ¿Por qué se usa la inducción para demostrar propiedades de la sucesión de Fibonacci?</legend>
       <label><input type="radio" name="q10" value="a"> A. Porque siempre es más rápida que cualquier otro método.</label>
       <label><input type="radio" name="q10" value="b"> B. Porque ningún otro método puede utilizarse.</label>
       <label><input type="radio" name="q10" value="c"> C. Porque permite demostrar una propiedad para todos los términos, comprobando los casos iniciales y el paso inductivo.</label>
       <label><input type="radio" name="q10" value="d"> D. Porque Fibonacci es una sucesión aritmética.</label>
-      <p class="question-feedback" id="feedback-q10"></p>
+      <div class="question-feedback" id="feedback-q10">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 11 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Una definición es recursiva cuando un problema se resuelve descomponiéndose en una o más llamadas a la misma función sobre instancias de menor tamaño.">
       <legend>11. ¿Qué son las funciones recursivas?</legend>
       <label><input type="radio" name="q11" value="a"> A. Funciones que siempre devuelven el mismo valor.</label>
       <label><input type="radio" name="q11" value="b"> B. Funciones definidas utilizando valores de la propia función en casos anteriores o más sencillos.</label>
       <label><input type="radio" name="q11" value="c"> C. Funciones que solo se usan en matemáticas y nunca en programación.</label>
       <label><input type="radio" name="q11" value="d"> D. Funciones que no pueden llamarse a sí mismas.</label>
-      <p class="question-feedback" id="feedback-q11"></p>
+      <div class="question-feedback" id="feedback-q11">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 12 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="El caso base determina la condición de parada con un resultado directo conocido, evitando llamadas recursivas infinitas y errores de pila.">
       <legend>12. ¿Para qué sirve el caso base en una definición recursiva?</legend>
       <label><input type="radio" name="q12" value="a"> A. Para que la función se ejecute indefinidamente.</label>
       <label><input type="radio" name="q12" value="b"> B. Para establecer el valor inicial o el caso que se resuelve directamente.</label>
       <label><input type="radio" name="q12" value="c"> C. Para calcular todos los valores futuros sin ninguna regla.</label>
       <label><input type="radio" name="q12" value="d"> D. Para provocar un error cuando se llama a la función.</label>
-      <p class="question-feedback" id="feedback-q12"></p>
+      <div class="question-feedback" id="feedback-q12">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 13 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="El paso recursivo formula el mecanismo o regla general que vincula el resultado del problema actual con el de los subproblemas anteriores.">
       <legend>13. ¿Qué se define en el paso recursivo?</legend>
       <label><input type="radio" name="q13" value="a"> A. El valor inicial de la función.</label>
       <label><input type="radio" name="q13" value="b"> B. Únicamente el mensaje de error.</label>
       <label><input type="radio" name="q13" value="c"> C. Una regla para obtener un valor a partir de uno o varios valores anteriores.</label>
       <label><input type="radio" name="q13" value="d"> D. El tiempo exacto que tardará el programa.</label>
-      <p class="question-feedback" id="feedback-q13"></p>
+      <div class="question-feedback" id="feedback-q13">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 14 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Ambos conceptos son complementarios: la recursión permite construir estructuras o algoritmos, mientras que la inducción demuestra que son correctos.">
       <legend>14. ¿Cómo se relacionan la recursión y la inducción matemática?</legend>
       <label><input type="radio" name="q14" value="a"> A. No tienen ninguna relación.</label>
       <label><input type="radio" name="q14" value="b"> B. Son exactamente lo mismo.</label>
       <label><input type="radio" name="q14" value="c"> C. La inducción puede utilizarse para demostrar que una definición o función recursiva cumple una propiedad.</label>
       <label><input type="radio" name="q14" value="d"> D. La inducción es siempre un caso especial de recursión.</label>
-      <p class="question-feedback" id="feedback-q14"></p>
+      <div class="question-feedback" id="feedback-q14">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 15 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Un árbol binario posee una naturaleza recursiva intrínseca: se compone de un nodo raíz conectado a dos subárboles (izquierdo y derecho) que son, a su vez, árboles binarios.">
       <legend>15. ¿Cuál de estas estructuras puede definirse recursivamente?</legend>
       <label><input type="radio" name="q15" value="a"> A. Una ecuación lineal.</label>
       <label><input type="radio" name="q15" value="b"> B. Un árbol binario.</label>
       <label><input type="radio" name="q15" value="c"> C. Una función cuadrática.</label>
       <label><input type="radio" name="q15" value="d"> D. Una operación aritmética aislada.</label>
-      <p class="question-feedback" id="feedback-q15"></p>
+      <div class="question-feedback" id="feedback-q15">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
     <div class="quiz-actions">
@@ -437,8 +501,7 @@ Esto es una definición recursiva: una estructura se construye a partir de estru
 La idea completa es:
 
 \[
-P(n_0)\quad\text{y}\quad
-P(n)\Rightarrow P(n+1)
+P(n_0)\quad\text{y}\quad P(n)\Rightarrow P(n+1)
 \]
 
 Así puedes concluir que la propiedad se cumple para todos los naturales desde \(n_0\).
@@ -472,27 +535,126 @@ Ejemplo del factorial:
 **Qué debes memorizar sí o sí:** caso base, hipótesis inductiva, paso inductivo, diferencia entre inducción ordinaria y fuerte, caso base recursivo y paso recursivo.
 
 <style>
-.quiz-container { border: 1px solid var(--md-default-fg-color--lightest); border-radius: .6rem; padding: 1rem; margin: 1rem 0 2rem; }
-.quiz-progress { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin-bottom: 1rem; padding: .7rem; background: var(--md-code-bg-color); border-radius: .4rem; }
-.quiz-question { border: 1px solid var(--md-default-fg-color--lightest); border-radius: .5rem; padding: .8rem 1rem; margin: 1rem 0; min-width: 0; }
-.quiz-question legend { font-weight: 700; padding: 0 .25rem; }
-.quiz-question label { display: block; padding: .42rem .5rem; border-radius: .3rem; cursor: pointer; }
-.quiz-question label:hover { background: var(--md-code-bg-color); }
-.quiz-question input { margin-right: .45rem; }
-.quiz-question.is-correct { border: 2px solid #2e7d32; }
-.quiz-question.is-wrong { border: 2px solid #c62828; }
-.question-feedback { margin: .5rem 0 0; font-weight: 700; }
-.is-correct .question-feedback { color: #2e7d32; }
-.is-wrong .question-feedback { color: #c62828; }
-.quiz-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
-.quiz-result { margin-top: 1rem; padding: 1rem; border-radius: .5rem; background: var(--md-code-bg-color); }
-.solution { margin: .6rem 0; padding: .65rem .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: .4rem; }
-.solution summary { cursor: pointer; font-weight: 700; }
+/* Estilos globales de la plantilla de tests MkDocs */
+.quiz-container {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .6rem;
+  padding: 1rem;
+  margin: 1rem 0 2rem;
+}
+.quiz-progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  padding: .7rem 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: .4rem;
+}
+.quiz-question {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  min-width: 0;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.quiz-question legend {
+  font-weight: 700;
+  padding: 0 .25rem;
+}
+.quiz-question label {
+  display: block;
+  padding: .45rem .6rem;
+  margin: .2rem 0;
+  border-radius: .3rem;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.quiz-question label:hover {
+  background: var(--md-code-bg-color);
+}
+.quiz-question input {
+  margin-right: .5rem;
+}
+
+/* Retroalimentación en tiempo de corrección */
+.quiz-question.is-correct {
+  border: 2px solid #2e7d32;
+}
+.quiz-question.is-wrong {
+  border: 2px solid #c62828;
+}
+
+.question-feedback {
+  display: none;
+  margin-top: .8rem;
+  padding: .75rem;
+  border-left: 4px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  border-radius: .3rem;
+}
+.is-correct .question-feedback {
+  display: block;
+  border-left-color: #2e7d32;
+}
+.is-wrong .question-feedback {
+  display: block;
+  border-left-color: #c62828;
+}
+
+.feedback-status {
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.is-correct .feedback-status {
+  color: #2e7d32;
+}
+.is-wrong .feedback-status {
+  color: #c62828;
+}
+
+.feedback-exp {
+  font-size: .92rem;
+  line-height: 1.45;
+  color: var(--md-default-fg-color);
+}
+
+/* Botones y área de resultados */
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.2rem;
+}
+.quiz-result {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: .5rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Desplegables de soluciones completas */
+.solution {
+  margin: .6rem 0;
+  padding: .65rem .9rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+}
+.solution summary {
+  cursor: pointer;
+  font-weight: 700;
+}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("quiz-form");
+  if (!form || form.dataset.initialized === "true") return;
+  form.dataset.initialized = "true";
+
   const questions = Array.from(document.querySelectorAll("#quiz-form .quiz-question"));
   const count = document.getElementById("quiz-count");
   const progressText = document.getElementById("quiz-progress-text");
@@ -501,9 +663,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const message = document.getElementById("quiz-message");
   const summary = document.getElementById("quiz-summary");
   const reset = document.getElementById("quiz-reset");
-
-  if (!form || form.dataset.initialized === "true") return;
-  form.dataset.initialized = "true";
 
   function updateProgress() {
     const answered = questions.filter(q => {
@@ -527,7 +686,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const number = index + 1;
       const selected = form.querySelector('input[name="q' + number + '"]:checked');
       const answer = question.dataset.answer;
-      const feedback = document.getElementById("feedback-q" + number);
+      const shortExp = question.dataset.shortExp || "";
+      const statusEl = question.querySelector(".feedback-status");
+      const expEl = question.querySelector(".feedback-exp");
       const labels = question.querySelectorAll("label");
 
       question.classList.remove("is-correct", "is-wrong");
@@ -536,15 +697,17 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!selected) {
         unanswered++;
         question.classList.add("is-wrong");
-        feedback.textContent = "Sin responder. La respuesta correcta es " + answer.toUpperCase() + ".";
+        statusEl.textContent = "✗ Sin responder. Respuesta correcta: " + answer.toUpperCase();
       } else if (selected.value === answer) {
         correct++;
         question.classList.add("is-correct");
-        feedback.textContent = "¡Correcto!";
+        statusEl.textContent = "✓ ¡Correcto!";
       } else {
         question.classList.add("is-wrong");
-        feedback.textContent = "Incorrecto. La respuesta correcta es " + answer.toUpperCase() + ".";
+        statusEl.textContent = "✗ Incorrecto. Respuesta correcta: " + answer.toUpperCase();
       }
+
+      expEl.textContent = shortExp;
 
       const correctLabel = Array.from(labels).find(label =>
         label.querySelector("input").value === answer
@@ -556,24 +719,30 @@ document.addEventListener("DOMContentLoaded", function () {
     scoreText.textContent = correct + " de " + questions.length + " correctas (" + percent + "%).";
     message.textContent = percent >= 90 ? "¡Excelente! Dominas muy bien el tema." :
       percent >= 70 ? "¡Buen trabajo! Repasa los fallos para afianzar lo aprendido." :
-      percent >= 50 ? "Vas por buen camino. Lee las explicaciones y vuelve a intentarlo." :
-      "Te conviene repasar las explicaciones con calma y repetir el test.";
+      percent >= 50 ? "Vas por buen camino. Lee las explicaciones cortas y detalladas para afianzar." :
+      "Te conviene repasar las explicaciones detalladas con calma y repetir el test.";
     summary.textContent = unanswered
       ? "Has dejado " + unanswered + " pregunta(s) sin responder."
       : "Has respondido todas las preguntas.";
 
     result.hidden = false;
     result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    // Renderizar MathJax/KaTeX si está presente en la página tras actualizar textos
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
   });
 
   reset.addEventListener("click", function () {
     form.reset();
-    questions.forEach(function (question, index) {
+    questions.forEach(function (question) {
       question.classList.remove("is-correct", "is-wrong");
       question.querySelectorAll("label").forEach(label => {
         label.style.fontWeight = "normal";
       });
-      document.getElementById("feedback-q" + (index + 1)).textContent = "";
+      question.querySelector(".feedback-status").textContent = "";
+      question.querySelector(".feedback-exp").textContent = "";
     });
     result.hidden = true;
     updateProgress();

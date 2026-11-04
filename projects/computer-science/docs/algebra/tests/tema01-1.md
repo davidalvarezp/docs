@@ -1,9 +1,13 @@
-# Test de repaso — Tema 1: Lógica y demostraciones
+---
+title: Test Tema 1 - Lógica y demostraciones
+---
 
-Este test está basado en las 15 preguntas del cuestionario original. Tiene **una sola respuesta correcta por pregunta**. Al terminar, pulsa **Comprobar respuestas** para ver tu nota, qué has acertado y qué has fallado. Después podrás estudiar la explicación sencilla de cada pregunta.
+# Test Tema 1: Lógica y demostraciones
 
-!!! tip "Cómo practicar"
-    Intenta responder sin mirar las explicaciones. Si fallas una pregunta, lee su explicación y vuelve a hacer el test.
+Este test está basado en las 15 preguntas del cuestionario original. Tiene **una sola respuesta correcta por pregunta**. Selecciona tus respuestas y pulsa **Comprobar respuestas** para conocer tu nota, ver la explicación rápida de cada pregunta y consultar al final las soluciones explicadas paso a paso.
+
+!!! tip "Cómo estudiar"
+    Haz primero el test sin mirar las soluciones. Al corregirlo, lee la **explicación rápida** de cada pregunta y, si necesitas profundizar, despliega la **explicación detallada paso a paso** al final de la página.
 
 <div id="quiz-tema1" class="quiz-container">
 
@@ -13,140 +17,200 @@ Este test está basado en las 15 preguntas del cuestionario original. Tiene **un
   </div>
 
   <form id="quiz-form">
-
-    <fieldset class="quiz-question" data-answer="b">
+    
+    <!-- Pregunta 1 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="La disyunción inclusiva p ∨ q solo requiere que al menos uno de sus componentes sea verdadero para que toda la proposición resulte verdadera.">
       <legend>1. ¿Cuándo es verdadera la proposición \(p \lor q\)?</legend>
       <label><input type="radio" name="q1" value="a"> A. Siempre que \(q\) no sea falsa.</label>
       <label><input type="radio" name="q1" value="b"> B. Cuando al menos una de las dos proposiciones es verdadera.</label>
       <label><input type="radio" name="q1" value="c"> C. Siempre que \(p\) no sea falsa.</label>
       <label><input type="radio" name="q1" value="d"> D. Siempre; es una tautología.</label>
-      <p class="question-feedback" id="feedback-q1"></p>
+      <div class="question-feedback" id="feedback-q1">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 2 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Negar que una propiedad se cumpla para todos los elementos (¬∀x P(x)) equivale a afirmar que existe al menos un elemento que no la cumple (∃x ¬P(x)).">
       <legend>2. ¿Qué significa \(\neg(\forall x\, P(x)) \iff \exists x\,\neg P(x)\)?</legend>
       <label><input type="radio" name="q2" value="a"> A. Para todo \(x\), no se cumple \(P(x)\).</label>
       <label><input type="radio" name="q2" value="b"> B. Existe un \(x\) para el que se cumple \(P(x)\).</label>
       <label><input type="radio" name="q2" value="c"> C. No todos los valores de \(x\) cumplen \(P(x)\).</label>
       <label><input type="radio" name="q2" value="d"> D. Todos los valores de \(x\) cumplen \(P(x)\).</label>
-      <p class="question-feedback" id="feedback-q2"></p>
+      <div class="question-feedback" id="feedback-q2">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 3 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="El predicado o relación expresa la propiedad o vínculo que une a los sujetos («No es más grande que»), mientras que «Saturno» y «la Tierra» actúan como términos/argumentos.">
       <legend>3. En la frase «Saturno no es más grande que la Tierra», ¿qué parte expresa el predicado o relación?</legend>
       <label><input type="radio" name="q3" value="a"> A. «Saturno».</label>
       <label><input type="radio" name="q3" value="b"> B. «No es más grande que».</label>
       <label><input type="radio" name="q3" value="c"> C. «La Tierra».</label>
       <label><input type="radio" name="q3" value="d"> D. La frase no contiene ningún predicado.</label>
-      <p class="question-feedback" id="feedback-q3"></p>
+      <div class="question-feedback" id="feedback-q3">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 4 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Es el principio del tercero excluido: p ∨ ¬p siempre es verdadera, ya que si p es falsa, su negación ¬p es necesariamente verdadera (y viceversa).">
       <legend>4. ¿Qué tipo de proposición es \(p \lor \neg p\)?</legend>
       <label><input type="radio" name="q4" value="a"> A. Una contradicción.</label>
       <label><input type="radio" name="q4" value="b"> B. Una tautología.</label>
       <label><input type="radio" name="q4" value="c"> C. Una contingencia.</label>
       <label><input type="radio" name="q4" value="d"> D. No se puede saber.</label>
-      <p class="question-feedback" id="feedback-q4"></p>
+      <div class="question-feedback" id="feedback-q4">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="d">
+    <!-- Pregunta 5 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Negar ∃x equivale a ∀x ¬(...). Al negar la implicación P(x) ⇒ Q(x) se obtiene que P(x) es verdadera Y Q(x) es falsa: P(x) ∧ ¬Q(x).">
       <legend>5. ¿A qué expresión equivale \(\neg\exists x\,(P(x)\Rightarrow Q(x))\)?</legend>
       <label><input type="radio" name="q5" value="a"> A. \(\exists x\,(P(x)\Rightarrow Q(x))\).</label>
       <label><input type="radio" name="q5" value="b"> B. \(\forall x\,(P(x)\lor\neg Q(x))\).</label>
       <label><input type="radio" name="q5" value="c"> C. \(\forall x\,(\neg P(x)\lor Q(x))\).</label>
       <label><input type="radio" name="q5" value="d"> D. \(\forall x\,(P(x)\land\neg Q(x))\).</label>
-      <p class="question-feedback" id="feedback-q5"></p>
+      <div class="question-feedback" id="feedback-q5">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="a">
+    <!-- Pregunta 6 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Esta fórmula representa el esquema formal de Modus Tollens. Al ser una regla de inferencia lógica válida, su tabla de verdad da siempre verdadero (tautología).">
       <legend>6. Suponiendo que la expresión es \(((p\Rightarrow q)\land\neg q)\Rightarrow\neg p\), ¿qué podemos afirmar?</legend>
       <label><input type="radio" name="q6" value="a"> A. Es una tautología.</label>
       <label><input type="radio" name="q6" value="b"> B. Es una contradicción.</label>
       <label><input type="radio" name="q6" value="c"> C. Solo es verdadera cuando \(p\) y \(q\) son verdaderas.</label>
       <label><input type="radio" name="q6" value="d"> D. Siempre es falsa.</label>
-      <p class="question-feedback" id="feedback-q6"></p>
+      <div class="question-feedback" id="feedback-q6">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="a">
+    <!-- Pregunta 7 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="NAND es conmutativa porque p NAND q ≡ ¬(p ∧ q) ≡ ¬(q ∧ p) ≡ q NAND p. Sin embargo, no cumple la propiedad asociativa.">
       <legend>7. La operación NAND, definida como \(p\ \text{NAND}\ q=\neg(p\land q)\), es:</legend>
       <label><input type="radio" name="q7" value="a"> A. Conmutativa.</label>
       <label><input type="radio" name="q7" value="b"> B. Asociativa.</label>
       <label><input type="radio" name="q7" value="c"> C. Siempre verdadera.</label>
       <label><input type="radio" name="q7" value="d"> D. Siempre falsa.</label>
-      <p class="question-feedback" id="feedback-q7"></p>
+      <div class="question-feedback" id="feedback-q7">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 8 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Es la formulación exacta de la Ley de De Morgan para la conjunción: la negación de una conjunción equivale a la disyunción de las negaciones.">
       <legend>8. ¿Es verdadera la equivalencia \(\neg(P(x)\land Q(x))\iff(\neg P(x)\lor\neg Q(x))\)?</legend>
       <label><input type="radio" name="q8" value="a"> A. No; la parte derecha siempre es falsa.</label>
       <label><input type="radio" name="q8" value="b"> B. No; solo funciona cuando ambas son verdaderas.</label>
       <label><input type="radio" name="q8" value="c"> C. Sí; es una de las leyes de De Morgan.</label>
       <label><input type="radio" name="q8" value="d"> D. No; es una contradicción.</label>
-      <p class="question-feedback" id="feedback-q8"></p>
+      <div class="question-feedback" id="feedback-q8">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="b">
+    <!-- Pregunta 9 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Al aplicar la definición p NAND p = ¬(p ∧ p), y sabiendo por idempotencia que p ∧ p ≡ p, la expresión se reduce directamente a ¬p.">
       <legend>9. ¿Es cierto que \(p\ \text{NAND}\ p\iff\neg p\)?</legend>
       <label><input type="radio" name="q9" value="a"> A. No son equivalentes.</label>
       <label><input type="radio" name="q9" value="b"> B. Sí, son lógicamente equivalentes.</label>
       <label><input type="radio" name="q9" value="c"> C. Falta información.</label>
       <label><input type="radio" name="q9" value="d"> D. Solo son equivalentes cuando \(p\) es verdadera.</label>
-      <p class="question-feedback" id="feedback-q9"></p>
+      <div class="question-feedback" id="feedback-q9">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="d">
+    <!-- Pregunta 10 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Modus Tollens (o negación del consecuente) establece que si la implicación p ⇒ q es válida y la consecuencia q es falsa, la hipótesis p debe ser necesariamente falsa.">
       <legend>10. La expresión \(((p\Rightarrow q)\land\neg q)\Rightarrow\neg p\) representa un razonamiento conocido como:</legend>
       <label><input type="radio" name="q10" value="a"> A. Afirmación del consecuente.</label>
       <label><input type="radio" name="q10" value="b"> B. Negación del antecedente.</label>
       <label><input type="radio" name="q10" value="c"> C. Silogismo disyuntivo.</label>
       <label><input type="radio" name="q10" value="d"> D. Modus tollens (razonamiento por contraposición).</label>
-      <p class="question-feedback" id="feedback-q10"></p>
+      <div class="question-feedback" id="feedback-q10">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="d">
+    <!-- Pregunta 11 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Los términos premisa/hipótesis/antecedente para p y consecuencia/conclusión para q son sinónimos estándar utilizados en lógica formal.">
       <legend>11. En una implicación \(p\Rightarrow q\):</legend>
       <label><input type="radio" name="q11" value="a"> A. \(p\) es la premisa.</label>
       <label><input type="radio" name="q11" value="b"> B. \(q\) es la consecuencia.</label>
       <label><input type="radio" name="q11" value="c"> C. \(p\) es la hipótesis o antecedente.</label>
       <label><input type="radio" name="q11" value="d"> D. Todas las anteriores son correctas.</label>
-      <p class="question-feedback" id="feedback-q11"></p>
+      <div class="question-feedback" id="feedback-q11">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="d">
+    <!-- Pregunta 12 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Se puede probar directamente desarrollando (2k+1)² = 2(2k²+2k)+1, o por contraposición demostrando que si n es par (n=2k), entonces n² es par (4k²).">
       <legend>12. «Si \(n\) es un entero impar, entonces \(n^2\) es impar». ¿Cómo se puede demostrar?</legend>
       <label><input type="radio" name="q12" value="a"> A. Solo de forma directa.</label>
       <label><input type="radio" name="q12" value="b"> B. Solo por contraposición.</label>
       <label><input type="radio" name="q12" value="c"> C. No se puede demostrar.</label>
       <label><input type="radio" name="q12" value="d"> D. Tanto de forma directa como por contraposición.</label>
-      <p class="question-feedback" id="feedback-q12"></p>
+      <div class="question-feedback" id="feedback-q12">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="d">
+    <!-- Pregunta 13 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="A diferencia de la inducción o la observación empírica, las demostraciones directas e indirectas son deductivas: garantizan la verdad formal partiendo de premisas válidas.">
       <legend>13. Los métodos de demostración directo e indirecto son:</legend>
       <label><input type="radio" name="q13" value="a"> A. Métodos inductivos.</label>
       <label><input type="radio" name="q13" value="b"> B. Métodos que se basan en probar muchos ejemplos.</label>
       <label><input type="radio" name="q13" value="c"> C. Métodos que van de lo particular a lo general.</label>
       <label><input type="radio" name="q13" value="d"> D. Métodos deductivos; parten de hipótesis o hechos aceptados para llegar a una conclusión.</label>
-      <p class="question-feedback" id="feedback-q13"></p>
+      <div class="question-feedback" id="feedback-q13">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="d">
+    <!-- Pregunta 14 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="¬p ⇒ ¬q es la INVERSA de p ⇒ q (no equivalente). La contraposición equivalente es ¬q ⇒ ¬p (invierte el orden y niega ambas partes).">
       <legend>14. Si sabemos que \(p\Rightarrow q\) es verdadera, ¿podemos concluir que \(\neg p\Rightarrow\neg q\) también lo es?</legend>
       <label><input type="radio" name="q14" value="a"> A. Sí, siempre.</label>
       <label><input type="radio" name="q14" value="b"> B. Sí, porque es la contraposición.</label>
       <label><input type="radio" name="q14" value="c"> C. Sí, porque negar las dos partes no cambia la implicación.</label>
       <label><input type="radio" name="q14" value="d"> D. No; \(\neg p\Rightarrow\neg q\) es la inversa, no la contraposición.</label>
-      <p class="question-feedback" id="feedback-q14"></p>
+      <div class="question-feedback" id="feedback-q14">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
-    <fieldset class="quiz-question" data-answer="c">
+    <!-- Pregunta 15 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Un error operacional (como dividir entre cero o fallar en un signo) invalida por completo el encadenamiento deductivo, aunque la lógica de fondo sea correcta.">
       <legend>15. Al hacer demostraciones matemáticas debemos prestar atención a:</legend>
       <label><input type="radio" name="q15" value="a"> A. Los errores de aritmética básica.</label>
       <label><input type="radio" name="q15" value="b"> B. Los errores de álgebra básica.</label>
       <label><input type="radio" name="q15" value="c"> C. Tanto los errores aritméticos como los algebraicos.</label>
       <label><input type="radio" name="q15" value="d"> D. Ningún error importa si la conclusión parece correcta.</label>
-      <p class="question-feedback" id="feedback-q15"></p>
+      <div class="question-feedback" id="feedback-q15">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
     </fieldset>
 
     <div class="quiz-actions">
@@ -435,27 +499,116 @@ Por ejemplo, no podemos decir que \(2=1\) mediante una operación ilegal. Si div
 | Contraposición | \(p\Rightarrow q\) equivale a \(\neg q\Rightarrow\neg p\). |
 
 <style>
-.quiz-container { border: 1px solid var(--md-default-fg-color--lightest); border-radius: .6rem; padding: 1rem; margin: 1rem 0 2rem; }
-.quiz-progress { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin-bottom: 1rem; padding: .7rem; background: var(--md-code-bg-color); border-radius: .4rem; }
-.quiz-question { border: 1px solid var(--md-default-fg-color--lightest); border-radius: .5rem; padding: .8rem 1rem; margin: 1rem 0; min-width: 0; }
-.quiz-question legend { font-weight: 700; padding: 0 .25rem; }
-.quiz-question label { display: block; padding: .42rem .5rem; border-radius: .3rem; cursor: pointer; }
-.quiz-question label:hover { background: var(--md-code-bg-color); }
-.quiz-question input { margin-right: .45rem; }
-.quiz-question.is-correct { border: 2px solid #2e7d32; }
-.quiz-question.is-wrong { border: 2px solid #c62828; }
-.question-feedback { margin: .5rem 0 0; font-weight: 700; }
-.is-correct .question-feedback { color: #2e7d32; }
-.is-wrong .question-feedback { color: #c62828; }
-.quiz-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; }
-.quiz-result { margin-top: 1rem; padding: 1rem; border-radius: .5rem; background: var(--md-code-bg-color); }
-.solution { margin: .6rem 0; padding: .65rem .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: .4rem; }
-.solution summary { cursor: pointer; font-weight: 700; }
+.quiz-container {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .6rem;
+  padding: 1rem;
+  margin: 1rem 0 2rem;
+}
+.quiz-progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  padding: .7rem 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: .4rem;
+}
+.quiz-question {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  min-width: 0;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.quiz-question legend {
+  font-weight: 700;
+  padding: 0 .25rem;
+}
+.quiz-question label {
+  display: block;
+  padding: .45rem .6rem;
+  margin: .2rem 0;
+  border-radius: .3rem;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.quiz-question label:hover {
+  background: var(--md-code-bg-color);
+}
+.quiz-question input {
+  margin-right: .5rem;
+}
+.quiz-question.is-correct {
+  border: 2px solid #2e7d32;
+}
+.quiz-question.is-wrong {
+  border: 2px solid #c62828;
+}
+.question-feedback {
+  display: none;
+  margin-top: .8rem;
+  padding: .75rem;
+  border-left: 4px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  border-radius: .3rem;
+}
+.is-correct .question-feedback {
+  display: block;
+  border-left-color: #2e7d32;
+}
+.is-wrong .question-feedback {
+  display: block;
+  border-left-color: #c62828;
+}
+.feedback-status {
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.is-correct .feedback-status {
+  color: #2e7d32;
+}
+.is-wrong .feedback-status {
+  color: #c62828;
+}
+.feedback-exp {
+  font-size: .92rem;
+  line-height: 1.45;
+  color: var(--md-default-fg-color);
+}
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.2rem;
+}
+.quiz-result {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: .5rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+.solution {
+  margin: .6rem 0;
+  padding: .65rem .9rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+}
+.solution summary {
+  cursor: pointer;
+  font-weight: 700;
+}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("quiz-form");
+  if (!form || form.dataset.initialized === "true") return;
+  form.dataset.initialized = "true";
+
   const questions = Array.from(document.querySelectorAll("#quiz-form .quiz-question"));
   const count = document.getElementById("quiz-count");
   const progressText = document.getElementById("quiz-progress-text");
@@ -465,13 +618,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const summary = document.getElementById("quiz-summary");
   const reset = document.getElementById("quiz-reset");
 
-  if (!form || form.dataset.initialized === "true") return;
-  form.dataset.initialized = "true";
-
   function updateProgress() {
-    const answered = questions.filter(q => form.querySelector('input[name="' + q.querySelector("input").name + '"]:checked')).length;
+    const answered = questions.filter(q => {
+      const input = q.querySelector("input");
+      return form.querySelector('input[name="' + input.name + '"]:checked');
+    }).length;
     count.textContent = answered + " de " + questions.length + " respondidas";
-    progressText.textContent = answered === questions.length ? "¡Ya has respondido todas!" : "Te faltan " + (questions.length - answered) + " por responder.";
+    progressText.textContent = answered === questions.length
+      ? "¡Ya has respondido todas!"
+      : "Te faltan " + (questions.length - answered) + " por responder.";
   }
 
   form.addEventListener("change", updateProgress);
@@ -485,7 +640,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const number = index + 1;
       const selected = form.querySelector('input[name="q' + number + '"]:checked');
       const answer = question.dataset.answer;
-      const feedback = document.getElementById("feedback-q" + number);
+      const shortExp = question.dataset.shortExp || "";
+      const statusEl = question.querySelector(".feedback-status");
+      const expEl = question.querySelector(".feedback-exp");
       const labels = question.querySelectorAll("label");
 
       question.classList.remove("is-correct", "is-wrong");
@@ -494,17 +651,21 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!selected) {
         unanswered++;
         question.classList.add("is-wrong");
-        feedback.textContent = "Sin responder. La respuesta correcta es " + answer.toUpperCase() + ".";
+        statusEl.textContent = "✗ Sin responder. Respuesta correcta: " + answer.toUpperCase();
       } else if (selected.value === answer) {
         correct++;
         question.classList.add("is-correct");
-        feedback.textContent = "¡Correcto!";
+        statusEl.textContent = "✓ ¡Correcto!";
       } else {
         question.classList.add("is-wrong");
-        feedback.textContent = "Incorrecto. La respuesta correcta es " + answer.toUpperCase() + ".";
+        statusEl.textContent = "✗ Incorrecto. Respuesta correcta: " + answer.toUpperCase();
       }
 
-      const correctLabel = Array.from(labels).find(label => label.querySelector("input").value === answer);
+      expEl.textContent = shortExp;
+
+      const correctLabel = Array.from(labels).find(label =>
+        label.querySelector("input").value === answer
+      );
       if (correctLabel) correctLabel.style.fontWeight = "700";
     });
 
@@ -512,19 +673,29 @@ document.addEventListener("DOMContentLoaded", function () {
     scoreText.textContent = correct + " de " + questions.length + " correctas (" + percent + "%).";
     message.textContent = percent >= 90 ? "¡Excelente! Dominas muy bien el tema." :
       percent >= 70 ? "¡Buen trabajo! Repasa los fallos para afianzar lo aprendido." :
-      percent >= 50 ? "Vas por buen camino. Lee las explicaciones y vuelve a intentarlo." :
-      "Te conviene repasar las explicaciones con calma y repetir el test.";
-    summary.textContent = unanswered ? "Has dejado " + unanswered + " pregunta(s) sin responder." : "Has respondido todas las preguntas.";
+      percent >= 50 ? "Vas por buen camino. Lee las explicaciones cortas y detalladas para afianzar." :
+      "Te conviene repasar las explicaciones detalladas con calma y repetir el test.";
+    summary.textContent = unanswered
+      ? "Has dejado " + unanswered + " pregunta(s) sin responder."
+      : "Has respondido todas las preguntas.";
+
     result.hidden = false;
     result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
   });
 
   reset.addEventListener("click", function () {
     form.reset();
-    questions.forEach(function (question, index) {
+    questions.forEach(function (question) {
       question.classList.remove("is-correct", "is-wrong");
-      question.querySelectorAll("label").forEach(label => { label.style.fontWeight = "normal"; });
-      document.getElementById("feedback-q" + (index + 1)).textContent = "";
+      question.querySelectorAll("label").forEach(label => {
+        label.style.fontWeight = "normal";
+      });
+      question.querySelector(".feedback-status").textContent = "";
+      question.querySelector(".feedback-exp").textContent = "";
     });
     result.hidden = true;
     updateProgress();

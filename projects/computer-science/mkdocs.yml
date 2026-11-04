@@ -168,7 +168,7 @@ markdown_extensions:
 
 extra_javascript:
   # Configuración MathJax: siempre antes del motor
-  - javascripts/mathjax.js
+  - assets/js/mathjax.js
 
   # Renderizado matemático
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
@@ -177,10 +177,10 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
 
   # Lógica de los tests interactivos
-#  - javascripts/quiz.js
+#  - assets/js/quiz.js
 
   # Cerrar submenus anteriores
-  - javascripts/navigation.js
+  - assets/js/navigation.js
 
 # --------------------------------------------------
 # METADATOS Y REDES SOCIALES
@@ -232,51 +232,45 @@ extra:
 # --------------------------------------------------
 
 nav:
-  - Docs: https://davidalvarezp.com/docs/
-
   - Inicio: index.md
 
   - Álgebra y Matemática Discreta:
-      - Visión general: algebra/index.md
+      - Inicio: algebra/index.md
       - Tema 01: 
         - Inicio: algebra/tema01/index.md
       - Tema 02:
         - Inicio: algebra/tema02/index.md
       - Tema 03:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema03/index.md
       - Tema 04:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema04/index.md
       - Tema 05:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema05/index.md
       - Tema 06:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema06/index.md
       - Tema 07:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema07/index.md
       - Tema 08:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema08/index.md
       - Tema 09:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema09/index.md
       - Tema 10:
-        - Inicio: algebra/index.md
+        - Inicio: algebra/tema10/index.md
       - Tests:
-        - Inicio: algebra/tests/tema01/test01.md
-        - Tema 01:
-          - Test 01: algebra/tests/tema01/test01.md
-        - Tema 02:
-          - Test 01: algebra/tests/tema02/test01.md
-        - Tema 03:
-          - Test 01: algebra/tests/tema03/test01.md
-        - Tema 04:
-          - Test 01: algebra/tests/tema04/test01.md
-        - Tema 05:
-          - Test 01: algebra/tests/tema05/test01.md
-        - Tema 06:
-          - Test 01: algebra/tests/tema06/test01.md
-        - Tema 07:
-          - Test 01: algebra/tests/tema07/test01.md
-        - Tema 08:
-          - Test 01: algebra/tests/tema08/test01.md
-        - Tema 09:
-          - Test 01: algebra/tests/tema09/test01.md
-        - Tema 10:
-          - Test 01: algebra/tests/tema10/test01.md
+        - Tareas:
+          - Tarea 01.1: algebra/tests/tarea01-1.md
+          - Tarea 01.2: algebra/tests/tarea01-2.md
+          - Tarea 02.1: algebra/tests/tarea02-1.md
+          - Tarea 02.2: algebra/tests/tarea02-2.md
+        - Temario:
+          - Tema 01.1: algebra/tests/tema01-1.md
+          - Tema 02.1: algebra/tests/tema02-1.md
+          - Tema 03.1: algebra/tests/tema03-1.md
+          - Tema 04.1: algebra/tests/tema04-1.md
+          - Tema 05.1: algebra/tests/tema05-1.md
+          - Tema 06.1: algebra/tests/tema06-1.md
+          - Tema 07.1: algebra/tests/tema07-1.md
+          - Tema 08.1: algebra/tests/tema08-1.md
+          - Tema 09.1: algebra/tests/tema09-1.md
+          - Tema 10.1: algebra/tests/tema10-1.md
+  - Docs: https://davidalvarezp.com/docs/

@@ -51,7 +51,7 @@ Contenidos:
 - Demostración directa, contraposición y contradicción.
 
 **Recursos:**
-- [Test de repaso — Tema 1: Lógica y demostraciones](tests/tema01/test01.md)
+- [Test de repaso — Tema 1: Lógica y demostraciones]()
 
 ### 2. Teoría de conjuntos
 
