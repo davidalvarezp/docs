@@ -1,0 +1,3210 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación académica del Bachelor Degree in Computer Science. Apuntes, teoría, ejercicios resueltos, tests interactivos y recursos de aprendizaje sobre ciencias de la computación, matemáticas, programación, algoritmos, sistemas y tecnologías informáticas.">
+      
+      
+        <meta name="author" content="dap">
+      
+      
+        <link rel="canonical" href="https://davidalvarezp.com/docs/computer-science/algebra/tests/tarea02-2/">
+      
+      
+        <link rel="prev" href="../tarea02-1/">
+      
+      
+        <link rel="next" href="../tema01-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="/docs/assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Test Tarea 2.2 - Aritmética Modular, Teorema Chino del Resto y Teoría de Conjuntos - Bachelor Degree in Computer Science</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-F0G1797238"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-F0G1797238",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-F0G1797238",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-tarea-22-teoria-de-numeros-aritmetica-modular-y-operaciones-con-conjuntos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Bachelor Degree in Computer Science" class="md-header__button md-logo" aria-label="Bachelor Degree in Computer Science" data-md-component="logo">
+      
+  <img src="/docs/assets/img/logo.webp" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bachelor Degree in Computer Science
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Test Tarea 2.2 - Aritmética Modular, Teorema Chino del Resto y Teoría de Conjuntos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Álgebra y Matemática Discreta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://davidalvarezp.com/docs/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docs
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Bachelor Degree in Computer Science" class="md-nav__button md-logo" aria-label="Bachelor Degree in Computer Science" data-md-component="logo">
+      
+  <img src="/docs/assets/img/logo.webp" alt="logo">
+
+    </a>
+    Bachelor Degree in Computer Science
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Álgebra y Matemática Discreta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Álgebra y Matemática Discreta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema01/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 01
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 01
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema02/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 02
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 02
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema03/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 03
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 03
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema04/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 04
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 04
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema05/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 05
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 05
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema06/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 06
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 06
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema07/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 07
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 07
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema08/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 08
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 08
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema09/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 09
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 09
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema10/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 10
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 10
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tests
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_1" id="__nav_2_12_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tareas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_12_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tareas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea01-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 01.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea01-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 01.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea02-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 02.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 02.2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 02.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#soluciones-explicadas-aprende-pregunta-por-pregunta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soluciones explicadas: aprende pregunta por pregunta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuleta-final-formulas-y-leyes-avanzadas-para-la-tarea-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuleta final: fórmulas y leyes avanzadas para la Tarea 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chuleta final: fórmulas y leyes avanzadas para la Tarea 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-algebra-de-conjuntos-leyes-fundamentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Álgebra de Conjuntos (Leyes fundamentales)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-conjunto-potencia-y-producto-cartesiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Conjunto Potencia y Producto Cartesiano
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-aritmetica-modular-y-teoremas-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aritmética Modular y Teoremas Clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_2" id="__nav_2_12_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema01-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 01.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema02-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 02.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema03-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 03.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema04-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 04.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema05-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 05.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema06-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 06.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema07-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 07.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema08-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 08.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema09-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 09.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema10-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 10.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://davidalvarezp.com/docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#soluciones-explicadas-aprende-pregunta-por-pregunta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soluciones explicadas: aprende pregunta por pregunta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuleta-final-formulas-y-leyes-avanzadas-para-la-tarea-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuleta final: fórmulas y leyes avanzadas para la Tarea 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chuleta final: fórmulas y leyes avanzadas para la Tarea 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-algebra-de-conjuntos-leyes-fundamentales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Álgebra de Conjuntos (Leyes fundamentales)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-conjunto-potencia-y-producto-cartesiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Conjunto Potencia y Producto Cartesiano
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-aritmetica-modular-y-teoremas-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aritmética Modular y Teoremas Clave
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Álgebra y Matemática Discreta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../tarea01-1/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Tests
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../tarea01-1/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Tareas
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="test-tarea-22-teoria-de-numeros-aritmetica-modular-y-operaciones-con-conjuntos">Test Tarea 2.2: Teoría de Números, Aritmética Modular y Operaciones con Conjuntos<a class="headerlink" href="#test-tarea-22-teoria-de-numeros-aritmetica-modular-y-operaciones-con-conjuntos" title="Permanent link">&para;</a></h1>
+<p>Este segundo test consta de <strong>30 preguntas teóricas y prácticas completamente nuevas y diferenciadas</strong>, diseñadas con la misma estructura y plantilla global que el resto del curso. Cubre en profundidad los contenidos de la Tarea 2: algoritmo extendido de Euclídes, inversos modulares, teoremas de la teoría de números (Fermat/Euler), resolución paso a paso del Teorema Chino del Resto (TCR), álgebra de conjuntos, propiedades de las operaciones (distributiva, asociativa, absorción), conjunto potencia, diferencia simétrica y representación en diagramas de Venn.</p>
+<div class="admonition info">
+<p class="admonition-title">Puntuación y Criterios de Examen</p>
+<ul>
+<li><strong>Preguntas 1 a 30:</strong> 0,33 puntos por respuesta correcta (Total: <strong>10 puntos</strong>).</li>
+<li><strong>Paso de respuesta única:</strong> Selecciona la opción adecuada para cada pregunta y pulsa <strong>Comprobar respuestas</strong> para calcular tu nota final, ver tus aciertos/fallos y consultar la retroalimentación inmediata.</li>
+</ul>
+</div>
+<div id="quiz-tarea2-v2" class="quiz-container">
+
+  <div class="quiz-progress" aria-live="polite">
+    <strong id="quiz-count">0 de 30 respondidas</strong>
+    <span id="quiz-progress-text">¡Empieza cuando quieras!</span>
+  </div>
+
+  <form id="quiz-form">
+
+    <!-- Pregunta 1 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="La relación de congruencia a ≡ b (mod m) es una relación de equivalencia sobre Z, por lo que satisface las propiedades reflexiva, simétrica y transitiva.">
+      <legend>1. ¿Qué tipo de relación matemática sobre el conjunto de los enteros $\mathbb{Z}$ define la congruencia módulo $m$ ($a \equiv b \pmod m$)?</legend>
+      <label><input type="radio" name="q1" value="a"> A. Una relación de orden parcial strictly asimétrica.</label>
+      <label><input type="radio" name="q1" value="b"> B. Una relación de equivalencia (reflexiva, simétrica y transitiva).</label>
+      <label><input type="radio" name="q1" value="c"> C. Una función biyectiva no invertible.</label>
+      <label><input type="radio" name="q1" value="d"> D. Una operación binaria no asociativa.</label>
+      <div class="question-feedback" id="feedback-q1">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 2 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Por el Teorema de Bézout, existen enteros x, y tales que a·x + m·y = mcd(a, m). Si mcd(a, m) = 1, la ecuación a·x ≡ 1 (mod m) admite solución única en Z_m.">
+      <legend>2. ¿Qué teorema de la teoría de números justifica algebraicamente la existencia del inverso modular $a^{-1} \pmod m$ cuando $\operatorname{mcd}(a, m) = 1$?</legend>
+      <label><input type="radio" name="q2" value="a"> A. El Teorema Fundamental del Cálculo.</label>
+      <label><input type="radio" name="q2" value="b"> B. La Ley de Reciprocidad Cuadrática de Gauss.</label>
+      <label><input type="radio" name="q2" value="c"> C. La Identidad de Bézout ($a \cdot x + m \cdot y = \operatorname{mcd}(a, m)$).</label>
+      <label><input type="radio" name="q2" value="d"> D. La Desigualdad de Cauchy-Schwarz.</label>
+      <div class="question-feedback" id="feedback-q2">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 3 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="El Algoritmo Extendido de Euclídes calcula eficazmente el mcd(a, m) y obtiene los coeficientes de Bézout x e y para determinar el inverso modular.">
+      <legend>3. ¿Qué algoritmo sistemático se utiliza en la práctica computacional para hallar el inverso modular $y_i$ de $M_i$ módulo $m_i$?</legend>
+      <label><input type="radio" name="q3" value="a"> A. El Algoritmo Extendido de Euclídes.</label>
+      <label><input type="radio" name="q3" value="b"> B. La Criba de Eratóstenes.</label>
+      <label><input type="radio" name="q3" value="c"> C. El Algoritmo de Eliminación de Gauss-Jordan.</label>
+      <label><input type="radio" name="q3" value="d"> D. La regla de la cadena para derivadas.</label>
+      <div class="question-feedback" id="feedback-q3">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 4 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Buscamos y en {0..10} tal que 5y ≡ 1 mod 11. Como 5 · 9 = 45 = 4 · 11 + 1 ≡ 1 mod 11, el inverso es 9.">
+      <legend>4. ¿Cuál es el inverso modular de $5$ en $\mathbb{Z}_{11}$ (módulo $11$)?</legend>
+      <label><input type="radio" name="q4" value="a"> A. $2$</label>
+      <label><input type="radio" name="q4" value="b"> B. $4$</label>
+      <label><input type="radio" name="q4" value="c"> C. $7$</label>
+      <label><input type="radio" name="q4" value="d"> D. $9$</label>
+      <div class="question-feedback" id="feedback-q4">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 5 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Si el sistema de congruencias del TCR no fuera de módulos coprimos dos a dos, la solución podría no existir o no ser única módulo M = ∏ m_i.">
+      <legend>5. ¿Qué ocurre si intentamos aplicar la fórmula estándar del TCR a un sistema donde dos módulos $m_1$ y $m_2$ no son coprimos ($\operatorname{mcd}(m_1, m_2) = d > 1$)?</legend>
+      <label><input type="radio" name="q5" value="a"> A. La solución siempre existe y es única módulo $M = m_1 \cdot m_2$.</label>
+      <label><input type="radio" name="q5" value="b"> B. La fórmula estándar falla porque $M_i$ y $m_i$ no serían coprimos y no existiría alguno de los inversos modulares $y_i$.</label>
+      <label><input type="radio" name="q5" value="c"> C. El módulo total $M$ se calcula simplemente elevando al cuadrado la suma de módulos.</label>
+      <label><input type="radio" name="q5" value="d"> D. Automáticamente el sistema se vuelve compatible indeterminado con infinitos parámetros en $\mathbb{R}$.</label>
+      <div class="question-feedback" id="feedback-q5">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 6 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Para m_1=2, m_2=3, m_3=5: M = 2·3·5 = 30. M_1=15, M_2=10, M_3=6. Inversos: 15y_1≡1 mod 2 ⟹ 1y_1≡1 ⟹ y_1=1. 10y_2≡1 mod 3 ⟹ 1y_2≡1 ⟹ y_2=1. 6y_3≡1 mod 5 ⟹ 1y_3≡1 ⟹ y_3=1. Suma x = 1·15·1 + 2·10·1 + 3·6·1 = 15 + 20 + 18 = 53 ≡ 23 mod 30.">
+      <legend>6. Dado el sistema: $x \equiv 1 \pmod 2$, $x \equiv 2 \pmod 3$, $x \equiv 3 \pmod 5$. ¿Cuál es la menor solución positiva $x$?</legend>
+      <label><input type="radio" name="q6" value="a"> A. $x = 13$</label>
+      <label><input type="radio" name="q6" value="b"> B. $x = 17$</label>
+      <label><input type="radio" name="q6" value="c"> C. $x = 23$</label>
+      <label><input type="radio" name="q6" value="d"> D. $x = 29$</label>
+      <div class="question-feedback" id="feedback-q6">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 7 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Cualquier otra solución x' del sistema es congruente con la solución particular x_0 módulo M: x' ≡ x_0 (mod M), formando la clase de congruencia x_0 + k·M para k ∈ Z.">
+      <legend>7. Si $x_0$ es la menor solución positiva obtenida por el TCR para un módulo total $M$, ¿cuál es la forma de la solución general entera?</legend>
+      <label><input type="radio" name="q7" value="a"> A. $x = x_0 + k \cdot M$, con $k \in \mathbb{Z}$.</label>
+      <label><input type="radio" name="q7" value="b"> B. $x = x_0 \cdot M^k$, con $k \in \mathbb{N}$.</label>
+      <label><input type="radio" name="q7" value="c"> C. $x = x_0 \pm \operatorname{mcd}(m_1, m_2)$.</label>
+      <label><input type="radio" name="q7" value="d"> D. $x = \frac{x_0}{k \cdot M}$, con $k \neq 0$.</label>
+      <div class="question-feedback" id="feedback-q7">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 8 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="La función totiente φ(p) para un número primo p vale φ(p) = p - 1, ya que todos los enteros entre 1 y p-1 son coprimos con p.">
+      <legend>8. ¿Cuál es el valor de la función totiente de Euler $\phi(p)$ si $p$ es un número primo?</legend>
+      <label><input type="radio" name="q8" value="a"> A. $\phi(p) = p$</label>
+      <label><input type="radio" name="q8" value="b"> B. $\phi(p) = p + 1$</label>
+      <label><input type="radio" name="q8" value="c"> C. $\phi(p) = p / 2$</label>
+      <label><input type="radio" name="q8" value="d"> D. $\phi(p) = p - 1$</label>
+      <div class="question-feedback" id="feedback-q8">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 9 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="El Pequeño Teorema de Fermat establece que si p es primo y mcd(a, p) = 1, entonces a^(p-1) ≡ 1 (mod p).">
+      <legend>9. ¿Qué establece el Pequeño Teorema de Fermat para un número primo $p$ y un entero $a$ tal que $\operatorname{mcd}(a, p) = 1$?</legend>
+      <label><input type="radio" name="q9" value="a"> A. $a^p \equiv 0 \pmod p$</label>
+      <label><input type="radio" name="q9" value="b"> B. $a^{p-1} \equiv 1 \pmod p$</label>
+      <label><input type="radio" name="q9" value="c"> C. $a+p \equiv 1 \pmod p$</label>
+      <label><input type="radio" name="q9" value="d"> D. $a^{p+1} \equiv a^2 \pmod p$</label>
+      <div class="question-feedback" id="feedback-q9">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 10 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Por el Pequeño Teorema de Fermat, a^(p-1) ≡ 1 mod p ⟹ a · a^(p-2) ≡ 1 mod p, por lo que a^(p-2) es el inverso modular de a mod p.">
+      <legend>10. Apoyándote en el Pequeño Teorema de Fermat, ¿cómo se puede expresar directamente el inverso modular de $a$ módulo un primo $p$?</legend>
+      <label><input type="radio" name="q10" value="a"> A. $a^{-1} \equiv a^{p-2} \pmod p$</label>
+      <label><input type="radio" name="q10" value="b"> B. $a^{-1} \equiv a^{p-1} \pmod p$</label>
+      <label><input type="radio" name="q10" value="c"> C. $a^{-1} \equiv p - a^2 \pmod p$</label>
+      <label><input type="radio" name="q10" value="d"> D. $a^{-1} \equiv a^{p} \pmod p$</label>
+      <div class="question-feedback" id="feedback-q10">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 11 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="En teoría de conjuntos formal, el axioma de extensión establece que dos conjuntos son idénticos si y solo si poseen exactamente los mismos elementos.">
+      <legend>11. ¿Cuándo se considera que dos conjuntos $A$ y $B$ son estrictamente iguales ($A = B$)?</legend>
+      <label><input type="radio" name="q11" value="a"> A. Cuando ambos conjuntos tienen el mismo número de elementos (misma cardinalidad).</label>
+      <label><input type="radio" name="q11" value="b"> B. Cuando su intersección es el conjunto vacío.</label>
+      <label><input type="radio" name="q11" value="c"> C. Cuando coinciden elemento a elemento, es decir, $A \subseteq B$ y $B \subseteq A$.</label>
+      <label><input type="radio" name="q11" value="d"> D. Cuando el conjunto potencia de $A$ es mayor que el de $B$.</label>
+      <div class="question-feedback" id="feedback-q11">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 12 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="El conjunto potencia de un conjunto A con n elementos contiene 2^n subconjuntos. Para n = 3, |P(A)| = 2³ = 8 subconjuntos.">
+      <legend>12. Si un conjunto $A$ tiene $3$ elementos ($|A| = 3$), ¿cuántos elementos (subconjuntos) tiene su conjunto potencia $\mathcal{P}(A)$?</legend>
+      <label><input type="radio" name="q12" value="a"> A. $6$</label>
+      <label><input type="radio" name="q12" value="b"> B. $8$</label>
+      <label><input type="radio" name="q12" value="c"> C. $9$</label>
+      <label><input type="radio" name="q12" value="d"> D. $16$</label>
+      <div class="question-feedback" id="feedback-q12">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 13 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="P(S) de S = {1, 2} incluye todos sus subconjuntos: ∅, los de 1 elemento ({1}, {2}) y el propio conjunto ({1, 2}). Total 2² = 4.">
+      <legend>13. ¿Cuál de las siguientes opciones lista correctamente el conjunto potencia $\mathcal{P}(S)$ para $S = \{1, 2\}$?</legend>
+      <label><input type="radio" name="q13" value="a"> A. $\mathcal{P}(S) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$</label>
+      <label><input type="radio" name="q13" value="b"> B. $\mathcal{P}(S) = \{\{1\}, \{2\}\}$</label>
+      <label><input type="radio" name="q13" value="c"> C. $\mathcal{P}(S) = \{(1, 1), (1, 2), (2, 1), (2, 2)\}$</label>
+      <label><input type="radio" name="q13" value="d"> D. $\mathcal{P}(S) = \{\emptyset, 1, 2, \{1, 2\}\}$</label>
+      <div class="question-feedback" id="feedback-q13">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 14 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="U = {1,2,3,4,5,6}, A = {1,2,3}, B = {3,4,5}. A ∪ B = {1,2,3,4,5}. El complemento (A ∪ B)^c = U \ {1,2,3,4,5} = {6}.">
+      <legend>14. Dado $U = \{1, 2, 3, 4, 5, 6\}$, $A = \{1, 2, 3\}$, $B = \{3, 4, 5\}$. ¿Cuál es el resultado del conjunto $(A \cup B)^c$?</legend>
+      <label><input type="radio" name="q14" value="a"> A. $\{3\}$</label>
+      <label><input type="radio" name="q14" value="b"> B. $\{1, 2, 4, 5, 6\}$</label>
+      <label><input type="radio" name="q14" value="c"> C. $\emptyset$</label>
+      <label><input type="radio" name="q14" value="d"> D. $\{6\}$</label>
+      <div class="question-feedback" id="feedback-q14">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 15 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Leyes de Absorción: 1) A ∪ (A ∩ B) = A; 2) A ∩ (A ∪ B) = A. Reducen la expresión directamente a A.">
+      <legend>15. De acuerdo con la Ley de Absorción en álgebra de conjuntos, ¿a qué se simplifica la expresión $A \cup (A \cap B)$?</legend>
+      <label><input type="radio" name="q15" value="a"> A. $A \cap B$</label>
+      <label><input type="radio" name="q15" value="b"> B. $A$</label>
+      <label><input type="radio" name="q15" value="c"> C. $B$</label>
+      <label><input type="radio" name="q15" value="d"> D. $A \cup B$</label>
+      <div class="question-feedback" id="feedback-q15">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 16 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="La segunda Ley de De Morgan establece que el complemento de la intersección es la unión de los complementos: (A ∩ B)^c = A^c ∪ B^c.">
+      <legend>16. Según las Leyes de De Morgan, ¿a qué es equivalente la expresión $(A \cap B)^c$?</legend>
+      <label><input type="radio" name="q16" value="a"> A. $A^c \cap B^c$</label>
+      <label><input type="radio" name="q16" value="b"> B. $A \setminus B$</label>
+      <label><input type="radio" name="q16" value="c"> C. $A^c \cup B^c$</label>
+      <label><input type="radio" name="q16" value="d"> D. $(A \cup B)^c$</label>
+      <div class="question-feedback" id="feedback-q16">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 17 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="La doble complementación (o ley de involución) devuelve el conjunto original: (A^c)^c = A.">
+      <legend>17. ¿Cuál es el resultado de aplicar la complementación dos veces consecutivas $((A^c)^c)$ a un conjunto $A$?</legend>
+      <label><input type="radio" name="q17" value="a"> A. $A$</label>
+      <label><input type="radio" name="q17" value="b"> B. $A^c$</label>
+      <label><input type="radio" name="q17" value="c"> C. $U$ (el universo)</label>
+      <label><input type="radio" name="q17" value="d"> D. $\emptyset$ (el conjunto vacío)</label>
+      <div class="question-feedback" id="feedback-q17">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 18 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="A \ B equivale a A ∩ B^c (elementos de A que están fuera de B). Por tanto (A \ B)^c = (A ∩ B^c)^c = A^c ∪ (B^c)^c = A^c ∪ B.">
+      <legend>18. Expresa la diferencia $A \setminus B$ en términos de intersección y complemento.</legend>
+      <label><input type="radio" name="q18" value="a"> A. $A \setminus B = A \cup B^c$</label>
+      <label><input type="radio" name="q18" value="b"> B. $A \setminus B = A^c \cap B^c$</label>
+      <label><input type="radio" name="q18" value="c"> C. $A \setminus B = (A \cap B)^c$</label>
+      <label><input type="radio" name="q18" value="d"> D. $A \setminus B = A \cap B^c$</label>
+      <div class="question-feedback" id="feedback-q18">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 19 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="A = {a, b}, B = {1, 2}. A × B = {(a,1), (a,2), (b,1), (b,2)}. Contiene 2 · 2 = 4 pares ordenados.">
+      <legend>19. Sean $A = \{a, b\}$ y $B = \{1, 2\}$. ¿Cuál es el listado correcto del producto cartesiano $A \times B$?</legend>
+      <label><input type="radio" name="q19" value="a"> A. $A \times B = \{(1, a), (1, b), (2, a), (2, b)\}$</label>
+      <label><input type="radio" name="q19" value="b"> B. $A \times B = \{(a, 1), (a, 2), (b, 1), (b, 2)\}$</label>
+      <label><input type="radio" name="q19" value="c"> C. $A \times B = \{a, b, 1, 2\}$</label>
+      <label><input type="radio" name="q19" value="d"> D. $A \times B = \{(a, b), (1, 2)\}$</label>
+      <div class="question-feedback" id="feedback-q19">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 20 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="El producto cartesiano de cualquier conjunto A por el conjunto vacío ∅ da como resultado el conjunto vacío ∅.">
+      <legend>20. ¿A qué es igual el producto cartesiano de un conjunto $A$ por el conjunto vacío ($A \times \emptyset$)?</legend>
+      <label><input type="radio" name="q20" value="a"> A. $\emptyset$ (el conjunto vacío)</label>
+      <label><input type="radio" name="q20" value="b"> B. $A$</label>
+      <label><input type="radio" name="q20" value="c"> C. $\{(A, \emptyset)\}$</label>
+      <label><input type="radio" name="q20" value="d"> D. $U$ (el universo)</label>
+      <div class="question-feedback" id="feedback-q20">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 21 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="La diferencia simétrica A Δ B es asociativa: (A Δ B) Δ C = A Δ (B Δ C) y conmutativa. Mide la paridad de pertenencia en las regiones del Venn.">
+      <legend>21. ¿Cuál de las siguientes afirmaciones sobre la diferencia simétrica $A \Delta B$ es CORRECTA?</legend>
+      <label><input type="radio" name="q21" value="a"> A. Es equivalente a la intersección $A \cap B$.</label>
+      <label><input type="radio" name="q21" value="b"> B. No es conmutativa ($A \Delta B \neq B \Delta A$).</label>
+      <label><input type="radio" name="q21" value="c"> C. Es asociativa: $(A \Delta B) \Delta C = A \Delta (B \Delta C)$.</label>
+      <label><input type="radio" name="q21" value="d"> D. Siempre es igual al universo $U$.</label>
+      <div class="question-feedback" id="feedback-q21">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 22 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="La diferencia simétrica de un conjunto A consigo mismo elimina todos los elementos: A Δ A = (A \ A) ∪ (A \ A) = ∅ ∪ ∅ = ∅.">
+      <legend>22. ¿Cuál es el resultado de la diferencia simétrica de un conjunto $A$ consigo mismo ($A \Delta A$)?</legend>
+      <label><input type="radio" name="q22" value="a"> A. $A$</label>
+      <label><input type="radio" name="q22" value="b"> B. $\emptyset$</label>
+      <label><input type="radio" name="q22" value="c"> C. $A^c$</label>
+      <label><input type="radio" name="q22" value="d"> D. $U$</label>
+      <div class="question-feedback" id="feedback-q22">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 23 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="A Δ ∅ = (A \ ∅) ∪ (∅ \ A) = A ∪ ∅ = A. El conjunto vacío actúa como elemento neutro de la diferencia simétrica.">
+      <legend>23. ¿Cuál es el resultado de la diferencia simétrica de un conjunto $A$ con el conjunto vacío ($A \Delta \emptyset$)?</legend>
+      <label><input type="radio" name="q23" value="a"> A. $\emptyset$</label>
+      <label><input type="radio" name="q23" value="b"> B. $A^c$</label>
+      <label><input type="radio" name="q23" value="c"> C. $U$</label>
+      <label><input type="radio" name="q23" value="d"> D. $A$</label>
+      <div class="question-feedback" id="feedback-q23">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 24 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="|A ∪ B| = |A| + |B| - |A ∩ B| ⟹ 30 = 20 + 15 - |A ∩ B| ⟹ 30 = 35 - |A ∩ B| ⟹ |A ∩ B| = 5.">
+      <legend>24. Si $|A| = 20$, $|B| = 15$ y $|A \cup B| = 30$, ¿cuántos elementos contiene la intersección $|A \cap B|$?</legend>
+      <label><input type="radio" name="q24" value="a"> A. $5$</label>
+      <label><input type="radio" name="q24" value="b"> B. $10$</label>
+      <label><input type="radio" name="q24" value="c"> C. $35$</label>
+      <label><input type="radio" name="q24" value="d"> D. $0$</label>
+      <div class="question-feedback" id="feedback-q24">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 25 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="|A \ B| representa los elementos exclusivos de A, que se calculan restando de A la intersección: |A \ B| = |A| - |A ∩ B| = 20 - 5 = 15.">
+      <legend>25. Siguiendo con los datos del ejercicio anterior ($|A| = 20, |B| = 15, |A \cap B| = 5$), ¿cuántos elementos tiene la diferencia exclusiva $|A \setminus B|$?</legend>
+      <label><input type="radio" name="q25" value="a"> A. $20$</label>
+      <label><input type="radio" name="q25" value="b"> B. $10$</label>
+      <label><input type="radio" name="q25" value="c"> C. $15$</label>
+      <label><input type="radio" name="q25" value="d"> D. $25$</label>
+      <div class="question-feedback" id="feedback-q25">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 26 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="En un Diagrama de Venn de 3 conjuntos, la región A \ (B ∪ C) contiene a los elementos que están en A pero no pertenecen ni a B ni a C (exclusivos de A).">
+      <legend>26. En un diagrama de Venn con 3 conjuntos $A$, $B$ y $C$, ¿qué describe geométricamente la región $A \setminus (B \cup C)$?</legend>
+      <label><input type="radio" name="q26" value="a"> A. Los elementos que pertenecen a $A$ y a $B$, excluyendo $C$.</label>
+      <label><input type="radio" name="q26" value="b"> B. La región de elementos puramente exclusivos del conjunto $A$ (sin solapamiento con $B$ ni con $C$).</label>
+      <label><input type="radio" name="q26" value="c"> C. La zona exterior a todos los conjuntos.</label>
+      <label><input type="radio" name="q26" value="d"> D. La intersección triple de los tres conjuntos.</label>
+      <div class="question-feedback" id="feedback-q26">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 27 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Las Leyes de Idempotencia establecen que A ∪ A = A y A ∩ A = A. Unir o intersectar un conjunto consigo mismo no añade ni elimina elementos.">
+      <legend>27. ¿Cómo se denominan las propiedades algebraicas $A \cup A = A$ y $A \cap A = A$?</legend>
+      <label><input type="radio" name="q27" value="a"> A. Leyes de Absorción.</label>
+      <label><input type="radio" name="q27" value="b"> B. Leyes de De Morgan.</label>
+      <label><input type="radio" name="q27" value="c"> C. Propiedad Asociativa.</label>
+      <label><input type="radio" name="q27" value="d"> D. Leyes de Idempotencia.</label>
+      <div class="question-feedback" id="feedback-q27">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 28 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Demostración de igualdad de conjuntos: Para probar A = B se debe demostrar la doble inclusión, es decir, A ⊆ B (todo x ∈ A ⟹ x ∈ B) y B ⊆ A (todo x ∈ B ⟹ x ∈ A).">
+      <legend>28. Para demostrar rigurosamente la igualdad entre dos expresiones de conjuntos $X = Y$ mediante lógica proposicional, ¿qué método de doble inclusión se debe utilizar?</legend>
+      <label><input type="radio" name="q28" value="a"> A. Demostrar que $X \subseteq Y$ y simultáneamente $Y \subseteq X$.</label>
+      <label><input type="radio" name="q28" value="b"> B. Demostrar que $|X| = |Y|$ únicamente.</label>
+      <label><input type="radio" name="q28" value="c"> C. Comprobar un solo elemento genérico en $X$.</label>
+      <label><input type="radio" name="q28" value="d"> D. Verificar que $X \cap Y = U$.</label>
+      <div class="question-feedback" id="feedback-q28">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 29 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="La representación de relaciones entre conjuntos mediante diagramas de Venn tiene asignado un peso del 10% en la rúbrica oficial (Criterio 3).">
+      <legend>29. Según los criterios de evaluación de la Tarea 2, ¿qué peso porcentual de la calificación global tiene la representación gráfica en diagramas de Venn (Criterio 3)?</legend>
+      <label><input type="radio" name="q29" value="a"> A. $5\%$</label>
+      <label><input type="radio" name="q29" value="b"> B. $40\%$</label>
+      <label><input type="radio" name="q29" value="c"> C. $10\%$</label>
+      <label><input type="radio" name="q29" value="d"> D. $25\%$</label>
+      <div class="question-feedback" id="feedback-q29">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 30 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Formato académico: La extensión máxima fijada en las pautas de elaboración de la Tarea 2 es de exactamente 5 páginas en formato Calibri 12 interlineado 1,5 (Criterio 5).">
+      <legend>30. De acuerdo con las pautas formales de elaboración de la Tarea 2, ¿cuál es la extensión máxima permitida para el documento final?</legend>
+      <label><input type="radio" name="q30" value="a"> A. $2$ páginas.</label>
+      <label><input type="radio" name="q30" value="b"> B. $5$ páginas.</label>
+      <label><input type="radio" name="q30" value="c"> C. $10$ páginas.</label>
+      <label><input type="radio" name="q30" value="d"> D. Sin límite de páginas.</label>
+      <div class="question-feedback" id="feedback-q30">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <div class="quiz-actions">
+      <button type="submit" class="md-button md-button--primary">Comprobar respuestas</button>
+      <button type="button" id="quiz-reset" class="md-button">Reiniciar test</button>
+    </div>
+  </form>
+
+  <section id="quiz-result" class="quiz-result" aria-live="polite" hidden>
+    <h2>Resultado del Examen II</h2>
+    <p id="quiz-score"></p>
+    <p id="quiz-message"></p>
+    <p id="quiz-summary"></p>
+  </section>
+</div>
+
+<h2 id="soluciones-explicadas-aprende-pregunta-por-pregunta">Soluciones explicadas: aprende pregunta por pregunta<a class="headerlink" href="#soluciones-explicadas-aprende-pregunta-por-pregunta" title="Permanent link">&para;</a></h2>
+<details class="solution">
+<summary>1. Respuesta correcta: B — Congruencia como relación de equivalencia</summary>
+
+La congruencia módulo $m$ satisface:
+1. **Reflexiva:** $a \equiv a \pmod m$ porque $m \mid (a - a) = 0$.
+2. **Simétrica:** Si $a \equiv b \pmod m$, entonces $b \equiv a \pmod m$.
+3. **Transitiva:** Si $a \equiv b \pmod m$ y $b \equiv c \pmod m$, entonces $a \equiv c \pmod m$.
+
+Por tanto, particiona $\mathbb{Z}$ en $m$ clases de equivalencia distintas.
+</details>
+
+<details class="solution">
+<summary>2. Respuesta correcta: C — Identidad de Bézout</summary>
+
+El **Teorema de Bézout** afirma que para dos enteros $a$ y $m$, existen coeficientes $x, y \in \mathbb{Z}$ tales que:
+\[
+a \cdot x + m \cdot y = \operatorname{mcd}(a, m)
+\]
+Si $\operatorname{mcd}(a, m) = 1$, reduciendo la ecuación módulo $m$ obtenemos $a \cdot x \equiv 1 \pmod m$, lo que demuestra que $x$ es el **inverso modular** de $a$ en $\mathbb{Z}_m$.
+</details>
+
+<details class="solution">
+<summary>3. Respuesta correcta: A — Algoritmo Extendido de Euclídes</summary>
+
+El **Algoritmo Extendido de Euclídes** realiza divisiones sucesivas para calcular $\operatorname{mcd}(a, m)$ y desanda los pasos expresando el mcd como combinación lineal $a x + m y = \operatorname{mcd}(a, m)$, obteniendo así el valor del inverso $x = a^{-1} \pmod m$.
+</details>
+
+<details class="solution">
+<summary>4. Respuesta correcta: D — Inverso modular de 5 mod 11</summary>
+
+Buscamos $y \in \{0, 1, \dots, 10\}$ tal que $5 y \equiv 1 \pmod{11}$:
+- $5 \cdot 9 = 45 = 4 \cdot 11 + 1 \equiv 1 \pmod{11}$.
+
+Por consiguiente, $5^{-1} \equiv 9 \pmod{11}$.
+</details>
+
+<details class="solution">
+<summary>5. Respuesta correcta: B — Módulos no coprimos en el TCR</summary>
+
+Si dos módulos $m_i$ y $m_j$ comparten un divisor común $d > 1$, la cantidad auxiliar $M_i = M / m_i$ también contendrá al factor $d$. En consecuencia, $\operatorname{mcd}(M_i, m_i) = d > 1$, impidiendo la existencia del inverso modular $y_i$ módulo $m_i$ y provocando el fallo del método analítico directo.
+</details>
+
+<details class="solution">
+<summary>6. Respuesta correcta: C — Resolución de sistema de 3 congruencias</summary>
+
+Sistema: $x \equiv 1 \pmod 2$, $x \equiv 2 \pmod 3$, $x \equiv 3 \pmod 5$.
+
+1. **Módulo total:** $M = 2 \cdot 3 \cdot 5 = 30$.
+2. **Módulos parciales:**
+   - $M_1 = 30 / 2 = 15$
+   - $M_2 = 30 / 3 = 10$
+   - $M_3 = 30 / 5 = 6$
+3. **Inversos modulares:**
+   - $15 y_1 \equiv 1 \pmod 2 \implies 1 y_1 \equiv 1 \pmod 2 \implies y_1 = 1$.
+   - $10 y_2 \equiv 1 \pmod 3 \implies 1 y_2 \equiv 1 \pmod 3 \implies y_2 = 1$.
+   - $6 y_3 \equiv 1 \pmod 5 \implies 1 y_3 \equiv 1 \pmod 5 \implies y_3 = 1$.
+4. **Construcción de $x$:**
+   \[
+   x = (1 \cdot 15 \cdot 1) + (2 \cdot 10 \cdot 1) + (3 \cdot 6 \cdot 1) = 15 + 20 + 18 = 53
+   \]
+5. **Reducción módulo 30:** $53 = 1 \cdot 30 + 23 \implies x \equiv 23 \pmod{30}$.
+</details>
+
+<details class="solution">
+<summary>7. Respuesta correcta: A — Estructura de la solución general del TCR</summary>
+
+Por el TCR, la solución es única módulo $M$. Todas las soluciones enteras congruentes vienen dadas por la clase de equivalencia:
+\[
+x \in [x_0] = \{x_0 + k \cdot M \mid k \in \mathbb{Z}\}
+\]
+</details>
+
+<details class="solution">
+<summary>8. Respuesta correcta: D — Función Totiente para números primos</summary>
+
+La **función $\phi(n)$ de Euler** cuenta cuántos enteros $1 \le k \le n$ son coprimos con $n$. Si $p$ es un número primo, todos los números enteros menores que $p$ ($1, 2, \dots, p-1$) son primos con él, por lo que $\phi(p) = p - 1$.
+</details>
+
+<details class="solution">
+<summary>9. Respuesta correcta: B — Pequeño Teorema de Fermat</summary>
+
+Si $p$ es primo y $a$ no es divisible por $p$ ($\operatorname{mcd}(a, p) = 1$), el **Pequeño Teorema de Fermat** establece:
+\[
+a^{p-1} \equiv 1 \pmod p
+\]
+Multiplicando por $a$ en ambos miembros se obtiene la forma equivalente $a^p \equiv a \pmod p$.
+</details>
+
+<details class="solution">
+<summary>10. Respuesta correcta: A — Cálculo del inverso modular con Fermat</summary>
+
+Reescribiendo el Pequeño Teorema de Fermat:
+\[
+a^{p-1} \equiv 1 \pmod p \implies a \cdot \left(a^{p-2}\right) \equiv 1 \pmod p
+\]
+Por definición de inverso modular, $a^{-1} \equiv a^{p-2} \pmod p$.
+</details>
+
+<details class="solution">
+<summary>11. Respuesta correcta: C — Axioma de Extensión</summary>
+
+En lógica formal de conjuntos, dos conjuntos $A$ y $B$ son iguales ($A = B$) si y solo si poseen exactamente los mismos elementos:
+\[
+A = B \iff (\forall x, x \in A \iff x \in B) \iff A \subseteq B \land B \subseteq A
+\]
+</details>
+
+<details class="solution">
+<summary>12. Respuesta correcta: B — Cardinalidad del conjunto potencia</summary>
+
+El conjunto potencia $\mathcal{P}(A)$ es el conjunto formado por todos los subconjuntos posibles de $A$. Para un conjunto con $|A| = n$ elementos:
+\[
+|\mathcal{P}(A)| = 2^n
+\]
+Si $n = 3$, $|\mathcal{P}(A)| = 2^3 = 8$ subconjuntos.
+</details>
+
+<details class="solution">
+<summary>13. Respuesta correcta: A — Construcción de P(S)</summary>
+
+Para $S = \{1, 2\}$ ($n = 2$ elementos, luego $2^2 = 4$ subconjuntos):
+- Subconjunto de 0 elementos: $\emptyset$
+- Subconjuntos de 1 elemento: $\{1\}, \{2\}$
+- Subconjunto de 2 elementos: $\{1, 2\}$
+
+Luego $\mathcal{P}(S) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\}$.
+</details>
+
+<details class="solution">
+<summary>14. Respuesta correcta: D — Cálculo del complemento de la unión</summary>
+
+Dados $U = \{1, 2, 3, 4, 5, 6\}$, $A = \{1, 2, 3\}$, $B = \{3, 4, 5\}$:
+1. $A \cup B = \{1, 2, 3, 4, 5\}$.
+2. $(A \cup B)^c = U \setminus (A \cup B) = \{1, 2, 3, 4, 5, 6\} \setminus \{1, 2, 3, 4, 5\} = \{6\}$.
+</details>
+
+<details class="solution">
+<summary>15. Respuesta correcta: B — Ley de Absorción</summary>
+
+Las **Leyes de Absorción** simplifican expresiones donde se combinan la unión y la intersección con un mismo conjunto:
+\[
+A \cup (A \cap B) = A \quad \text{y} \quad A \cap (A \cup B) = A
+\]
+</details>
+
+<details class="solution">
+<summary>16. Respuesta correcta: C — Segunda Ley de De Morgan</summary>
+
+La segunda **Ley de De Morgan** establece que el complemento de la intersección es la unión de los complementos:
+\[
+(A \cap B)^c = A^c \cup B^c
+\]
+</details>
+
+<details class="solution">
+<summary>17. Respuesta correcta: A — Ley de Involución</summary>
+
+La ley de involución establece que el complemento del complemento de un conjunto $A$ recupera exactamente el conjunto $A$ original:
+\[
+(A^c)^c = A
+\]
+</details>
+
+<details class="solution">
+<summary>18. Respuesta correcta: D — Expresión de la diferencia mediante complemento</summary>
+
+La diferencia de conjuntos $A \setminus B$ se define de forma equivalente como la intersección de $A$ con el complemento de $B$:
+\[
+A \setminus B = A \cap B^c
+\]
+</details>
+
+<details class="solution">
+<summary>19. Respuesta correcta: B — Listado de A × B</summary>
+
+Para $A = \{a, b\}$ y $B = \{1, 2\}$:
+Tomando cada elemento de $A$ como primera componente y cada elemento de $B$ como segunda componente:
+\[
+A \times B = \{(a, 1), (a, 2), (b, 1), (b, 2)\}
+\]
+</details>
+
+<details class="solution">
+<summary>20. Respuesta correcta: A — Producto cartesiano con conjunto vacío</summary>
+
+Por definición, $A \times \emptyset = \{(a, b) \mid a \in A \land b \in \emptyset\}$. Como no existe ningún elemento $b \in \emptyset$, no se puede formar ningún par ordenado. Por lo tanto, $A \times \emptyset = \emptyset$.
+</details>
+
+<details class="solution">
+<summary>21. Respuesta correcta: C — Asociatividad de la diferencia simétrica</summary>
+
+La diferencia simétrica posee la propiedad de **asociatividad**:
+\[
+(A \Delta B) \Delta C = A \Delta (B \Delta C)
+\]
+Esta propiedad permite definir diferencias simétricas múltiples sin necesidad de paréntesis.
+</details>
+
+<details class="solution">
+<summary>22. Respuesta correcta: B — Diferencia simétrica A Δ A</summary>
+
+Aplicando la definición $A \Delta A = (A \setminus A) \cup (A \setminus A)$:
+Como $A \setminus A = \emptyset$, tenemos $\emptyset \cup \emptyset = \emptyset$.
+</details>
+
+<details class="solution">
+<summary>23. Respuesta correcta: D — Elemento neutro de la diferencia simétrica</summary>
+
+Aplicando la definición $A \Delta \emptyset = (A \setminus \emptyset) \cup (\emptyset \setminus A)$:
+Como $A \setminus \emptyset = A$ y $\emptyset \setminus A = \emptyset$, tenemos $A \cup \emptyset = A$.
+Por lo tanto, $\emptyset$ es el **elemento neutro** de la diferencia simétrica.
+</details>
+
+<details class="solution">
+<summary>24. Respuesta correcta: A — Cálculo de |A ∩ B| mediante Inclusión-Exclusión</summary>
+
+Sustituyendo en la fórmula $|A \cup B| = |A| + |B| - |A \cap B|$:
+\[
+30 = 20 + 15 - |A \cap B| \implies 30 = 35 - |A \cap B| \implies |A \cap B| = 35 - 30 = 5
+\]
+</details>
+
+<details class="solution">
+<summary>25. Respuesta correcta: C — Cardinalidad de la diferencia exclusive</summary>
+
+La cardinalidad de la diferencia $A \setminus B$ es el número de elementos de $A$ quitando los elementos comunes:
+\[
+|A \setminus B| = |A| - |A \cap B| = 20 - 5 = 15
+\]
+</details>
+
+<details class="solution">
+<summary>26. Respuesta correcta: B — Región exclusiva en diagramas de Venn</summary>
+
+La expresión $A \setminus (B \cup C)$ resta de $A$ todos los elementos que están en $B$ o en $C$, dejando aislada la región gráfica formada únicamente por los elementos **exclusivos de $A$**.
+</details>
+
+<details class="solution">
+<summary>27. Respuesta correcta: D — Leyes de Idempotencia</summary>
+
+Las **Leyes de Idempotencia** indican que operar un conjunto consigo mismo mediante la unión o la intersección no modifica el conjunto:
+\[
+A \cup A = A \quad \text{y} \quad A \cap A = A
+\]
+</details>
+
+<details class="solution">
+<summary>28. Respuesta correcta: A — Doble inclusión para probar la igualdad</summary>
+
+En teoría de conjuntos, la forma matemática estándar de probar que dos conjuntos son iguales ($X = Y$) consiste en demostrar la **doble inclusión**:
+1. Proveer que $X \subseteq Y$ (si $x \in X \implies x \in Y$).
+2. Proveer que $Y \subseteq X$ (si $y \in Y \implies y \in X$).
+</details>
+
+<details class="solution">
+<summary>29. Respuesta correcta: C — Ponderación del Criterio 3 de la Tarea 2</summary>
+
+En la rúbrica oficial de la Tarea 2, el **Criterio 3** (Representación gráfica en el diagrama de Venn) tiene asignado un peso del **10%** de la calificación global.
+</details>
+
+<details class="solution">
+<summary>30. Respuesta correcta: B — Extensión máxima permitida</summary>
+
+Las pautas de elaboración fijan una extensión máxima de **5 páginas** en formato Calibri 12, interlineado 1,5. Cumplir este límite y la claridad formal de presentación equivale al 20% de la nota (Criterio 5).
+</details>
+
+<hr />
+<h2 id="chuleta-final-formulas-y-leyes-avanzadas-para-la-tarea-2">Chuleta final: fórmulas y leyes avanzadas para la Tarea 2<a class="headerlink" href="#chuleta-final-formulas-y-leyes-avanzadas-para-la-tarea-2" title="Permanent link">&para;</a></h2>
+<h3 id="1-algebra-de-conjuntos-leyes-fundamentales">1. Álgebra de Conjuntos (Leyes fundamentales)<a class="headerlink" href="#1-algebra-de-conjuntos-leyes-fundamentales" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Leyes de De Morgan:</strong></li>
+<li><span class="arithmatex">\((A \cup B)^c = A^c \cap B^c\)</span></li>
+<li><span class="arithmatex">\((A \cap B)^c = A^c \cup B^c\)</span></li>
+<li><strong>Leyes de Absorción:</strong></li>
+<li><span class="arithmatex">\(A \cup (A \cap B) = A\)</span></li>
+<li><span class="arithmatex">\(A \cap (A \cup B) = A\)</span></li>
+<li><strong>Leyes Distributivas:</strong></li>
+<li><span class="arithmatex">\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)</span></li>
+<li><span class="arithmatex">\(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\)</span></li>
+<li><strong>Involución y Complemento:</strong></li>
+<li><span class="arithmatex">\((A^c)^c = A\)</span></li>
+<li><span class="arithmatex">\(A \setminus B = A \cap B^c\)</span></li>
+<li><span class="arithmatex">\(A \Delta B = (A \setminus B) \cup (B \setminus A)\)</span></li>
+</ul>
+<h3 id="2-conjunto-potencia-y-producto-cartesiano">2. Conjunto Potencia y Producto Cartesiano<a class="headerlink" href="#2-conjunto-potencia-y-producto-cartesiano" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Conjunto Potencia <span class="arithmatex">\(\mathcal{P}(A)\)</span>:</strong> <span class="arithmatex">\(|\mathcal{P}(A)| = 2^{|A|}\)</span>.</li>
+<li><strong>Producto Cartesiano <span class="arithmatex">\(A \times B\)</span>:</strong> <span class="arithmatex">\(|A \times B| = |A| \cdot |B|\)</span>. <span class="arithmatex">\(A \times \emptyset = \emptyset\)</span>.</li>
+</ul>
+<h3 id="3-aritmetica-modular-y-teoremas-clave">3. Aritmética Modular y Teoremas Clave<a class="headerlink" href="#3-aritmetica-modular-y-teoremas-clave" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Inverso Modular con Fermat:</strong> Si <span class="arithmatex">\(p\)</span> es primo y <span class="arithmatex">\(\operatorname{mcd}(a, p) = 1\)</span>, <span class="arithmatex">\(a^{-1} \equiv a^{p-2} \pmod p\)</span>.</li>
+<li><strong>Algoritmo de Bézout:</strong> <span class="arithmatex">\(a \cdot x + m \cdot y = 1 \implies x = a^{-1} \pmod m\)</span>.</li>
+<li><strong>Teorema Chino del Resto:</strong></li>
+<li><span class="arithmatex">\(M = \prod m_i\)</span></li>
+<li><span class="arithmatex">\(M_i = M / m_i\)</span></li>
+<li><span class="arithmatex">\(M_i \cdot y_i \equiv 1 \pmod{m_i}\)</span></li>
+<li><span class="arithmatex">\(x \equiv \sum a_i M_i y_i \pmod M\)</span></li>
+</ul>
+<style>
+.quiz-container {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .6rem;
+  padding: 1rem;
+  margin: 1rem 0 2rem;
+}
+.quiz-progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  padding: .7rem 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: .4rem;
+}
+.quiz-question {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  min-width: 0;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.quiz-question legend {
+  font-weight: 700;
+  padding: 0 .25rem;
+}
+.quiz-question label {
+  display: block;
+  padding: .45rem .6rem;
+  margin: .2rem 0;
+  border-radius: .3rem;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.quiz-question label:hover {
+  background: var(--md-code-bg-color);
+}
+.quiz-question input {
+  margin-right: .5rem;
+}
+.quiz-question.is-correct {
+  border: 2px solid #2e7d32;
+}
+.quiz-question.is-wrong {
+  border: 2px solid #c62828;
+}
+.question-feedback {
+  display: none;
+  margin-top: .8rem;
+  padding: .75rem;
+  border-left: 4px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  border-radius: .3rem;
+}
+.is-correct .question-feedback {
+  display: block;
+  border-left-color: #2e7d32;
+}
+.is-wrong .question-feedback {
+  display: block;
+  border-left-color: #c62828;
+}
+.feedback-status {
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.is-correct .feedback-status {
+  color: #2e7d32;
+}
+.is-wrong .feedback-status {
+  color: #c62828;
+}
+.feedback-exp {
+  font-size: .92rem;
+  line-height: 1.45;
+  color: var(--md-default-fg-color);
+}
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.2rem;
+}
+.quiz-result {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: .5rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+.solution {
+  margin: .6rem 0;
+  padding: .65rem .9rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+}
+.solution summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("quiz-form");
+  if (!form || form.dataset.initialized === "true") return;
+  form.dataset.initialized = "true";
+
+  const questions = Array.from(document.querySelectorAll("#quiz-form .quiz-question"));
+  const count = document.getElementById("quiz-count");
+  const progressText = document.getElementById("quiz-progress-text");
+  const result = document.getElementById("quiz-result");
+  const scoreText = document.getElementById("quiz-score");
+  const message = document.getElementById("quiz-message");
+  const summary = document.getElementById("quiz-summary");
+  const reset = document.getElementById("quiz-reset");
+
+  function updateProgress() {
+    const answered = questions.filter(q => {
+      const input = q.querySelector("input");
+      return form.querySelector('input[name="' + input.name + '"]:checked');
+    }).length;
+    count.textContent = answered + " de " + questions.length + " respondidas";
+    progressText.textContent = answered === questions.length
+      ? "¡Ya has respondido todas!"
+      : "Te faltan " + (questions.length - answered) + " por responder.";
+  }
+
+  form.addEventListener("change", updateProgress);
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let correct = 0;
+    let unanswered = 0;
+
+    questions.forEach(function (question, index) {
+      const number = index + 1;
+      const selected = form.querySelector('input[name="q' + number + '"]:checked');
+      const answer = question.dataset.answer;
+      const shortExp = question.dataset.shortExp || "";
+      const statusEl = question.querySelector(".feedback-status");
+      const expEl = question.querySelector(".feedback-exp");
+      const labels = question.querySelectorAll("label");
+
+      question.classList.remove("is-correct", "is-wrong");
+      labels.forEach(label => { label.style.fontWeight = "normal"; });
+
+      if (!selected) {
+        unanswered++;
+        question.classList.add("is-wrong");
+        statusEl.textContent = "✗ Sin responder. Respuesta correcta: " + answer.toUpperCase();
+      } else if (selected.value === answer) {
+        correct++;
+        question.classList.add("is-correct");
+        statusEl.textContent = "✓ ¡Correcto!";
+      } else {
+        question.classList.add("is-wrong");
+        statusEl.textContent = "✗ Incorrecto. Respuesta correcta: " + answer.toUpperCase();
+      }
+
+      expEl.textContent = shortExp;
+
+      const correctLabel = Array.from(labels).find(label =>
+        label.querySelector("input").value === answer
+      );
+      if (correctLabel) correctLabel.style.fontWeight = "700";
+    });
+
+    const percent = Math.round(correct / questions.length * 100);
+    scoreText.textContent = correct + " de " + questions.length + " correctas (" + percent + "%).";
+    message.textContent = percent >= 90 ? "¡Excelente! Dominas perfectamente los conceptos de la Tarea 2." :
+      percent >= 70 ? "¡Buen trabajo! Repasa los fallos cometidos para afianzar la puntuación máxima." :
+      percent >= 50 ? "Aprobado. Lee la explicación detallada de cada pregunta para asegurar el examen." :
+      "Te conviene repasar la chuleta final y consultar las soluciones explicadas paso a paso.";
+    summary.textContent = unanswered
+      ? "Has dejado " + unanswered + " pregunta(s) sin responder."
+      : "Has respondido todas las preguntas.";
+
+    result.hidden = false;
+    result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
+  });
+
+  reset.addEventListener("click", function () {
+    form.reset();
+    questions.forEach(function (question) {
+      question.classList.remove("is-correct", "is-wrong");
+      question.querySelectorAll("label").forEach(label => {
+        label.style.fontWeight = "normal";
+      });
+      question.querySelector(".feedback-status").textContent = "";
+      question.querySelector(".feedback-exp").textContent = "";
+    });
+    result.hidden = true;
+    updateProgress();
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  updateProgress();
+});
+</script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../tarea02-1/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Tarea 02.1">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Tarea 02.1
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tema01-1/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Tema 01.1">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Tema 01.1
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 <a href="https://davidalvarezp.com/" rel="noopener noreferrer"><strong>dap</strong></a> | All rights reserved.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://bsky.app/profile/davidalvarezp.com" target="_blank" rel="noopener" title="Sitio web de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://youtube.com/@davidalvarezp" target="_blank" rel="noopener" title="Canal de YouTube de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/davidalvarezp" target="_blank" rel="noopener" title="Github de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://twitch.tv/sudodap" target="_blank" rel="noopener" title="Twitch de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/sudodap" target="_blank" rel="noopener" title="Telegram de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.5.5 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024q-.159.037-5.061 3.345-.72.495-1.302.48c-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789q.04-.324.893-.663 5.247-2.286 6.998-3.014c3.332-1.386 4.025-1.627 4.476-1.635"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://x.com/sudodap" target="_blank" rel="noopener" title="X de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://instagram.com/davidalvarezzp" target="_blank" rel="noopener" title="Instagram de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.03.084c-1.277.06-2.149.264-2.91.563a5.9 5.9 0 0 0-2.124 1.388 5.9 5.9 0 0 0-1.38 2.127C.321 4.926.12 5.8.064 7.076s-.069 1.688-.063 4.947.021 3.667.083 4.947c.061 1.277.264 2.149.563 2.911.308.789.72 1.457 1.388 2.123a5.9 5.9 0 0 0 2.129 1.38c.763.295 1.636.496 2.913.552 1.278.056 1.689.069 4.947.063s3.668-.021 4.947-.082c1.28-.06 2.147-.265 2.91-.563a5.9 5.9 0 0 0 2.123-1.388 5.9 5.9 0 0 0 1.38-2.129c.295-.763.496-1.636.551-2.912.056-1.28.07-1.69.063-4.948-.006-3.258-.02-3.667-.081-4.947-.06-1.28-.264-2.148-.564-2.911a5.9 5.9 0 0 0-1.387-2.123 5.86 5.86 0 0 0-2.128-1.38C19.074.322 18.202.12 16.924.066 15.647.009 15.236-.006 11.977 0S8.31.021 7.03.084m.14 21.693c-1.17-.05-1.805-.245-2.228-.408a3.7 3.7 0 0 1-1.382-.895 3.7 3.7 0 0 1-.9-1.378c-.165-.423-.363-1.058-.417-2.228-.06-1.264-.072-1.644-.08-4.848-.006-3.204.006-3.583.061-4.848.05-1.169.246-1.805.408-2.228.216-.561.477-.96.895-1.382a3.7 3.7 0 0 1 1.379-.9c.423-.165 1.057-.361 2.227-.417 1.265-.06 1.644-.072 4.848-.08 3.203-.006 3.583.006 4.85.062 1.168.05 1.804.244 2.227.408.56.216.96.475 1.382.895s.681.817.9 1.378c.165.422.362 1.056.417 2.227.06 1.265.074 1.645.08 4.848.005 3.203-.006 3.583-.061 4.848-.051 1.17-.245 1.805-.408 2.23-.216.56-.477.96-.896 1.38a3.7 3.7 0 0 1-1.378.9c-.422.165-1.058.362-2.226.418-1.266.06-1.645.072-4.85.079s-3.582-.006-4.848-.06m9.783-16.192a1.44 1.44 0 1 0 1.437-1.442 1.44 1.44 0 0 0-1.437 1.442M5.839 12.012a6.161 6.161 0 1 0 12.323-.024 6.162 6.162 0 0 0-12.323.024M8 12.008A4 4 0 1 1 12.008 16 4 4 0 0 1 8 12.008"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://discord.gg/x7JFKT2n4X" target="_blank" rel="noopener" title="Comunidad de Discord de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 13 13 0 0 0-.617-1.25.08.08 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.1.1 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.08.08 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13 13 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10 10 0 0 0 .372-.292.07.07 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.07.07 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.08.08 0 0 0 .084.028 19.8 19.8 0 0 0 6.002-3.03.08.08 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.03M8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418m7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.top", "navigation.indexes", "navigation.tracking", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../assets/js/navigation.js"></script>
+      
+    
+  </body>
+</html>

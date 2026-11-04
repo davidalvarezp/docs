@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /contacto/
+Disallow: /p/
+
+Sitemap: https://davidalvarezp.com/docs/sitemap.xml
+Sitemap: https://davidalvarezp.com/docs/computer-science/sitemap.xml

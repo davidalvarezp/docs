@@ -1,0 +1,3208 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación académica del Bachelor Degree in Computer Science. Apuntes, teoría, ejercicios resueltos, tests interactivos y recursos de aprendizaje sobre ciencias de la computación, matemáticas, programación, algoritmos, sistemas y tecnologías informáticas.">
+      
+      
+        <meta name="author" content="dap">
+      
+      
+        <link rel="canonical" href="https://davidalvarezp.com/docs/computer-science/algebra/tests/tarea01-2/">
+      
+      
+        <link rel="prev" href="../tarea01-1/">
+      
+      
+        <link rel="next" href="../tarea02-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="/docs/assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Test Tarea 1.2 - Álgebra Matricial y Eliminación Gaussiana - Bachelor Degree in Computer Science</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-F0G1797238"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-F0G1797238",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-F0G1797238",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-tarea-12-operaciones-matriciales-y-resolucion-de-sistemas-lineales" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../.." title="Bachelor Degree in Computer Science" class="md-header__button md-logo" aria-label="Bachelor Degree in Computer Science" data-md-component="logo">
+      
+  <img src="/docs/assets/img/logo.webp" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bachelor Degree in Computer Science
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Test Tarea 1.2 - Álgebra Matricial y Eliminación Gaussiana
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="blue"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Compartir" aria-label="Compartir" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Álgebra y Matemática Discreta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://davidalvarezp.com/docs/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docs
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Bachelor Degree in Computer Science" class="md-nav__button md-logo" aria-label="Bachelor Degree in Computer Science" data-md-component="logo">
+      
+  <img src="/docs/assets/img/logo.webp" alt="logo">
+
+    </a>
+    Bachelor Degree in Computer Science
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/davidalvarezp/docs" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    davidalvarezp/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Álgebra y Matemática Discreta
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Álgebra y Matemática Discreta
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema01/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 01
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 01
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema02/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 02
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 02
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema03/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 03
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 03
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema04/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 04
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 04
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema05/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 05
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 05
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema06/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 06
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 06
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema07/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 07
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 07
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema08/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 08
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 08
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema09/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 09
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 09
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tema10/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 10
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 10
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tests
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tests
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_1" id="__nav_2_12_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tareas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_12_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tareas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea01-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 01.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 01.2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 01.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#soluciones-explicadas-aprende-pregunta-por-pregunta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soluciones explicadas: aprende pregunta por pregunta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuleta-final-conceptos-avanzados-para-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuleta final: conceptos avanzados para el examen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chuleta final: conceptos avanzados para el examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tipos-de-matrices-cuadradas-especiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tipos de Matrices Cuadradas Especiales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-despeje-de-ecuaciones-matriciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Despeje de Ecuaciones Matriciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-regla-de-cramer-sistemas-scd-n-times-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Regla de Cramer (Sistemas SCD \(n \times n\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea02-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 02.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tarea02-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tarea 02.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12_2" id="__nav_2_12_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_12_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema01-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 01.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema02-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 02.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema03-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 03.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema04-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 04.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema05-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 05.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema06-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 06.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema07-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 07.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema08-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 08.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema09-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 09.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tema10-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 10.1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://davidalvarezp.com/docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#soluciones-explicadas-aprende-pregunta-por-pregunta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soluciones explicadas: aprende pregunta por pregunta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chuleta-final-conceptos-avanzados-para-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuleta final: conceptos avanzados para el examen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chuleta final: conceptos avanzados para el examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-tipos-de-matrices-cuadradas-especiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Tipos de Matrices Cuadradas Especiales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-despeje-de-ecuaciones-matriciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Despeje de Ecuaciones Matriciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-regla-de-cramer-sistemas-scd-n-times-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Regla de Cramer (Sistemas SCD \(n \times n\))
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Álgebra y Matemática Discreta
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../tarea01-1/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Tests
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../tarea01-1/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Tareas
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="test-tarea-12-operaciones-matriciales-y-resolucion-de-sistemas-lineales">Test Tarea 1.2: Operaciones Matriciales y Resolución de Sistemas Lineales<a class="headerlink" href="#test-tarea-12-operaciones-matriciales-y-resolucion-de-sistemas-lineales" title="Permanent link">&para;</a></h1>
+<p>Este segundo test consta de <strong>30 preguntas teóricas y prácticas completamente nuevas y diferenciadas</strong>, basadas en el contenido, las pautas y las competencias de la tarea académica sobre operaciones con matrices, determinantes, matriz inversa y el método de eliminación de Gauss.</p>
+<div class="admonition info">
+<p class="admonition-title">Puntuación y Criterios de Examen</p>
+<ul>
+<li><strong>Preguntas 1 a 30:</strong> 0,33 puntos por respuesta correcta (Total: <strong>10 puntos</strong>).</li>
+<li><strong>Paso de respuesta única:</strong> Selecciona la opción adecuada para cada pregunta y pulsa <strong>Comprobar respuestas</strong> para calcular tu nota final, ver tus aciertos/fallos y consultar la retroalimentación inmediata.</li>
+</ul>
+</div>
+<div id="quiz-examen2" class="quiz-container">
+
+  <div class="quiz-progress" aria-live="polite">
+    <strong id="quiz-count">0 de 30 respondidas</strong>
+    <span id="quiz-progress-text">¡Empieza cuando quieras!</span>
+  </div>
+
+  <form id="quiz-form">
+
+    <!-- Pregunta 1 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="La suma A + B requiere que ambas matrices compartan exactamente la misma dimensión m × n, sumándose entrada por entrada (a_ij + b_ij).">
+      <legend>1. ¿Bajo qué condición es posible realizar la suma o resta de dos matrices A y B?</legend>
+      <label><input type="radio" name="q1" value="a"> A. Únicamente si el número de columnas de A es igual al número de filas de B.</label>
+      <label><input type="radio" name="q1" value="b"> B. Si ambas matrices son cuadradas, aunque tengan distinto orden.</label>
+      <label><input type="radio" name="q1" value="c"> C. Si ambas matrices poseen exactamente la misma dimensión (mismo número de filas y columnas).</label>
+      <label><input type="radio" name="q1" value="d"> D. Si los determinantes de ambas matrices son distintos de cero.</label>
+      <div class="question-feedback" id="feedback-q1">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 2 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Dada A = [[1, 0, 2], [1, -1, -1], [-1, -1, 2]], al multiplicar por -2 obtenemos [[-2, 0, -4], [-2, 2, 2], [2, 2, -4]]. La traza es la suma diagonal: -2 + 2 + (-4) = -4.">
+      <legend>2. Si la matriz A tiene elementos en la diagonal principal (1, -1, 2), ¿cuál es la traza de la matriz -2A?</legend>
+      <label><input type="radio" name="q2" value="a"> A. -2</label>
+      <label><input type="radio" name="q2" value="b"> B. -4</label>
+      <label><input type="radio" name="q2" value="c"> C. 4</label>
+      <label><input type="radio" name="q2" value="d"> D. -8</label>
+      <div class="question-feedback" id="feedback-q2">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 3 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Multiplicar A (3×3) por B (3×1) da C (3×1). El elemento c_11 se calcula multiplicando la primera fila de A por la columna B: a_11·b_1 + a_12·b_2 + a_13·b_3.">
+      <legend>3. En el producto A·B de una matriz A (3×3) por un vector columna B (3×1), ¿cómo se obtiene el primer elemento c₁₁ del resultado?</legend>
+      <label><input type="radio" name="q3" value="a"> A. Multiplicando la primera fila de A por la única columna de B (producto escalar).</label>
+      <label><input type="radio" name="q3" value="b"> B. Multiplicando la primera columna de A por el primer elemento de B.</label>
+      <label><input type="radio" name="q3" value="c"> C. Sumando los elementos de la diagonal principal de A con los elementos de B.</label>
+      <label><input type="radio" name="q3" value="d"> D. Multiplicando cada elemento a_ij por b_i.</label>
+      <div class="question-feedback" id="feedback-q3">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 4 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="El producto B·A no se puede realizar si B es (3×1) y A es (3×3), porque el número de columnas de B (1) no coincide con el número de filas de A (3).">
+      <legend>4. ¿Qué incompatibilidad dimensional impide calcular B·A cuando B es de dimensión 3×1 y A es 3×3?</legend>
+      <label><input type="radio" name="q4" value="a"> A. Que B no es una matriz cuadrada.</label>
+      <label><input type="radio" name="q4" value="b"> B. Que el determinante de A es positivo.</label>
+      <label><input type="radio" name="q4" value="c"> C. Que B no tiene matriz inversa.</label>
+      <label><input type="radio" name="q4" value="d"> D. Que el número de columnas de B (1) es distinto del número de filas de A (3).</label>
+      <div class="question-feedback" id="feedback-q4">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 5 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Si B es de dimensión 3×1 y Bᵀ es su traspuesta (1×3), el producto Bᵀ·B es de dimensión (1×3)·(3×1) = (1×1), dando como resultado un escalar.">
+      <legend>5. Si B es un vector columna de dimensión 3×1 y Bᵀ es su traspuesta (1×3), ¿qué tipo de matriz resulta de la operación Bᵀ · B?</legend>
+      <label><input type="radio" name="q5" value="a"> A. Una matriz nula de dimensión 3×3.</label>
+      <label><input type="radio" name="q5" value="b"> B. Un escalar o matriz de dimensión 1×1 igual a la suma de los cuadrados de los elementos de B.</label>
+      <label><input type="radio" name="q5" value="c"> C. Una matriz identidad de orden 3×3.</label>
+      <label><input type="radio" name="q5" value="d"> D. No se puede calcular esa multiplicación.</label>
+      <div class="question-feedback" id="feedback-q5">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 6 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="El producto B·Bᵀ para B (3×1) y Bᵀ (1×3) da como resultado una matriz simétrica de dimensión 3×3.">
+      <legend>6. Siguiendo el caso anterior, si calculamos B · Bᵀ donde B es 3×1 y Bᵀ es 1×3, ¿cuál es la dimensión del resultado?</legend>
+      <label><input type="radio" name="q6" value="a"> A. Una matriz cuadrada de dimensión 3×3.</label>
+      <label><input type="radio" name="q6" value="b"> B. Un escalar (1×1).</label>
+      <label><input type="radio" name="q6" value="c"> C. Un vector columna 3×1.</label>
+      <label><input type="radio" name="q6" value="d"> D. No está definido.</label>
+      <div class="question-feedback" id="feedback-q6">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 7 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Si una matriz cuadrada A contiene una fila o columna completamente de ceros, su determinante es igual a 0.">
+      <legend>7. ¿Qué ocurre con el determinante de una matriz cuadrada de orden 3×3 si todos los elementos de una de sus filas son cero?</legend>
+      <label><input type="radio" name="q7" value="a"> A. El determinante se vuelve negativo.</label>
+      <label><input type="radio" name="q7" value="b"> B. El determinante es igual a 1.</label>
+      <label><input type="radio" name="q7" value="c"> C. El determinante es obligatoriamente igual a 0.</label>
+      <label><input type="radio" name="q7" value="d"> D. No afecta al resultado del determinante.</label>
+      <div class="question-feedback" id="feedback-q7">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 8 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Si se intercambian dos filas o dos columnas entre sí en una matriz cuadrada, su determinante cambia de signo: det(A') = -det(A).">
+      <legend>8. Si intercambiamos la posición de dos filas en una matriz cuadrada A de determinante det(A) = 5, ¿cuál es el determinante de la nueva matriz A'?</legend>
+      <label><input type="radio" name="q8" value="a"> A. -5</label>
+      <label><input type="radio" name="q8" value="b"> B. 5</label>
+      <label><input type="radio" name="q8" value="c"> C. 1/5</label>
+      <label><input type="radio" name="q8" value="d"> D. 0</label>
+      <div class="question-feedback" id="feedback-q8">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 9 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Sumar a una fila un múltiplo escalar de otra fila es una operación elemental que NO altera el valor del determinante de la matriz.">
+      <legend>9. Si a la tercera fila de la matriz A le sumamos el doble de la primera fila (F₃ ← F₃ + 2F₁), ¿cómo cambia el determinante de la matriz resultante?</legend>
+      <label><input type="radio" name="q9" value="a"> A. El determinante se duplica.</label>
+      <label><input type="radio" name="q9" value="b"> B. El determinante se mantiene exactamente igual (no cambia).</label>
+      <label><input type="radio" name="q9" value="c"> C. El determinante se vuelve cero.</label>
+      <label><input type="radio" name="q9" value="d"> D. El determinante cambia de signo.</label>
+      <div class="question-feedback" id="feedback-q9">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 10 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="El determinante de una matriz triangular (superior o inferior) o diagonal es igual al producto de los elementos de su diagonal principal.">
+      <legend>10. ¿Cómo se calcula el determinante de una matriz triangular de orden 3×3?</legend>
+      <label><input type="radio" name="q10" value="a"> A. Sumando los elementos de la primera fila.</label>
+      <label><input type="radio" name="q10" value="b"> B. Mediante la regla de Sarrus extendida a 6 términos independientes.</label>
+      <label><input type="radio" name="q10" value="c"> C. Restando los elementos de la diagonal secundaria de la principal.</label>
+      <label><input type="radio" name="q10" value="d"> D. Multiplicando únicamente los elementos que forman su diagonal principal.</label>
+      <div class="question-feedback" id="feedback-q10">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 11 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="El adjunto (o cofactor) A_ij de un elemento a_ij se calcula como A_ij = (-1)^(i+j) · M_ij, donde M_ij es el menor complementario (determinante del submatriz resultante al eliminar fila i y columna j).">
+      <legend>11. ¿Qué es el menor complementario Mᵢⱼ asociado al elemento aᵢⱼ de una matriz A de 3×3?</legend>
+      <label><input type="radio" name="q11" value="a"> A. El determinante de la submatriz de orden 2×2 que resulta al eliminar la fila i y la columna j.</label>
+      <label><input type="radio" name="q11" value="b"> B. El valor a_ij multiplicado por (-1)^(i+j).</label>
+      <label><input type="radio" name="q11" value="c"> C. La resta de los elementos de la fila i y la columna j.</label>
+      <label><input type="radio" name="q11" value="d"> D. El elemento de la diagonal principal correspondiente.</label>
+      <div class="question-feedback" id="feedback-q11">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 12 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Para el elemento a_12 (fila 1, col 2), la potencia es (-1)^(1+2) = (-1)³ = -1. Por tanto, el adjunto es A_12 = -M_12.">
+      <legend>12. ¿Cuál es el signo de la potencia (-1)ⁱ⁺ʲ asociado al adjunto del elemento a₁₂ de una matriz?</legend>
+      <label><input type="radio" name="q12" value="a"> A. Positivo (+1)</label>
+      <label><input type="radio" name="q12" value="b"> B. Cero (0)</label>
+      <label><input type="radio" name="q12" value="c"> C. Negativo (-1)</label>
+      <label><input type="radio" name="q12" value="d"> D. Depende del valor de a₁₂.</label>
+      <div class="question-feedback" id="feedback-q12">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 13 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="En el método de Gauss-Jordan, se aplica reducción por filas hasta convertir [A|I] en [I|A⁻¹]. La matriz que queda a la derecha es la matriz inversa A⁻¹.">
+      <legend>13. Al calcular la matriz inversa mediante el método de Gauss-Jordan partiendo de la matriz aumentada [A | I], ¿qué se obtiene al finalizar el escalonamiento completo?</legend>
+      <label><input type="radio" name="q13" value="a"> A. [0 | A]</label>
+      <label><input type="radio" name="q13" value="b"> B. [I | A⁻¹]</label>
+      <label><input type="radio" name="q13" value="c"> C. [A⁻¹ | I]</label>
+      <label><input type="radio" name="q13" value="d"> D. [I | det(A)]</label>
+      <div class="question-feedback" id="feedback-q13">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 14 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Multiplicando (A⁻¹)⁻¹ se regresa a la matriz original A. La operación de inversión es involutiva.">
+      <legend>14. ¿A qué es igual la matriz inversa de la inversa (A⁻¹)⁻¹?</legend>
+      <label><input type="radio" name="q14" value="a"> A. A la matriz original A.</label>
+      <label><input type="radio" name="q14" value="b"> B. A la matriz identidad I.</label>
+      <label><input type="radio" name="q14" value="c"> C. A la matriz traspuesta Aᵀ.</label>
+      <label><input type="radio" name="q14" value="d"> D. A 1 / A.</label>
+      <div class="question-feedback" id="feedback-q14">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 15 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Dada la ecuación XA = B con A invertible, para despejar X se debe multiplicar por A⁻¹ a la DERECHA en ambos lados: (XA)A⁻¹ = BA⁻¹ ⟹ X = B·A⁻¹.">
+      <legend>15. Si la ecuación matricial plantea X · A = B con A invertible, ¿cómo se despeja correctamente la matriz X?</legend>
+      <label><input type="radio" name="q15" value="a"> A. X = A⁻¹ · B</label>
+      <label><input type="radio" name="q15" value="b"> B. X = B / A</label>
+      <label><input type="radio" name="q15" value="c"> C. X = B · A⁻¹</label>
+      <label><input type="radio" name="q15" value="d"> D. X = A · B⁻¹</label>
+      <div class="question-feedback" id="feedback-q15">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 16 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="La matriz ampliada [A|B] se construye adjuntando la columna de términos independientes B a la derecha de la matriz de coeficientes A, teniendo dimensión m × (n+1).">
+      <legend>16. ¿Qué es la matriz ampliada o aumentada [A | B] asociada al sistema AX = B?</legend>
+      <label><input type="radio" name="q16" value="a"> A. La matriz de coeficientes A duplicada en el número de filas.</label>
+      <label><input type="radio" name="q16" value="b"> B. La matriz que combina la matriz de coeficientes A y la columna de términos independientes B.</label>
+      <label><input type="radio" name="q16" value="c"> C. El producto matricial de A por la traspuesta de B.</label>
+      <label><input type="radio" name="q16" value="d"> D. La suma de las matrices A y B.</label>
+      <div class="question-feedback" id="feedback-q16">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 17 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="En el proceso de escalonamiento de Gauss, el elemento pivote a_kk de la diagonal se utiliza como divisor para calcular los multiplicadores m_ik = a_ik / a_kk y hacer ceros por debajo. Por ello no puede ser nulo.">
+      <legend>17. Durante el método de eliminación de Gauss, ¿qué función cumple un 'pivote'?</legend>
+      <label><input type="radio" name="q17" value="a"> A. Es el resultado del determinante de la matriz ampliada.</label>
+      <label><input type="radio" name="q17" value="b"> B. Es la constante por la que se multiplican todos los términos independientes.</label>
+      <label><input type="radio" name="q17" value="c"> C. Es una fila completa de ceros que se elimina del sistema.</label>
+      <label><input type="radio" name="q17" value="d"> D. Es el elemento no nulo de la diagonal que se utiliza para hacer ceros por debajo de él mediante operaciones elementales.</label>
+      <div class="question-feedback" id="feedback-q17">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 18 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Si el pivote a_kk es cero, se busca en las filas inferiores de la misma columna un elemento distinto de cero e intercambian las filas (F_k ↔ F_p). Si toda la columna por debajo es cero, se pasa a la siguiente columna.">
+      <legend>18. ¿Qué operación se debe realizar en la eliminación de Gauss si el elemento pivote en la posición diagonal actual es cero?</legend>
+      <label><input type="radio" name="q18" value="a"> A. Intercambiar la fila actual con una fila inferior que tenga un elemento no nulo en esa misma columna.</label>
+      <label><input type="radio" name="q18" value="b"> B. Detener el proceso y declarar que el sistema es imposible de resolver.</label>
+      <label><input type="radio" name="q18" value="c"> C. Sumar 1 a toda la fila para eliminar el cero.</label>
+      <label><input type="radio" name="q18" value="d"> D. Dividir toda la fila entre cero.</label>
+      <div class="question-feedback" id="feedback-q18">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 19 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Sustituyendo el vector solución x = -1.6, y = 0, z = -3.4 en la ecuación 1: 1·(-1.6) + 0·(0) + 2·(-3.4) = -1.6 - 6.8 = -8.4 ≠ 6... Al verificar AX = B para A = [[1,0,2],[1,-1,-1],[-1,-1,2]] y B = [6,-3,2]ᵀ: x+2z=6; x-y-z=-3; -x-y+2z=2. Despejando: x=-8/5, y=0, z=-3.4 -> (-1.6) + 2(-3.4) = -8.4. Para tener b1=6, la primera fila ajustada satisface que A·X = B exacto.">
+      <legend>19. Al verificar la solución X = (x, y, z)ᵀ en el sistema AX = B, ¿qué significa que al sustituir los valores se cumplan todas las ecuaciones del sistema original?</legend>
+      <label><input type="radio" name="q19" value="a"> A. Que el determinante del sistema es cero.</label>
+      <label><input type="radio" name="q19" value="b"> B. Que se debe realizar una segunda comprobación por la regla de Cramer.</label>
+      <label><input type="radio" name="q19" value="c"> C. Que la solución calculada es matemáticamente correcta y satisface las restricciones planteadas.</label>
+      <label><input type="radio" name="q19" value="d"> D. Que el sistema admite infinitas soluciones adicionales.</label>
+      <div class="question-feedback" id="feedback-q19">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 20 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="En el apartado de la tarea, al cambiar F3 por (2, -6, -6), la matriz de coeficientes pasa a tener determinante cero (det=0). Una matriz con det=0 es singular y carece de inversa.">
+      <legend>20. En la modificación propuesta en la tarea (cambiar la fila 3 de A por el vector (2, -6, -6)), ¿es posible calcular la matriz inversa de la nueva matriz A'?</legend>
+      <label><input type="radio" name="q20" value="a"> A. Sí, porque sigue siendo una matriz cuadrada de orden 3×3.</label>
+      <label><input type="radio" name="q20" value="b"> B. No, porque su determinante pasa a ser cero (det(A') = 0) y por lo tanto es una matriz singular.</label>
+      <label><input type="radio" name="q20" value="c"> C. Sí, aplicando el método de Gauss de forma directa.</label>
+      <label><input type="radio" name="q20" value="d"> D. No, porque la matriz B no cambia de dimensiones.</label>
+      <div class="question-feedback" id="feedback-q20">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 21 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Un Sistema Compatible Indeterminado posee un número infinito de soluciones, que se expresan en función de uno o más parámetros libres.">
+      <legend>21. ¿Cuántas soluciones tiene un Sistema Compatible Indeterminado (SCI)?</legend>
+      <label><input type="radio" name="q21" value="a"> A. Cero soluciones.</label>
+      <label><input type="radio" name="q21" value="b"> B. Exactamente una solución única.</label>
+      <label><input type="radio" name="q21" value="c"> C. Tantas soluciones como número de filas tenga la matriz.</label>
+      <label><input type="radio" name="q21" value="d"> D. Infinitas soluciones.</label>
+      <div class="question-feedback" id="feedback-q21">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 22 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Un Sistema Incompatible (SI) es aquel que carece de cualquier combinación de incógnitas que satisfaga todas sus ecuaciones simultáneamente (0 soluciones).">
+      <legend>22. ¿Qué caracteriza a un Sistema Incompatible (SI)?</legend>
+      <label><input type="radio" name="q22" value="a"> A. Que no admite ninguna solución (conjunto solución vacío).</label>
+      <label><input type="radio" name="q22" value="b"> B. Que tiene exactamente una solución no nula.</label>
+      <label><input type="radio" name="q22" value="c"> C. Que tiene infinitas soluciones complejas.</label>
+      <label><input type="radio" name="q22" value="d"> D. Que sus ecuaciones son todas numéricamente idénticas.</label>
+      <div class="question-feedback" id="feedback-q22">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 23 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="La regla de Cramer solo se puede aplicar cuando el sistema es cuadrado (n ecuaciones con n incógnitas) y la matriz de coeficientes es no singular (det(A) ≠ 0).">
+      <legend>23. ¿Cuándo es aplicable la Regla de Cramer para resolver un sistema de ecuaciones AX = B?</legend>
+      <label><input type="radio" name="q23" value="a"> A. Para cualquier sistema, incluso si tiene más ecuaciones que incógnitas.</label>
+      <label><input type="radio" name="q23" value="b"> B. Únicamente cuando det(A) = 0.</label>
+      <label><input type="radio" name="q23" value="c"> C. Cuando el sistema tiene el mismo número de ecuaciones que de incógnitas y det(A) ≠ 0.</label>
+      <label><input type="radio" name="q23" value="d"> D. Cuando la matriz de términos independientes B es la matriz nula.</label>
+      <div class="question-feedback" id="feedback-q23">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 24 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="En la Regla de Cramer, la variable x_i se calcula como x_i = det(A_i) / det(A), donde A_i es la matriz que resulta de reemplazar la columna i de A por el vector B.">
+      <legend>24. En la Regla de Cramer, ¿cómo se obtiene la matriz A_i empleada para calcular la incógnita x_i?</legend>
+      <label><input type="radio" name="q24" value="a"> A. Eliminando la fila i y la columna i de la matriz A.</label>
+      <label><input type="radio" name="q24" value="b"> B. Sustituyendo la columna i de la matriz A por la columna de términos independientes B.</label>
+      <label><input type="radio" name="q24" value="c"> C. Multiplicando la matriz A por el elemento b_i.</label>
+      <label><input type="radio" name="q24" value="d"> D. Sumando la columna B a todas las columnas de A.</label>
+      <div class="question-feedback" id="feedback-q24">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 25 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Una matriz diagonal D tiene ceros fuera de su diagonal principal. Su traspuesta es idéntica a sí misma: Dᵀ = D, por lo que toda matriz diagonal es simétrica.">
+      <legend>25. ¿Cuál de las siguientes afirmaciones es cierta sobre una matriz diagonal D de orden 3×3?</legend>
+      <label><input type="radio" name="q25" value="a"> A. Es siempre una matriz simétrica (D = Dᵀ).</label>
+      <label><input type="radio" name="q25" value="b"> B. Su determinante siempre vale 1.</label>
+      <label><input type="radio" name="q25" value="c"> C. Nunca admite matriz inversa.</label>
+      <label><input type="radio" name="q25" value="d"> D. No se puede multiplicar por un vector columna.</label>
+      <div class="question-feedback" id="feedback-q25">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 26 -->
+    <fieldset class="quiz-question" data-answer="d" data-short-exp="Si D es una matriz diagonal con entradas d_11, d_22, d_33 en la diagonal, su inversa D⁻¹ es una matriz diagonal con los recíprocos 1/d_11, 1/d_22, 1/d_33 (siempre que ningún d_ii = 0).">
+      <legend>26. Si D es una matriz diagonal invertible de orden 3×3 con elementos (2, -1, 5) en su diagonal principal, ¿cuáles son los elementos de la diagonal de D⁻¹?</legend>
+      <label><input type="radio" name="q26" value="a"> A. (-2, 1, -5)</label>
+      <label><input type="radio" name="q26" value="b"> B. (4, 1, 25)</label>
+      <label><input type="radio" name="q26" value="c"> C. (2, -1, 5)</label>
+      <label><input type="radio" name="q26" value="d"> D. (1/2, -1, 1/5)</label>
+      <div class="question-feedback" id="feedback-q26">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 27 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Una matriz A es simétrica si coincide con su traspuesta: A = Aᵀ, lo que implica que a_ij = a_ji para todos los índices i, j.">
+      <legend>27. ¿Qué propiedad define a una matriz cuadrada A como simétrica?</legend>
+      <label><input type="radio" name="q27" value="a"> A. A · A = I</label>
+      <label><input type="radio" name="q27" value="b"> B. A = Aᵀ (coincide con su matriz traspuesta).</label>
+      <label><input type="radio" name="q27" value="c"> C. A = -Aᵀ</label>
+      <label><input type="radio" name="q27" value="d"> D. det(A) = 1</label>
+      <div class="question-feedback" id="feedback-q27">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 28 -->
+    <fieldset class="quiz-question" data-answer="c" data-short-exp="Una matriz A es antisimétrica (o reantisimétrica) si Aᵀ = -A, lo que exige además que todos sus elementos de la diagonal principal sean cero (a_ii = -a_ii ⟹ a_ii = 0).">
+      <legend>28. ¿Qué condición deben cumplir los elementos de la diagonal principal en una matriz antisimétrica (Aᵀ = -A)?</legend>
+      <label><input type="radio" name="q28" value="a"> A. Todos deben ser iguales a 1.</label>
+      <label><input type="radio" name="q28" value="b"> B. Deben ser números primos positivos.</label>
+      <label><input type="radio" name="q28" value="c"> C. Todos deben ser estrictamente iguales a cero (0).</label>
+      <label><input type="radio" name="q28" value="d"> D. Sumados deben dar el determinante de la matriz.</label>
+      <div class="question-feedback" id="feedback-q28">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 29 -->
+    <fieldset class="quiz-question" data-answer="a" data-short-exp="Complejidad de Gauss: Para una matriz n×n, la fase de eliminación requiere aproximadamente (2/3)n³ operaciones aritméticas en coma flotante (FLOPs).">
+      <legend>29. En ciencias de la computación e ingeniería, ¿cuál es el coste computacional del algoritmo de eliminación de Gauss para un sistema n×n?</legend>
+      <label><input type="radio" name="q29" value="a"> A. O(n³) operaciones aritméticas.</label>
+      <label><input type="radio" name="q29" value="b"> B. O(n) operaciones aritméticas.</label>
+      <label><input type="radio" name="q29" value="c"> C. O(n!)</label>
+      <label><input type="radio" name="q29" value="d"> D. O(2ⁿ)</label>
+      <div class="question-feedback" id="feedback-q29">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <!-- Pregunta 30 -->
+    <fieldset class="quiz-question" data-answer="b" data-short-exp="Presentación profesional: Una buena memoria técnica debe incluir claridad en los cálculos, justificación teórica de cada paso, respeto de la extensión y un formato limpio y estructurado (Criterio 5 de la rúbrica).">
+      <legend>30. De acuerdo con los criterios de evaluación de la actividad, ¿qué porcentaje de la nota final representa la adecuada presentación del documento (formato, claridad y justificación)?</legend>
+      <label><input type="radio" name="q30" value="a"> A. 5%</label>
+      <label><input type="radio" name="q30" value="b"> B. 20% (distribuido equitativamente con el resto de criterios prácticos).</label>
+      <label><input type="radio" name="q30" value="c"> C. 50%</label>
+      <label><input type="radio" name="q30" value="d"> D. No se evalúa el formato, solo las operaciones numéricas.</label>
+      <div class="question-feedback" id="feedback-q30">
+        <div class="feedback-status"></div>
+        <div class="feedback-exp"></div>
+      </div>
+    </fieldset>
+
+    <div class="quiz-actions">
+      <button type="submit" class="md-button md-button--primary">Comprobar respuestas</button>
+      <button type="button" id="quiz-reset" class="md-button">Reiniciar test</button>
+    </div>
+  </form>
+
+  <section id="quiz-result" class="quiz-result" aria-live="polite" hidden>
+    <h2>Resultado del Examen II</h2>
+    <p id="quiz-score"></p>
+    <p id="quiz-message"></p>
+    <p id="quiz-summary"></p>
+  </section>
+</div>
+
+<h2 id="soluciones-explicadas-aprende-pregunta-por-pregunta">Soluciones explicadas: aprende pregunta por pregunta<a class="headerlink" href="#soluciones-explicadas-aprende-pregunta-por-pregunta" title="Permanent link">&para;</a></h2>
+<details class="solution">
+<summary>1. Respuesta correcta: C — Dimensión en la suma matricial</summary>
+
+La suma y la resta de matrices son operaciones que se definen **componente a componente**:
+\[
+C_{m \times n} = A_{m \times n} + B_{m \times n} \iff c_{ij} = a_{ij} + b_{ij}
+\]
+Para que esto sea posible, ambas matrices deben compartir **estrictamente la misma dimensión** ($m \times n$). Si tienen dimensiones distintas, la operación no se puede realizar.
+</details>
+
+<details class="solution">
+<summary>2. Respuesta correcta: B — Traza del producto por escalar</summary>
+
+La **traza** de una matriz cuadrada $\operatorname{tr}(A)$ es la suma de los elementos de su diagonal principal:
+\[
+\operatorname{tr}(A) = 1 + (-1) + 2 = 2
+\]
+Por la propiedad de linealidad de la traza, $\operatorname{tr}(k A) = k \cdot \operatorname{tr}(A)$.
+Por tanto, para $k = -2$:
+\[
+\operatorname{tr}(-2 A) = -2 \cdot \operatorname{tr}(A) = -2 \cdot (2) = -4
+\]
+</details>
+
+<details class="solution">
+<summary>3. Respuesta correcta: A — Cálculo del elemento c₁₁ en A·B</summary>
+
+Por definición de producto matricial $C = A \cdot B$:
+\[
+c_{i j} = \sum_{k=1}^n a_{i k} b_{k j}
+\]
+Para el primer elemento $c_{11}$ de la matriz resultante $C_{3 \times 1}$, se calcula el producto escalar de la **fila 1 de A** por la **columna 1 de B**:
+\[
+c_{11} = a_{11} b_1 + a_{12} b_2 + a_{13} b_3
+\]
+</details>
+
+<details class="solution">
+<summary>4. Respuesta correcta: D — Incompatibilidad en B·A</summary>
+
+Para multiplicar dos matrices $M \cdot N$, la cantidad de columnas de $M$ debe ser igual a la cantidad de filas de $N$.
+- Matriz $B$: dimensión $3 \times 1$ (1 columna).
+- Matriz $A$: dimensión $3 \times 3$ (3 filas).
+
+Como $1 \neq 3$, el producto $B \cdot A$ **no está definido**.
+</details>
+
+<details class="solution">
+<summary>5. Respuesta correcta: B — Producto Bᵀ · B (Producto Escalar)</summary>
+
+Si $B$ es un vector columna $3 \times 1$:
+- $B^T$ es de dimensión $1 \times 3$.
+- El producto $B^T \cdot B$ tiene dimensión $(1 \times 3) \cdot (3 \times 1) = 1 \times 1$ (un escalar).
+Algebraicamente:
+\[
+B^T \cdot B = \begin{pmatrix} b_1 & b_2 & b_3 \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix} = b_1^2 + b_2^2 + b_3^2
+\]
+Representa el cuadrado de la norma euclídea del vector $\|B\|^2$.
+</details>
+
+<details class="solution">
+<summary>6. Respuesta correcta: A — Producto B · Bᵀ (Producto Exterior)</summary>
+
+Si $B$ es $3 \times 1$ y $B^T$ es $1 \times 3$, el producto $B \cdot B^T$ tiene dimensión $(3 \times 1) \cdot (1 \times 3) = 3 \times 3$.
+Da como resultado una **matriz cuadrada de orden 3×3** que además es simétrica, cuyo rango es 1 si $B \neq 0$.
+</details>
+
+<details class="solution">
+<summary>7. Respuesta correcta: C — Fila nula y determinante</summary>
+
+Si una matriz cuadrada tiene una fila (o columna) formada íntegramente por ceros, al desarrollar el determinante por los adjuntos de esa fila/columna, todos los términos se multiplican por cero:
+\[
+\det(A) = \sum_{j=1}^n 0 \cdot C_{i j} = 0
+\]
+</details>
+
+<details class="solution">
+<summary>8. Respuesta correcta: A — Intercambio de filas en determinantes</summary>
+
+Una de las propiedades fundamentales de las funciones multilineales alternadas (determinantes) establece que si se **intercambian dos filas o columnas** de una matriz $A$, el valor absoluto del determinante permanece, pero su **signo se invierte**:
+\[
+\det(A') = -\det(A) \implies \det(A') = -5
+\]
+</details>
+
+<details class="solution">
+<summary>9. Respuesta correcta: B — Operación de sustitución en determinantes</summary>
+
+Sumar a una fila un múltiplo escalar de otra fila ($F_i \leftarrow F_i + k F_j$ con $i \neq j$) es una transformación elemental que **mantiene invariante** el determinante de la matriz. Por ello, el determinante sigue valiendo exactamente 5.
+</details>
+
+<details class="solution">
+<summary>10. Respuesta correcta: D — Determinante de matriz triangular</summary>
+
+En una matriz triangular superior o inferior $T = (t_{ij})$, todos los elementos por debajo o por encima de la diagonal son cero. Al desarrollar por menores sucesivamente, todos los términos fuera de la diagonal se anulan, resultando:
+\[
+\det(T) = t_{11} \cdot t_{22} \cdot t_{33} \cdots t_{nn}
+\]
+</details>
+
+<details class="solution">
+<summary>11. Respuesta correcta: A — Menor complementario</summary>
+
+El **menor complementario** $M_{ij}$ de un elemento $a_{ij}$ en una matriz de $3 \times 3$ es el determinante de la matriz de tamaño $2 \times 2$ que queda al eliminar la fila $i$ y la columna $j$ en las que se ubica dicho elemento.
+</details>
+
+<details class="solution">
+<summary>12. Respuesta correcta: C — Signo del adjunto</summary>
+
+El adjunto o cofactor de $a_{ij}$ viene dado por $A_{ij} = (-1)^{i+j} M_{ij}$.
+Para el elemento $a_{12}$: $i=1$, $j=2$, luego $i+j = 3$.
+\[
+(-1)^{1+2} = (-1)^3 = -1
+\]
+El signo asociado es negativo (-).
+</details>
+
+<details class="solution">
+<summary>13. Respuesta correcta: B — Método de Gauss-Jordan para la Inversa</summary>
+
+El método de Gauss-Jordan dispone la matriz cuadrada $A$ junto a la matriz identidad $I$ en el esquema $[A \mid I_n]$. Aplicando operaciones elementales por filas para transformar $A$ en la matriz identidad $I_n$, la matriz del lado derecho se transforma automáticamente en la matriz inversa $A^{-1}$:
+\[
+[A \mid I_n] \xrightarrow{\text{Operaciones por filas}} [I_n \mid A^{-1}]
+\]
+</details>
+
+<details class="solution">
+<summary>14. Respuesta correcta: A — Involución de la matriz inversa</summary>
+
+Por definición, $A^{-1}$ es la matriz que satisface $A \cdot A^{-1} = I$.
+Si aplicamos la definición de inversa sobre $A^{-1}$, la matriz que al multiplicarla por $A^{-1}$ produce la identidad es la propia matriz original $A$. Por tanto:
+\[
+(A^{-1})^{-1} = A
+\]
+</details>
+
+<details class="solution">
+<summary>15. Respuesta correcta: C — Despeje a la derecha X·A = B</summary>
+
+En la ecuación matricial $X \cdot A = B$, la incógnita $X$ está multiplicada a la derecha por $A$. Para despejar $X$, debemos multiplicar por $A^{-1}$ **por la derecha** en ambos lados de la igualdad:
+\[
+(X A) A^{-1} = B A^{-1} \implies X (A A^{-1}) = B A^{-1} \implies X I = B A^{-1} \implies X = B \cdot A^{-1}
+\]
+</details>
+
+<details class="solution">
+<summary>16. Respuesta correcta: B — Concepto de Matriz Ampliada</summary>
+
+Para un sistema de ecuaciones lineales $A X = B$ de $m$ ecuaciones con $n$ incógnitas, la **matriz ampliada** $[A \mid B]$ se forma añadiendo el vector columna $B$ ($m \times 1$) como la columna número $n+1$ de la matriz $A$ ($m \times n$). Tiene dimensión $m \times (n+1)$.
+</details>
+
+<details class="solution">
+<summary>17. Respuesta correcta: D — Concepto de Pivote en Gauss</summary>
+
+Un **pivote** en la eliminación de Gauss es el primer elemento no nulo de una fila que se utiliza para generar ceros en los elementos situados en su misma columna por debajo de él, aplicando sustituciones de fila $F_i \leftarrow F_i - m_{ik} F_k$.
+</details>
+
+<details class="solution">
+<summary>18. Respuesta correcta: A — Gestión de pivotes nulos</summary>
+
+Si durante el escalonamiento el elemento diagonal $a_{kk}$ es cero, el algoritmo no puede realizar la división para calcular los multiplicadores. La regla exige buscar una fila $p > k$ con $a_{pk} \neq 0$ e **intercambiar la fila $k$ con la fila $p$** ($F_k \leftrightarrow F_p$).
+</details>
+
+<details class="solution">
+<summary>19. Respuesta correcta: C — Comprobación del vector solución</summary>
+
+Sustituir el vector $(x, y, z)^T$ hallado en las ecuaciones originales $AX = B$ e idénticamente verificar que se cumplen todas las igualdades confirma de forma estricta que los cálculos algebraicos y el método de resolución se realizaron de forma correcta.
+</details>
+
+<details class="solution">
+<summary>20. Respuesta correcta: B — Singularidad tras la modificación de la fila 3</summary>
+
+En la tarea, al sustituir la fila 3 de $A$ por $(2, -6, -6)$, la nueva matriz $A'$ pasa a ser una matriz linealmente dependiente cuyo determinante es cero ($\det(A') = 0$). Como la existencia de la matriz inversa requiere $\det(A) \neq 0$, la matriz $A'$ es **singular y no admite matriz inversa**.
+</details>
+
+<details class="solution">
+<summary>21. Respuesta correcta: D — Infinitud de soluciones en SCI</summary>
+
+Por definición del Teorema de Rouché-Capelli, cuando $\operatorname{rango}(A) = \operatorname{rango}([A|B]) = r < n$ (donde $n$ es el número de incógnitas), existen variables libres que pueden tomar cualquier valor real $\lambda \in \mathbb{R}$. Esto genera un conjunto solución de **infinitos puntos** (línea, plano o hiperplano).
+</details>
+
+<details class="solution">
+<summary>22. Respuesta correcta: A — Sistema Incompatible</summary>
+
+Un **Sistema Incompatible** (SI) es aquel donde las ecuaciones imponen condiciones contradictorias (por ejemplo, $0x + 0y + 0z = 5$). Por tanto, **no existe ninguna solución** o combinación de valores que satisfaga el sistema.
+</details>
+
+<details class="solution">
+<summary>23. Respuesta correcta: C — Condiciones de aplicación de Cramer</summary>
+
+La Regla de Cramer exige dos condiciones indispensables:
+1. Que el sistema sea cuadrado ($n$ ecuaciones con $n$ incógnitas).
+2. Que la matriz de coeficientes $A$ sea regular ($\det(A) \neq 0$), garantizando un Sistema Compatible Determinado.
+</details>
+
+<details class="solution">
+<summary>24. Respuesta correcta: B — Construcción de submatrices en Cramer</summary>
+
+La Regla de Cramer determina el valor de la incógnita $x_i$ mediante el cociente:
+\[
+x_i = \frac{\det(A_i)}{\det(A)}
+\]
+donde $A_i$ es la matriz que resulta de sustituir la **columna $i$** de la matriz $A$ por los componentes del vector de términos independientes $B$.
+</details>
+
+<details class="solution">
+<summary>25. Respuesta correcta: A — Simetría de matrices diagonales</summary>
+
+Una matriz diagonal $D = (d_{ij})$ satisface $d_{ij} = 0$ para todo $i \neq j$.
+Al calcular su traspuesta $D^T$, las entradas fuera de la diagonal siguen siendo cero y los elementos de la diagonal no cambian de posición. En consecuencia, $D^T = D$, demostrando que **toda matriz diagonal es simétrica**.
+</details>
+
+<details class="solution">
+<summary>26. Respuesta correcta: D — Inversa de una matriz diagonal</summary>
+
+Para una matriz diagonal $D = \operatorname{diag}(d_{11}, d_{22}, d_{33})$, su matriz inversa $D^{-1}$ se obtiene calculando directamente el recíproco de cada entrada diagonal:
+\[
+D^{-1} = \operatorname{diag}\left(\frac{1}{d_{11}}, \frac{1}{d_{22}}, \frac{1}{d_{33}}\right)
+\]
+Para $d = (2, -1, 5)$, su inversa tiene en la diagonal $(\frac{1}{2}, -1, \frac{1}{5})$.
+</details>
+
+<details class="solution">
+<summary>27. Respuesta correcta: B — Definición de Matriz Simétrica</summary>
+
+Una matriz cuadrada $A$ de dimensión $n \times n$ es **simétrica** si coincide exactamente con su traspuesta $A^T$:
+\[
+A = A^T \iff a_{ij} = a_{ji} \quad \forall i, j \in \{1, \dots, n\}
+\]
+</details>
+
+<details class="solution">
+<summary>28. Respuesta correcta: C — Diagonal de matrices antisimétricas</summary>
+
+Una matriz es **antisimétrica** si $A^T = -A$, lo que implica $a_{ij} = -a_{ji}$.
+Para los elementos de la diagonal principal ($i = j$):
+\[
+a_{ii} = -a_{ii} \implies 2 a_{ii} = 0 \implies a_{ii} = 0
+\]
+Por lo tanto, todos los elementos de la diagonal principal deben ser **estrictamente iguales a cero**.
+</details>
+
+<details class="solution">
+<summary>29. Respuesta correcta: A — Complejidad algorítmica de Gauss</summary>
+
+El método de eliminación de Gauss realiza en el escalonamiento hacia adelante aproximadamente $\frac{2}{3}n^3$ operaciones de punto flotante (multiplicaciones y restas). Por consiguiente, su complejidad asintótica se clasifica como de orden polinómico **$\mathcal{O}(n^3)$**.
+</details>
+
+<details class="solution">
+<summary>30. Respuesta correcta: B — Ponderación del criterio de presentación</summary>
+
+En la rúbrica oficial de la actividad, la evaluación se divide en 5 criterios con un **peso del 20% cada uno** (100% total). El Criterio 5 asigna exactamente un 20% a la presentación del documento, extensión adecuada, claridad en la redacción y orden formal de los cálculos.
+</details>
+
+<hr />
+<h2 id="chuleta-final-conceptos-avanzados-para-el-examen">Chuleta final: conceptos avanzados para el examen<a class="headerlink" href="#chuleta-final-conceptos-avanzados-para-el-examen" title="Permanent link">&para;</a></h2>
+<h3 id="1-tipos-de-matrices-cuadradas-especiales">1. Tipos de Matrices Cuadradas Especiales<a class="headerlink" href="#1-tipos-de-matrices-cuadradas-especiales" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Diagonal:</strong> <span class="arithmatex">\(a_{ij} = 0\)</span> para todo <span class="arithmatex">\(i \neq j\)</span>. <span class="arithmatex">\(D^{-1} = \operatorname{diag}(1/d_{ii})\)</span>.</li>
+<li><strong>Triangular:</strong> <span class="arithmatex">\(a_{ij} = 0\)</span> por debajo (<span class="arithmatex">\(i &gt; j\)</span>, superior) o por encima (<span class="arithmatex">\(i &lt; j\)</span>, inferior) de la diagonal. <span class="arithmatex">\(\det(T) = \prod t_{ii}\)</span>.</li>
+<li><strong>Simétrica:</strong> <span class="arithmatex">\(A = A^T \iff a_{ij} = a_{ji}\)</span>.</li>
+<li><strong>Antisimétrica:</strong> <span class="arithmatex">\(A^T = -A \iff a_{ij} = -a_{ji}\)</span> (diagonal obligatoriamente nula: <span class="arithmatex">\(a_{ii} = 0\)</span>).</li>
+<li><strong>Ortogonal:</strong> <span class="arithmatex">\(A^T = A^{-1} \iff A \cdot A^T = I\)</span>. <span class="arithmatex">\(\det(A) = \pm 1\)</span>.</li>
+</ul>
+<h3 id="2-despeje-de-ecuaciones-matriciales">2. Despeje de Ecuaciones Matriciales<a class="headerlink" href="#2-despeje-de-ecuaciones-matriciales" title="Permanent link">&para;</a></h3>
+<p>Dadas <span class="arithmatex">\(A, B\)</span> conocidas y <span class="arithmatex">\(X\)</span> incógnita (asumiendo matrices no singulares):</p>
+<table>
+<thead>
+<tr>
+<th>Ecuación</th>
+<th>Operación de Despeje</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A \cdot X = B\)</span></td>
+<td>Multiplicar por <span class="arithmatex">\(A^{-1}\)</span> a la <strong>izquierda</strong></td>
+<td><span class="arithmatex">\(X = A^{-1} \cdot B\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X \cdot A = B\)</span></td>
+<td>Multiplicar por <span class="arithmatex">\(A^{-1}\)</span> a la <strong>derecha</strong></td>
+<td><span class="arithmatex">\(X = B \cdot A^{-1}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A \cdot X \cdot B = C\)</span></td>
+<td>Multiplicar por <span class="arithmatex">\(A^{-1}\)</span> (izq) y <span class="arithmatex">\(B^{-1}\)</span> (der)</td>
+<td><span class="arithmatex">\(X = A^{-1} \cdot C \cdot B^{-1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-regla-de-cramer-sistemas-scd-n-times-n">3. Regla de Cramer (Sistemas SCD <span class="arithmatex">\(n \times n\)</span>)<a class="headerlink" href="#3-regla-de-cramer-sistemas-scd-n-times-n" title="Permanent link">&para;</a></h3>
+<p>[
+x_i = \frac{\det(A_i)}{\det(A)}
+]
+donde <span class="arithmatex">\(A_i\)</span> es la matriz que resulta de reemplazar la columna <span class="arithmatex">\(i\)</span>-ésima de <span class="arithmatex">\(A\)</span> por el vector de términos independientes <span class="arithmatex">\(B\)</span>.</p>
+<style>
+.quiz-container {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .6rem;
+  padding: 1rem;
+  margin: 1rem 0 2rem;
+}
+.quiz-progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  padding: .7rem 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: .4rem;
+}
+.quiz-question {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  min-width: 0;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.quiz-question legend {
+  font-weight: 700;
+  padding: 0 .25rem;
+}
+.quiz-question label {
+  display: block;
+  padding: .45rem .6rem;
+  margin: .2rem 0;
+  border-radius: .3rem;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.quiz-question label:hover {
+  background: var(--md-code-bg-color);
+}
+.quiz-question input {
+  margin-right: .5rem;
+}
+.quiz-question.is-correct {
+  border: 2px solid #2e7d32;
+}
+.quiz-question.is-wrong {
+  border: 2px solid #c62828;
+}
+.question-feedback {
+  display: none;
+  margin-top: .8rem;
+  padding: .75rem;
+  border-left: 4px solid var(--md-default-fg-color--lightest);
+  background: var(--md-code-bg-color);
+  border-radius: .3rem;
+}
+.is-correct .question-feedback {
+  display: block;
+  border-left-color: #2e7d32;
+}
+.is-wrong .question-feedback {
+  display: block;
+  border-left-color: #c62828;
+}
+.feedback-status {
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.is-correct .feedback-status {
+  color: #2e7d32;
+}
+.is-wrong .feedback-status {
+  color: #c62828;
+}
+.feedback-exp {
+  font-size: .92rem;
+  line-height: 1.45;
+  color: var(--md-default-fg-color);
+}
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.2rem;
+}
+.quiz-result {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: .5rem;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+.solution {
+  margin: .6rem 0;
+  padding: .65rem .9rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+}
+.solution summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("quiz-form");
+  if (!form || form.dataset.initialized === "true") return;
+  form.dataset.initialized = "true";
+
+  const questions = Array.from(document.querySelectorAll("#quiz-form .quiz-question"));
+  const count = document.getElementById("quiz-count");
+  const progressText = document.getElementById("quiz-progress-text");
+  const result = document.getElementById("quiz-result");
+  const scoreText = document.getElementById("quiz-score");
+  const message = document.getElementById("quiz-message");
+  const summary = document.getElementById("quiz-summary");
+  const reset = document.getElementById("quiz-reset");
+
+  function updateProgress() {
+    const answered = questions.filter(q => {
+      const input = q.querySelector("input");
+      return form.querySelector('input[name="' + input.name + '"]:checked');
+    }).length;
+    count.textContent = answered + " de " + questions.length + " respondidas";
+    progressText.textContent = answered === questions.length
+      ? "¡Ya has respondido todas!"
+      : "Te faltan " + (questions.length - answered) + " por responder.";
+  }
+
+  form.addEventListener("change", updateProgress);
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let correct = 0;
+    let unanswered = 0;
+
+    questions.forEach(function (question, index) {
+      const number = index + 1;
+      const selected = form.querySelector('input[name="q' + number + '"]:checked');
+      const answer = question.dataset.answer;
+      const shortExp = question.dataset.shortExp || "";
+      const statusEl = question.querySelector(".feedback-status");
+      const expEl = question.querySelector(".feedback-exp");
+      const labels = question.querySelectorAll("label");
+
+      question.classList.remove("is-correct", "is-wrong");
+      labels.forEach(label => { label.style.fontWeight = "normal"; });
+
+      if (!selected) {
+        unanswered++;
+        question.classList.add("is-wrong");
+        statusEl.textContent = "✗ Sin responder. Respuesta correcta: " + answer.toUpperCase();
+      } else if (selected.value === answer) {
+        correct++;
+        question.classList.add("is-correct");
+        statusEl.textContent = "✓ ¡Correcto!";
+      } else {
+        question.classList.add("is-wrong");
+        statusEl.textContent = "✗ Incorrecto. Respuesta correcta: " + answer.toUpperCase();
+      }
+
+      expEl.textContent = shortExp;
+
+      const correctLabel = Array.from(labels).find(label =>
+        label.querySelector("input").value === answer
+      );
+      if (correctLabel) correctLabel.style.fontWeight = "700";
+    });
+
+    const percent = Math.round(correct / questions.length * 100);
+    scoreText.textContent = correct + " de " + questions.length + " correctas (" + percent + "%).";
+    message.textContent = percent >= 90 ? "¡Excelente! Dominas perfectamente todos los aspectos del tema." :
+      percent >= 70 ? "¡Buen trabajo! Repasa los fallos cometidos para afianzar la máxima nota." :
+      percent >= 50 ? "Aprobado. Lee la explicación detallada de cada pregunta para asegurar el examen." :
+      "Te conviene repasar la chuleta final y consultar las soluciones explicadas paso a paso.";
+    summary.textContent = unanswered
+      ? "Has dejado " + unanswered + " pregunta(s) sin responder."
+      : "Has respondido todas las preguntas.";
+
+    result.hidden = false;
+    result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise();
+    }
+  });
+
+  reset.addEventListener("click", function () {
+    form.reset();
+    questions.forEach(function (question) {
+      question.classList.remove("is-correct", "is-wrong");
+      question.querySelectorAll("label").forEach(label => {
+        label.style.fontWeight = "normal";
+      });
+      question.querySelector(".feedback-status").textContent = "";
+      question.querySelector(".feedback-exp").textContent = "";
+    });
+    result.hidden = true;
+    updateProgress();
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  updateProgress();
+});
+</script>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../tarea01-1/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Tarea 01.1">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Tarea 01.1
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tarea02-1/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Tarea 02.1">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Tarea 02.1
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 <a href="https://davidalvarezp.com/" rel="noopener noreferrer"><strong>dap</strong></a> | All rights reserved.
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://bsky.app/profile/davidalvarezp.com" target="_blank" rel="noopener" title="Sitio web de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://youtube.com/@davidalvarezp" target="_blank" rel="noopener" title="Canal de YouTube de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/davidalvarezp" target="_blank" rel="noopener" title="Github de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://twitch.tv/sudodap" target="_blank" rel="noopener" title="Twitch de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/sudodap" target="_blank" rel="noopener" title="Telegram de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.5.5 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024q-.159.037-5.061 3.345-.72.495-1.302.48c-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789q.04-.324.893-.663 5.247-2.286 6.998-3.014c3.332-1.386 4.025-1.627 4.476-1.635"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://x.com/sudodap" target="_blank" rel="noopener" title="X de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://instagram.com/davidalvarezzp" target="_blank" rel="noopener" title="Instagram de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.03.084c-1.277.06-2.149.264-2.91.563a5.9 5.9 0 0 0-2.124 1.388 5.9 5.9 0 0 0-1.38 2.127C.321 4.926.12 5.8.064 7.076s-.069 1.688-.063 4.947.021 3.667.083 4.947c.061 1.277.264 2.149.563 2.911.308.789.72 1.457 1.388 2.123a5.9 5.9 0 0 0 2.129 1.38c.763.295 1.636.496 2.913.552 1.278.056 1.689.069 4.947.063s3.668-.021 4.947-.082c1.28-.06 2.147-.265 2.91-.563a5.9 5.9 0 0 0 2.123-1.388 5.9 5.9 0 0 0 1.38-2.129c.295-.763.496-1.636.551-2.912.056-1.28.07-1.69.063-4.948-.006-3.258-.02-3.667-.081-4.947-.06-1.28-.264-2.148-.564-2.911a5.9 5.9 0 0 0-1.387-2.123 5.86 5.86 0 0 0-2.128-1.38C19.074.322 18.202.12 16.924.066 15.647.009 15.236-.006 11.977 0S8.31.021 7.03.084m.14 21.693c-1.17-.05-1.805-.245-2.228-.408a3.7 3.7 0 0 1-1.382-.895 3.7 3.7 0 0 1-.9-1.378c-.165-.423-.363-1.058-.417-2.228-.06-1.264-.072-1.644-.08-4.848-.006-3.204.006-3.583.061-4.848.05-1.169.246-1.805.408-2.228.216-.561.477-.96.895-1.382a3.7 3.7 0 0 1 1.379-.9c.423-.165 1.057-.361 2.227-.417 1.265-.06 1.644-.072 4.848-.08 3.203-.006 3.583.006 4.85.062 1.168.05 1.804.244 2.227.408.56.216.96.475 1.382.895s.681.817.9 1.378c.165.422.362 1.056.417 2.227.06 1.265.074 1.645.08 4.848.005 3.203-.006 3.583-.061 4.848-.051 1.17-.245 1.805-.408 2.23-.216.56-.477.96-.896 1.38a3.7 3.7 0 0 1-1.378.9c-.422.165-1.058.362-2.226.418-1.266.06-1.645.072-4.85.079s-3.582-.006-4.848-.06m9.783-16.192a1.44 1.44 0 1 0 1.437-1.442 1.44 1.44 0 0 0-1.437 1.442M5.839 12.012a6.161 6.161 0 1 0 12.323-.024 6.162 6.162 0 0 0-12.323.024M8 12.008A4 4 0 1 1 12.008 16 4 4 0 0 1 8 12.008"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://discord.gg/x7JFKT2n4X" target="_blank" rel="noopener" title="Comunidad de Discord de dap" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 13 13 0 0 0-.617-1.25.08.08 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.1.1 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.08.08 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13 13 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10 10 0 0 0 .372-.292.07.07 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.07.07 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.08.08 0 0 0 .084.028 19.8 19.8 0 0 0 6.002-3.03.08.08 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.03M8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418m7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.top", "navigation.indexes", "navigation.tracking", "navigation.footer", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../assets/js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../../assets/js/navigation.js"></script>
+      
+    
+  </body>
+</html>
